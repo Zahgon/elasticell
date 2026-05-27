@@ -26,87 +26,31 @@ type indexHandler struct {
 }
 
 func initAPIForIndex(router *mux.Router, service Service, rd *render.Render) {
-	handler := newIndexHandler(service, rd)
-
-	router.HandleFunc("/api/v1/indices/{id}", handler.get).Methods("GET")
-	router.HandleFunc("/api/v1/indices/{id}", handler.delete).Methods("DELETE")
-	router.HandleFunc("/api/v1/indices", handler.create).Methods("POST")
-	router.HandleFunc("/api/v1/indices", handler.list).Methods("GET")
+	_ = "STUB: not implemented"
+	return
 }
 
 func newIndexHandler(service Service, rd *render.Render) *indexHandler {
-	return &indexHandler{
-		service: service,
-		rd:      rd,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (h *indexHandler) get(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	vars := mux.Vars(r)
-	idxStr := vars["id"]
-	idx, err := h.service.GetIndex(idxStr)
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	}
-
-	result.Value = idx
-
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (h *indexHandler) delete(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	vars := mux.Vars(r)
-	idxStr := vars["id"]
-	err := h.service.DeleteIndex(idxStr)
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	}
-
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (h *indexHandler) create(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	idxDef, err := readIndexDef(r.Body)
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	} else {
-		err = h.service.CreateIndex(idxDef)
-		if err != nil {
-			result.Code = CodeError
-			result.Error = err.Error()
-		}
-	}
-
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (h *indexHandler) list(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	indices, err := h.service.ListIndex()
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	}
-
-	result.Value = indices
-
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }

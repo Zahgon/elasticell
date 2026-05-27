@@ -13,13 +13,6 @@
 
 package redis
 
-import (
-	"bytes"
-	"strings"
-
-	"github.com/fagongzi/util/hack"
-)
-
 const (
 	Set      = "set"
 	Get      = "get"
@@ -44,26 +37,20 @@ type Command [][]byte
 
 // Cmd returns redis command
 func (c Command) Cmd() []byte {
-	return c[0]
+	_ = "STUB: not implemented"
+
+	// CmdString returns redis command use lower string
+	return nil
 }
 
-// CmdString returns redis command use lower string
-func (c Command) CmdString() string {
-	return strings.ToLower(hack.SliceToString(c[0]))
-}
+func (c Command) CmdString() string { _ = "STUB: not implemented"; return "" }
 
 // Args returns redis command args
 func (c Command) Args() [][]byte {
-	return c[1:]
+	_ = "STUB: not implemented"
+
+	// ToString returns a redis command as string
+	return nil
 }
 
-// ToString returns a redis command as string
-func (c Command) ToString() string {
-	buf := new(bytes.Buffer)
-	for _, arg := range c {
-		buf.Write(arg)
-		buf.WriteString(" ")
-	}
-
-	return strings.TrimSpace(buf.String())
-}
+func (c Command) ToString() string { _ = "STUB: not implemented"; return "" }

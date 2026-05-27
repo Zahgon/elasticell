@@ -55,79 +55,43 @@ type scheduleController struct {
 }
 
 func newScheduleController(c *coordinator, s Scheduler) *scheduleController {
-	return &scheduleController{
-		Scheduler: s,
-		cfg:       c.cfg,
-		limiter:   c.limiter,
-		interval:  minScheduleInterval,
-	}
-}
-
-func (s *scheduleController) Schedule(cache *cache) Operator {
-	// If we have schedule, reset interval to the minimal interval.
-	if op := s.Scheduler.Schedule(cache); op != nil {
-		s.interval = minScheduleInterval
-		return op
-	}
-
-	// If we have no schedule, increase the interval exponentially.
-	s.interval = minDuration(s.interval*2, maxScheduleInterval)
+	_ = "STUB: not implemented"
 	return nil
 }
 
-func (s *scheduleController) GetInterval() time.Duration {
-	return s.interval
+func (s *scheduleController) Schedule(cache *cache) Operator {
+	_ = "STUB: not implemented"
+	// If we have schedule, reset interval to the minimal interval.
+	return *new(Operator)
 }
 
-func (s *scheduleController) AllowSchedule() bool {
-	return s.limiter.operatorCount(s.GetResourceKind()) < s.GetResourceLimit()
+// If we have no schedule, increase the interval exponentially.
+
+func (s *scheduleController) GetInterval() time.Duration {
+	_ = "STUB: not implemented"
+	return *new(time.Duration)
 }
+
+func (s *scheduleController) AllowSchedule() bool { _ = "STUB: not implemented"; return false }
 
 type scheduleLimiter struct {
 	sync.RWMutex
 	counts map[ResourceKind]uint64
 }
 
-func newScheduleLimiter() *scheduleLimiter {
-	return &scheduleLimiter{
-		counts: make(map[ResourceKind]uint64),
-	}
-}
+func newScheduleLimiter() *scheduleLimiter { _ = "STUB: not implemented"; return nil }
 
-func (l *scheduleLimiter) addOperator(op Operator) {
-	l.Lock()
-	defer l.Unlock()
-	l.counts[op.GetResourceKind()]++
-}
+func (l *scheduleLimiter) addOperator(op Operator) { _ = "STUB: not implemented"; return }
 
-func (l *scheduleLimiter) removeOperator(op Operator) {
-	l.Lock()
-	defer l.Unlock()
-	l.counts[op.GetResourceKind()]--
-}
+func (l *scheduleLimiter) removeOperator(op Operator) { _ = "STUB: not implemented"; return }
 
 func (l *scheduleLimiter) operatorCount(kind ResourceKind) uint64 {
-	l.RLock()
-	defer l.RUnlock()
-	return l.counts[kind]
+	_ = "STUB: not implemented"
+	return 0
 }
 
 // scheduleRemovePeer schedules a cell to remove the peer.
 func scheduleRemovePeer(cache *cache, s Selector, filters ...Filter) (*CellInfo, *metapb.Peer) {
-	stores := cache.getStoreCache().getStores()
-
-	source := s.SelectSource(stores, filters...)
-	if source == nil {
-		return nil, nil
-	}
-
-	cell := cache.getCellCache().randFollowerCell(source.getID())
-	if cell == nil {
-		cell = cache.getCellCache().randLeaderCell(source.getID())
-	}
-	if cell == nil {
-		return nil, nil
-	}
-
-	return cell, cell.getStorePeer(source.getID())
+	_ = "STUB: not implemented"
+	return nil, nil
 }

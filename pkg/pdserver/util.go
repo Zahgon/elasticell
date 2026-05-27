@@ -16,34 +16,17 @@ package pdserver
 import (
 	"io"
 	"time"
-
-	"github.com/coreos/pkg/capnslog"
 )
 
 // RedirectEmbedEtcdLog because of our used embed etcd,
 // so we need redirect etcd log to spec.
-func RedirectEmbedEtcdLog(w io.Writer) {
-	capnslog.SetFormatter(capnslog.NewPrettyFormatter(w, false))
-	capnslog.SetGlobalLogLevel(capnslog.DEBUG)
-}
+func RedirectEmbedEtcdLog(w io.Writer) { _ = "STUB: not implemented"; return }
 
-func minUint64(a, b uint64) uint64 {
-	if a < b {
-		return a
-	}
-	return b
-}
+func minUint64(a, b uint64) uint64 { _ = "STUB: not implemented"; return 0 }
 
-func maxUint64(a, b uint64) uint64 {
-	if a > b {
-		return a
-	}
-	return b
-}
+func maxUint64(a, b uint64) uint64 { _ = "STUB: not implemented"; return 0 }
 
 func minDuration(a, b time.Duration) time.Duration {
-	if a < b {
-		return a
-	}
-	return b
+	_ = "STUB: not implemented"
+	return *new(time.Duration)
 }

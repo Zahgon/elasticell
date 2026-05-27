@@ -31,136 +31,58 @@ var (
 )
 
 // AcquireRaftMessage returns a raft message from pool
-func AcquireRaftMessage() *mraft.RaftMessage {
-	v := raftMessagePool.Get()
-	if v == nil {
-		return &mraft.RaftMessage{}
-	}
-	return v.(*mraft.RaftMessage)
-}
+func AcquireRaftMessage() *mraft.RaftMessage { _ = "STUB: not implemented"; return nil }
 
 // ReleaseRaftMessage returns a raft message to pool
-func ReleaseRaftMessage(msg *mraft.RaftMessage) {
-	msg.Reset()
-	raftMessagePool.Put(msg)
-}
+func ReleaseRaftMessage(msg *mraft.RaftMessage) { _ = "STUB: not implemented"; return }
 
 // AcquireRaftCMDRequest returns a raft cmd request from pool
-func AcquireRaftCMDRequest() *raftcmdpb.RaftCMDRequest {
-	v := raftCMDRequestPool.Get()
-	if v == nil {
-		return &raftcmdpb.RaftCMDRequest{}
-	}
-	return v.(*raftcmdpb.RaftCMDRequest)
-}
+func AcquireRaftCMDRequest() *raftcmdpb.RaftCMDRequest { _ = "STUB: not implemented"; return nil }
 
 // ReleaseRaftCMDRequest returns a raft cmd request to pool
-func ReleaseRaftCMDRequest(req *raftcmdpb.RaftCMDRequest) {
-	req.Reset()
-	raftCMDRequestPool.Put(req)
-}
+func ReleaseRaftCMDRequest(req *raftcmdpb.RaftCMDRequest) { _ = "STUB: not implemented"; return }
 
 // AcquireRaftRequestHeader returns a raft request header from pool
-func AcquireRaftRequestHeader() *raftcmdpb.RaftRequestHeader {
-	v := raftRequestHeaderPool.Get()
-	if v == nil {
-		return &raftcmdpb.RaftRequestHeader{}
-	}
-	return v.(*raftcmdpb.RaftRequestHeader)
-}
+func AcquireRaftRequestHeader() *raftcmdpb.RaftRequestHeader { _ = "STUB: not implemented"; return nil }
 
 // ReleaseRaftRequestHeader returns a raft request header to pool
 func ReleaseRaftRequestHeader(header *raftcmdpb.RaftRequestHeader) {
-	header.Reset()
-	raftRequestHeaderPool.Put(header)
+	_ = "STUB: not implemented"
+	return
 }
 
 // AcquireRequest returns a raft request from pool
-func AcquireRequest() *raftcmdpb.Request {
-	v := requestsPool.Get()
-	if v == nil {
-		return &raftcmdpb.Request{}
-	}
-	return v.(*raftcmdpb.Request)
-}
+func AcquireRequest() *raftcmdpb.Request { _ = "STUB: not implemented"; return nil }
 
 // ReleaseRequest returns a request to pool
-func ReleaseRequest(req *raftcmdpb.Request) {
-	req.Reset()
-	requestsPool.Put(req)
-}
+func ReleaseRequest(req *raftcmdpb.Request) { _ = "STUB: not implemented"; return }
 
 // AcquireResponse returns a response from pool
-func AcquireResponse() *raftcmdpb.Response {
-	v := responsePool.Get()
-	if v == nil {
-		return &raftcmdpb.Response{}
-	}
-	return v.(*raftcmdpb.Response)
-}
+func AcquireResponse() *raftcmdpb.Response { _ = "STUB: not implemented"; return nil }
 
 // ReleaseResponse returns a response to pool
-func ReleaseResponse(resp *raftcmdpb.Response) {
-	resp.Reset()
-	responsePool.Put(resp)
-}
+func ReleaseResponse(resp *raftcmdpb.Response) { _ = "STUB: not implemented"; return }
 
 // AcquireRaftCMDResponse returns a raft cmd response from pool
-func AcquireRaftCMDResponse() *raftcmdpb.RaftCMDResponse {
-	v := raftCMDResponsePool.Get()
-	if v == nil {
-		return &raftcmdpb.RaftCMDResponse{}
-	}
-	return v.(*raftcmdpb.RaftCMDResponse)
-}
+func AcquireRaftCMDResponse() *raftcmdpb.RaftCMDResponse { _ = "STUB: not implemented"; return nil }
 
 // ReleaseRaftCMDResponse returns a raft cmd response to pool
-func ReleaseRaftCMDResponse(resp *raftcmdpb.RaftCMDResponse) {
-	if resp.Header != nil {
-		ReleaseRaftResponseHeader(resp.Header)
-	}
-
-	resp.Reset()
-	raftCMDResponsePool.Put(resp)
-}
+func ReleaseRaftCMDResponse(resp *raftcmdpb.RaftCMDResponse) { _ = "STUB: not implemented"; return }
 
 // AcquireRaftResponseHeader returns a raft response header from pool
 func AcquireRaftResponseHeader() *raftcmdpb.RaftResponseHeader {
-	v := raftResponseHeaderPool.Get()
-	if v == nil {
-		return &raftcmdpb.RaftResponseHeader{}
-	}
-	return v.(*raftcmdpb.RaftResponseHeader)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ReleaseRaftResponseHeader returns a raft response header to pool
 func ReleaseRaftResponseHeader(header *raftcmdpb.RaftResponseHeader) {
-	header.Reset()
-	raftResponseHeaderPool.Put(header)
+	_ = "STUB: not implemented"
+	return
 }
 
 // ReleaseRaftRequestAll release requests, header and self to pool
-func ReleaseRaftRequestAll(req *raftcmdpb.RaftCMDRequest) {
-	for _, req := range req.Requests {
-		ReleaseRequest(req)
-	}
-
-	if req.Header != nil {
-		ReleaseRaftRequestHeader(req.Header)
-	}
-
-	ReleaseRaftCMDRequest(req)
-}
+func ReleaseRaftRequestAll(req *raftcmdpb.RaftCMDRequest) { _ = "STUB: not implemented"; return }
 
 // ReleaseRaftResponseAll release responses, header and self to pool
-func ReleaseRaftResponseAll(resp *raftcmdpb.RaftCMDResponse) {
-	for _, rsp := range resp.Responses {
-		ReleaseResponse(rsp)
-	}
-
-	if resp.Header != nil {
-		ReleaseRaftResponseHeader(resp.Header)
-	}
-
-	ReleaseRaftCMDResponse(resp)
-}
+func ReleaseRaftResponseAll(resp *raftcmdpb.RaftCMDResponse) { _ = "STUB: not implemented"; return }

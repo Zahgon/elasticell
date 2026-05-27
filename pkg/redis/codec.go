@@ -30,29 +30,18 @@ type redisDecoder struct {
 type redisEncoder struct {
 }
 
-func newRedisDecoder() *redisDecoder {
-	return &redisDecoder{}
-}
+func newRedisDecoder() *redisDecoder { _ = "STUB: not implemented"; return nil }
 
-func newRedisEncoder() *redisEncoder {
-	return &redisEncoder{}
-}
+func newRedisEncoder() *redisEncoder { _ = "STUB: not implemented"; return nil }
 
 // Decode decode
 func (decoder redisDecoder) Decode(in *goetty.ByteBuf) (bool, interface{}, error) {
-	complete, cmd, err := readCommand(in)
-	if err != nil {
-		return true, nil, err
-	}
-
-	if !complete {
-		return false, nil, nil
-	}
-
-	return true, cmd, nil
+	_ = "STUB: not implemented"
+	return false, nil, nil
 }
 
 // Encode encode
 func (e redisEncoder) Encode(data interface{}, out *goetty.ByteBuf) error {
+	_ = "STUB: not implemented"
 	return nil
 }

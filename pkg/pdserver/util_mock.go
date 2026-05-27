@@ -13,12 +13,6 @@
 
 package pdserver
 
-import (
-	"bytes"
-	"fmt"
-	"io/ioutil"
-)
-
 var (
 	testPort        = 10000
 	baseAddrPattern = "127.0.0.1:%d"
@@ -26,98 +20,21 @@ var (
 	testNamePattern = "test-pd-%d"
 )
 
-func getTestPort() int {
-	testPort++
-	return testPort
-}
+func getTestPort() int { _ = "STUB: not implemented"; return 0 }
 
-func genBaseAddr() string {
-	return fmt.Sprintf(baseAddrPattern, getTestPort())
-}
+func genBaseAddr() string { _ = "STUB: not implemented"; return "" }
 
-func genHTTPAddr() string {
-	return fmt.Sprintf(httpAddrPattern, getTestPort())
-}
+func genHTTPAddr() string { _ = "STUB: not implemented"; return "" }
 
-func getTestName(index int) string {
-	return fmt.Sprintf(testNamePattern, index)
-}
+func getTestName(index int) string { _ = "STUB: not implemented"; return "" }
 
 // NewTestSingleServer returns a single pd server
-func NewTestSingleServer() *Server {
-	name := "test-single-pd"
-	addrPeer := genHTTPAddr()
-	addrClient := genHTTPAddr()
-	addrRPC := genBaseAddr()
-	return NewServer(newTestConfig(name,
-		addrClient,
-		addrPeer,
-		addrRPC,
-		fmt.Sprintf("%s=%s", name, addrPeer)))
-}
+func NewTestSingleServer() *Server { _ = "STUB: not implemented"; return nil }
 
 // NewTestMultiServers returns multi pd server
-func NewTestMultiServers(count int) []*Server {
-	var servers []*Server
-	var names []string
-	var addrClients []string
-	var addrPeers []string
-	var addrRPCs []string
-
-	buf := bytes.NewBufferString("")
-
-	for index := 0; index < count; index++ {
-		name := getTestName(index)
-		addrPeer := genHTTPAddr()
-		addrClient := genHTTPAddr()
-		addrRPC := genBaseAddr()
-
-		names = append(names, name)
-		addrClients = append(addrClients, addrClient)
-		addrPeers = append(addrPeers, addrPeer)
-		addrRPCs = append(addrRPCs, addrRPC)
-
-		buf.WriteString(fmt.Sprintf("%s=%s", name, addrPeer))
-		if index < count-1 {
-			buf.WriteString(",")
-		}
-	}
-
-	initCluster := string(buf.Bytes())
-
-	for index := 0; index < count; index++ {
-		cfg := newTestConfig(names[index],
-			addrClients[index],
-			addrPeers[index],
-			addrRPCs[index],
-			initCluster)
-
-		servers = append(servers, NewServer(cfg))
-	}
-
-	return servers
-}
+func NewTestMultiServers(count int) []*Server { _ = "STUB: not implemented"; return nil }
 
 func newTestConfig(name, addrClient, addrPeer, addrRPC, initCluster string) *Cfg {
-	cfg := &Cfg{}
-
-	cfg.Name = name
-	cfg.DataPath, _ = ioutil.TempDir("/tmp", cfg.Name)
-	cfg.DurationLeaderLease = 1
-	cfg.AddrRPC = addrRPC
-
-	cfg.URLsClient = addrClient
-	cfg.URLsPeer = addrPeer
-	cfg.InitialCluster = initCluster
-	cfg.InitialClusterState = "new"
-
-	cfg.LimitReplicas = 3
-	cfg.LabelsLocation = []string{"zone", "rack"}
-	cfg.LimitSnapshots = 3
-	cfg.LimitStoreDownDuration = 1000
-	cfg.LimitScheduleLeader = 16
-	cfg.LimitScheduleCell = 12
-	cfg.LimitScheduleReplica = 16
-
-	return cfg
+	_ = "STUB: not implemented"
+	return nil
 }

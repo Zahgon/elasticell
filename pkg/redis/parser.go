@@ -16,12 +16,7 @@ package redis
 import (
 	"errors"
 
-	"github.com/deepfabric/elasticell/pkg/pool"
 	"github.com/fagongzi/goetty"
-	gredis "github.com/fagongzi/goetty/protocol/redis"
-	pe "github.com/pkg/errors"
-	"github.com/fagongzi/log"
-	"github.com/fagongzi/util/protoc"
 )
 
 var (
@@ -39,54 +34,14 @@ const (
 )
 
 func readCommand(in *goetty.ByteBuf) (bool, interface{}, error) {
-	for {
-		c, err := in.PeekByte(0)
-		if err != nil {
-			return false, nil, err
-		}
-
-		switch c {
-		case CMDBegin:
-			return gredis.ReadCommand(in)
-		case ProxyBegin:
-			return readCommandByProxyProtocol(in)
-		default:
-			return false, nil, pe.Wrap(ErrIllegalPacket, "")
-		}
-	}
+	_ = "STUB: not implemented"
+	return false, nil, nil
 }
 
 func readCommandByProxyProtocol(in *goetty.ByteBuf) (bool, interface{}, error) {
+	_ = "STUB: not implemented"
 	// remember the begin read index,
 	// if we found has no enough data, we will resume this read index,
 	// and waiting for next.
-	backupReaderIndex := in.GetReaderIndex()
-
-	in.Skip(1)
-
-	if in.Readable() < 4 {
-		in.SetReaderIndex(backupReaderIndex)
-		return false, nil, nil
-	}
-
-	size, _ := in.PeekInt(0)
-	if in.Readable() < 4+size {
-		in.SetReaderIndex(backupReaderIndex)
-		return false, nil, nil
-	}
-
-	in.Skip(4)
-	n, data, err := in.ReadRawBytes(size)
-	if err != nil {
-		log.Fatal("bug: can't read failed")
-	}
-
-	if n != size {
-		log.Fatal("bug: can't read mismatch")
-	}
-
-	req := pool.AcquireRequest()
-	protoc.MustUnmarshal(req, data)
-	in.Skip(size)
-	return true, req, nil
+	return false, nil, nil
 }

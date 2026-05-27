@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package storage
@@ -18,7 +19,6 @@ package storage
 import (
 	"github.com/deepfabric/elasticell/pkg/util"
 	gonemo "github.com/deepfabric/go-nemo"
-	"golang.org/x/net/context"
 )
 
 type nemoListEngine struct {
@@ -27,103 +27,70 @@ type nemoListEngine struct {
 }
 
 func newNemoListEngine(db *gonemo.NEMO, cfg *NemoCfg) ListEngine {
-	return &nemoListEngine{
-		limiter: util.NewLimiter(cfg.LimitConcurrencyWrite),
-		db:      db,
-	}
+	_ = "STUB: not implemented"
+	return *new(ListEngine)
 }
 
 func (e *nemoListEngine) LIndex(key []byte, index int64) ([]byte, error) {
-	return e.db.LIndex(key, index)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoListEngine) LInsert(key []byte, pos int, pivot []byte, value []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.LInsert(key, pos, pivot, value)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (e *nemoListEngine) LLen(key []byte) (int64, error) {
-	return e.db.LLen(key)
-}
+func (e *nemoListEngine) LLen(key []byte) (int64, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (e *nemoListEngine) LPop(key []byte) ([]byte, error) {
-	e.limiter.Wait(context.TODO())
-	value, err := e.db.LPop(key)
-	e.limiter.Release()
-
-	return value, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoListEngine) LPush(key []byte, values ...[]byte) (int64, error) {
+	_ = "STUB: not implemented"
 	// TODO: nemo must support more value push
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.LPush(key, values[0])
-	e.limiter.Release()
-
-	return n, err
+	return 0, nil
 }
 
 func (e *nemoListEngine) LPushX(key []byte, value []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.LPushx(key, value)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoListEngine) LRange(key []byte, begin int64, end int64) ([][]byte, error) {
-	_, values, err := e.db.LRange(key, begin, end)
-	return values, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoListEngine) LRem(key []byte, count int64, value []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.LRem(key, count, value)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoListEngine) LSet(key []byte, index int64, value []byte) error {
-	e.limiter.Wait(context.TODO())
-	err := e.db.LSet(key, index, value)
-	e.limiter.Release()
-
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (e *nemoListEngine) LTrim(key []byte, begin int64, end int64) error {
-	e.limiter.Wait(context.TODO())
-	err := e.db.LTrim(key, begin, end)
-	e.limiter.Release()
-
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (e *nemoListEngine) RPop(key []byte) ([]byte, error) {
-	e.limiter.Wait(context.TODO())
-	value, err := e.db.RPop(key)
-	e.limiter.Release()
-
-	return value, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoListEngine) RPush(key []byte, values ...[]byte) (int64, error) {
+	_ = "STUB: not implemented"
 	// TODO: nemo must support more value push
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.RPush(key, values[0])
-	e.limiter.Release()
-
-	return n, err
+	return 0, nil
 }
 
 func (e *nemoListEngine) RPushX(key []byte, value []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.RPushx(key, value)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }

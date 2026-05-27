@@ -14,41 +14,10 @@
 package pdserver
 
 import (
-	"github.com/deepfabric/elasticell/pkg/util"
 	"github.com/coreos/etcd/embed"
-	"github.com/fagongzi/util/adjust"
 )
 
 func (c *Cfg) getEmbedEtcdConfig() (*embed.Config, error) {
-	cfg := embed.NewConfig()
-	cfg.Name = c.Name
-	cfg.Dir = c.DataPath
-	cfg.WalDir = ""
-	cfg.InitialCluster = c.InitialCluster
-	cfg.ClusterState = c.InitialClusterState
-	cfg.EnablePprof = false
-	cfg.Debug = false
-
-	var err error
-	cfg.LPUrls, err = util.ParseUrls(c.URLsPeer)
-	if err != nil {
-		return nil, err
-	}
-
-	cfg.APUrls, err = util.ParseUrls(adjust.String(c.URLsAdvertisePeer, c.URLsPeer))
-	if err != nil {
-		return nil, err
-	}
-
-	cfg.LCUrls, err = util.ParseUrls(c.URLsClient)
-	if err != nil {
-		return nil, err
-	}
-
-	cfg.ACUrls, err = util.ParseUrls(adjust.String(c.URLsAdvertiseClient, c.URLsClient))
-	if err != nil {
-		return nil, err
-	}
-
-	return cfg, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }

@@ -15,7 +15,6 @@ package pdapi
 
 import (
 	"net/http"
-	"strings"
 )
 
 const (
@@ -28,24 +27,11 @@ const (
 type cross struct {
 }
 
-func newCross() *cross {
-	return &cross{}
-}
+func newCross() *cross { _ = "STUB: not implemented"; return nil }
 
 func (c *cross) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	options(w, r)
-
-	if strings.ToUpper(r.Method) == http.MethodOptions {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-
-	next(w, r)
+	_ = "STUB: not implemented"
+	return
 }
 
-func options(w http.ResponseWriter, r *http.Request) {
-	w.Header().Del(headerAccess)
-	w.Header().Set(headerAccess, headerAccessValue)
-	w.Header().Set(headerAccessMethods, "OPTIONS, GET, HEAD, POST, PUT, DELETE")
-	w.Header().Set(headerAccessHeaders, "Content-Type")
-}
+func options(w http.ResponseWriter, r *http.Request) { _ = "STUB: not implemented"; return }

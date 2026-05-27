@@ -1,3 +1,4 @@
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package log

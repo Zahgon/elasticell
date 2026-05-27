@@ -14,18 +14,13 @@
 package server
 
 import (
-	"io"
 	"strings"
 	"sync"
 
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
-	"github.com/deepfabric/elasticell/pkg/pool"
 	"github.com/deepfabric/elasticell/pkg/raftstore"
 	"github.com/deepfabric/elasticell/pkg/redis"
 	"github.com/fagongzi/goetty"
-	"github.com/fagongzi/log"
-	"github.com/fagongzi/util/hack"
-	"github.com/fagongzi/util/protoc"
 )
 
 // RedisServer is provide a redis like server
@@ -41,15 +36,10 @@ type RedisServer struct {
 }
 
 // Start used for start the redis server
-func (s *RedisServer) Start() error {
-	return s.s.Start(s.doConnection)
-}
+func (s *RedisServer) Start() error { _ = "STUB: not implemented"; return nil }
 
 // Stop is used for stop redis server
-func (s *RedisServer) Stop() error {
-	s.s.Stop()
-	return nil
-}
+func (s *RedisServer) Stop() error { _ = "STUB: not implemented"; return nil }
 
 func (s *RedisServer) init() {
 	s.routing = newRouting()
@@ -149,160 +139,30 @@ func (s *RedisServer) init() {
 }
 
 func (s *RedisServer) doConnection(session goetty.IOSession) error {
-	addr := session.RemoteAddr()
-	log.Debugf("redis-[%s]: connected", addr)
-
-	// every client has 2 goroutines, read and write
-	rs := newSession(session)
-	s.routing.put(rs.id, rs)
-
-	go rs.writeLoop()
-	defer func() {
-		s.routing.delete(rs.id)
-		rs.close()
-	}()
-
-	for {
-		value, err := session.Read()
-		if err != nil {
-			if err == io.EOF {
-				return nil
-			}
-
-			log.Errorf("redis-[%s]: read from cli failed, errors\n %+v",
-				addr,
-				err)
-			return err
-		}
-
-		if req, ok := value.(redis.Command); ok {
-			log.Debugf("redis-[%s]: read a redis command, cmd=<%+v>", addr, req)
-
-			err = s.onRedisCommand(req, rs)
-			if err != nil {
-				log.Debugf("onRedisCommand faied. req=<%+v>, err=<%+v>", req, err)
-				rsp := pool.AcquireResponse()
-				rsp.ErrorResult = hack.StringToSlice(err.Error())
-				rs.onResp(rsp)
-			}
-		} else if req, ok := value.(*raftcmdpb.Request); ok {
-			if len(req.UUID) > 0 {
-				log.Debugf("req: read a raft req. from=<%s>, req=<%v>",
-					addr,
-					req)
-			}
-
-			rs.setFromProxy()
-			err = s.onProxyReq(req, rs)
-			if err != nil {
-				log.Debugf("onProxyReq faied. req=<%+v>, err=<%+v>", req, err)
-				rsp := pool.AcquireResponse()
-				rsp.ErrorResult = hack.StringToSlice(err.Error())
-				rsp.UUID = req.UUID
-				rs.onResp(rsp)
-				pool.ReleaseRequest(req)
-			}
-		}
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (s *RedisServer) onResp(resp *raftcmdpb.RaftCMDResponse) {
-	var errorResult []byte
-	hasError := resp.Header != nil
+// every client has 2 goroutines, read and write
 
-	for _, rsp := range resp.Responses {
-		rs := s.routing.get(rsp.SessionID)
-		if rs != nil {
-			if hasError {
-				if resp.Header.Error.RaftEntryTooLarge == nil {
-					rsp.Type = raftcmdpb.RaftError
-				} else {
-					rsp.Type = raftcmdpb.Invalid
-				}
-
-				if errorResult == nil {
-					errorResult = protoc.MustMarshal(resp.Header)
-				}
-
-				rsp.ErrorResult = errorResult
-			}
-
-			rs.onResp(rsp)
-		} else {
-			pool.ReleaseResponse(rsp)
-		}
-	}
-
-	pool.ReleaseRaftCMDResponse(resp)
-}
+func (s *RedisServer) onResp(resp *raftcmdpb.RaftCMDResponse) { _ = "STUB: not implemented"; return }
 
 func (s *RedisServer) onProxyReq(req *raftcmdpb.Request, session *session) error {
-	req.Type = s.typeMapping[strings.ToLower(hack.SliceToString(req.Cmd[0]))]
-	req.SessionID = session.id
-
-	if h, ok := s.localHandlers[req.Type]; ok {
-		h(req, session)
-		return nil
-	}
-
-	if len(req.Cmd) < 2 {
-		rsp := pool.AcquireResponse()
-		rsp.UUID = req.UUID
-		rsp.ErrorResult = redis.ErrNotSupportCommand
-		session.onResp(rsp)
-		return nil
-	}
-
-	err := s.store.OnProxyReq(req, s.onResp)
-	if err != nil {
-		return err
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (s *RedisServer) onRedisCommand(cmd redis.Command, session *session) error {
-	t := s.typeMapping[cmd.CmdString()]
-
-	if h, ok := s.localHandlers[t]; ok {
-		req := pool.AcquireRequest()
-		req.Cmd = cmd
-		h(req, session)
-		return nil
-	}
-
-	h, ok := s.handlers[t]
-	if !ok {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrNotSupportCommand
-		session.onResp(rsp)
-		return nil
-	}
-
-	_, err := h(t, cmd, session)
-	if err != nil {
-		return err
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (s *RedisServer) onDel(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 1 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onPing(req *raftcmdpb.Request, session *session) ([]byte, error) {
-	rsp := pool.AcquireResponse()
-	rsp.UUID = req.UUID
-	rsp.StatusResult = redis.PongResp
-	session.onResp(rsp)
+	_ = "STUB: not implemented"
 	return nil, nil
 }

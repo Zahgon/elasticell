@@ -16,8 +16,7 @@ import (
 var (
 	allParallelSuites []interface{}
 	allSerialSuites   []interface{}
-	)
-
+)
 
 // Suite registers the given value as a test suite to be run. Any methods
 // starting with the Test prefix in the given value will be considered as

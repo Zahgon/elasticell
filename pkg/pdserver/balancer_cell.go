@@ -24,78 +24,34 @@ type balanceCellScheduler struct {
 	selector Selector
 }
 
-func newBalanceCellScheduler(cfg *Cfg) *balanceCellScheduler {
-	cache := newIDCache(storeCacheInterval, 4*storeCacheInterval)
+func newBalanceCellScheduler(cfg *Cfg) *balanceCellScheduler { _ = "STUB: not implemented"; return nil }
 
-	var filters []Filter
-	filters = append(filters, newCacheFilter(cache))
-	filters = append(filters, newStateFilter(cfg))
-	filters = append(filters, newHealthFilter(cfg))
-	filters = append(filters, newSnapshotCountFilter(cfg))
-	filters = append(filters, newStorageThresholdFilter(cfg))
-
-	return &balanceCellScheduler{
-		cfg:      cfg,
-		cache:    cache,
-		limit:    1,
-		selector: newBalanceSelector(cellKind, filters),
-	}
-}
-
-func (s *balanceCellScheduler) GetName() string {
-	return "balance-cell-scheduler"
-}
+func (s *balanceCellScheduler) GetName() string { _ = "STUB: not implemented"; return "" }
 
 func (s *balanceCellScheduler) GetResourceKind() ResourceKind {
-	return cellKind
+	_ = "STUB: not implemented"
+	return *new(ResourceKind)
 }
 
-func (s *balanceCellScheduler) GetResourceLimit() uint64 {
-	return minUint64(s.limit, s.cfg.LimitScheduleCell)
-}
+func (s *balanceCellScheduler) GetResourceLimit() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (s *balanceCellScheduler) Prepare(cache *cache) error { return nil }
+func (s *balanceCellScheduler) Prepare(cache *cache) error { _ = "STUB: not implemented"; return nil }
 
-func (s *balanceCellScheduler) Cleanup(cache *cache) {}
+func (s *balanceCellScheduler) Cleanup(cache *cache) { _ = "STUB: not implemented"; return }
 
 func (s *balanceCellScheduler) Schedule(cache *cache) Operator {
+	_ = "STUB: not implemented"
 	// Select a peer from the store with most cells.
-	cell, oldPeer := scheduleRemovePeer(cache, s.selector)
-	if cell == nil {
-		return nil
-	}
-
-	// We don't schedule cell with abnormal number of replicas.
-	if len(cell.getPeers()) != int(s.cfg.LimitReplicas) {
-		return nil
-	}
-
-	op := s.transferPeer(cache, cell, oldPeer)
-	if op == nil {
-		// We can't transfer peer from this store now, so we add it to the cache
-		// and skip it for a while.
-		s.cache.set(oldPeer.StoreID)
-	}
-	return op
+	return *new(Operator)
 }
 
+// We don't schedule cell with abnormal number of replicas.
+
+// We can't transfer peer from this store now, so we add it to the cache
+// and skip it for a while.
+
 func (s *balanceCellScheduler) transferPeer(cache *cache, cell *CellInfo, oldPeer *metapb.Peer) Operator {
+	_ = "STUB: not implemented"
 	// scoreGuard guarantees that the distinct score will not decrease.
-	stores := cache.getStoreCache().getCellStores(cell)
-	source := cache.getStoreCache().getStore(oldPeer.StoreID)
-	scoreGuard := newDistinctScoreFilter(s.cfg, stores, source)
-
-	checker := newReplicaChecker(s.cfg, cache)
-	newPeer, _ := checker.selectBestPeer(cell, true, scoreGuard)
-	if newPeer == nil {
-		return nil
-	}
-
-	target := cache.getStoreCache().getStore(newPeer.StoreID)
-	if !shouldBalance(source, target, s.GetResourceKind()) {
-		return nil
-	}
-	s.limit = adjustBalanceLimit(cache, s.GetResourceKind())
-
-	return newTransferPeerAggregationOp(cell, oldPeer, newPeer)
+	return *new(Operator)
 }

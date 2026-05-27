@@ -45,47 +45,20 @@ var (
 		}, []string{"type"})
 )
 
-func initMetricsForRequest() {
-	prometheus.MustRegister(requestDurationHistogram)
-	prometheus.MustRegister(queueGauge)
+func initMetricsForRequest() { _ = "STUB: not implemented"; return }
 
-}
+func observeRequestInQueue(start time.Time) { _ = "STUB: not implemented"; return }
 
-func observeRequestInQueue(start time.Time) {
-	requestDurationHistogram.WithLabelValues(labelRequestInQueue).Observe(time.Now().Sub(start).Seconds())
-}
+func observeRequestWaitting(c *cmd) { _ = "STUB: not implemented"; return }
 
-func observeRequestWaitting(c *cmd) {
-	observeRequestWithlabel(c, labelRequestWaitting)
-}
+func observeRequestProposal(c *cmd) { _ = "STUB: not implemented"; return }
 
-func observeRequestProposal(c *cmd) {
-	observeRequestWithlabel(c, labelRequestProposal)
-}
+func observeRequestRaft(c *cmd) { _ = "STUB: not implemented"; return }
 
-func observeRequestRaft(c *cmd) {
-	observeRequestWithlabel(c, labelRequestRaft)
-}
+func observeRequestStored(c *cmd) { _ = "STUB: not implemented"; return }
 
-func observeRequestStored(c *cmd) {
-	observeRequestWithlabel(c, labelRequestStored)
-}
+func observeRequestResponse(c *cmd) { _ = "STUB: not implemented"; return }
 
-func observeRequestResponse(c *cmd) {
-	now := time.Now()
-	for _, req := range c.req.Requests {
-		requestDurationHistogram.WithLabelValues(labelRequestResponse).Observe(now.Sub(time.Unix(0, req.StartAt)).Seconds())
-	}
-}
+func observeRequestWithlabel(c *cmd, label string) { _ = "STUB: not implemented"; return }
 
-func observeRequestWithlabel(c *cmd, label string) {
-	now := time.Now()
-	for _, req := range c.req.Requests {
-		requestDurationHistogram.WithLabelValues(label).Observe(now.Sub(time.Unix(0, req.LastStageAt)).Seconds())
-		stage(req, now.UnixNano())
-	}
-}
-
-func stage(req *raftcmdpb.Request, now int64) {
-	req.LastStageAt = now
-}
+func stage(req *raftcmdpb.Request, now int64) { _ = "STUB: not implemented"; return }

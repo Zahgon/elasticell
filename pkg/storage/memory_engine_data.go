@@ -14,13 +14,7 @@
 package storage
 
 import (
-	"fmt"
-	"io/ioutil"
-	"os"
-
 	"github.com/deepfabric/elasticell/pkg/util"
-	"github.com/fagongzi/goetty"
-	"github.com/pkg/errors"
 )
 
 type memoryDataEngine struct {
@@ -28,115 +22,38 @@ type memoryDataEngine struct {
 }
 
 func newMemoryDataEngine(kv *util.KVTree) DataEngine {
-	return &memoryDataEngine{
-		kv: kv,
-	}
+	_ = "STUB: not implemented"
+	return *new(DataEngine)
 }
 
 func (e *memoryDataEngine) RangeDelete(start, end []byte) error {
-	e.kv.RangeDelete(start, end)
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (e *memoryDataEngine) GetTargetSizeKey(startKey []byte, endKey []byte, size uint64) (uint64, []byte, error) {
+	_ = "STUB: not implemented"
 	return 0, nil, nil
 }
 
 func (e *memoryDataEngine) ScanIndexInfo(start []byte, end []byte, skipEmpty bool, handler func(key, idxInfo []byte) error) (int, error) {
-	return 1, errors.New("(*memoryDataEngine).ScanIndexInfo is not implemented")
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *memoryDataEngine) SetIndexInfo(key, idxInfo []byte) error {
-	return errors.New("(*memoryDataEngine).SetIndexInfo is not implemented")
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (e *memoryDataEngine) GetIndexInfo(key []byte) (idxInfo []byte, err error) {
-	err = errors.New("(*memoryDataEngine).GetIndexInfo is not implemented")
-	return
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *memoryDataEngine) CreateSnapshot(path string, start, end []byte) error {
-	err := os.MkdirAll(path, os.ModeDir)
-	if err != nil {
-		return nil
-	}
-
-	f, err := os.Create(fmt.Sprintf("%s/data.sst", path))
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	return e.kv.Scan(start, end, func(key, value []byte) (bool, error) {
-		_, err := f.Write(goetty.Int2Bytes(len(key)))
-		if err != nil {
-			return false, nil
-		}
-
-		_, err = f.Write(goetty.Int2Bytes(len(value)))
-		if err != nil {
-			return false, nil
-		}
-
-		_, err = f.Write(key)
-		if err != nil {
-			return false, nil
-		}
-
-		_, err = f.Write(value)
-		if err != nil {
-			return false, nil
-		}
-
-		return true, nil
-	})
-}
-
-func (e *memoryDataEngine) ApplySnapshot(path string) error {
-	data, err := ioutil.ReadFile(fmt.Sprintf("%s/data.sst", path))
-	if err != nil {
-		return err
-	}
-
-	if len(data) == 0 {
-		return nil
-	}
-
-	buf := goetty.NewByteBuf(len(data))
-	buf.Write(data)
-
-	for {
-		if buf.Readable() > 8 {
-			_, v, err := buf.ReadBytes(4)
-			if err != nil {
-				return err
-			}
-
-			keySize := goetty.Byte2Int(v)
-
-			_, v, err = buf.ReadBytes(4)
-			if err != nil {
-				return err
-			}
-
-			valueSize := goetty.Byte2Int(v)
-
-			_, key, err := buf.ReadBytes(keySize)
-			if err != nil {
-				return err
-			}
-
-			_, value, err := buf.ReadBytes(valueSize)
-			if err != nil {
-				return err
-			}
-
-			e.kv.Put(key, value)
-		} else {
-			break
-		}
-	}
-
-	buf.Release()
+	_ = "STUB: not implemented"
 	return nil
 }
+
+func (e *memoryDataEngine) ApplySnapshot(path string) error { _ = "STUB: not implemented"; return nil }

@@ -19,7 +19,6 @@ import (
 	"github.com/deepfabric/elasticell/pkg/pb/errorpb"
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
-	"github.com/deepfabric/elasticell/pkg/pool"
 )
 
 var (
@@ -36,61 +35,28 @@ var (
 	storeNotMatch = new(errorpb.StoreNotMatch)
 )
 
-func buildTerm(term uint64, resp *raftcmdpb.RaftCMDResponse) {
-	if resp.Header == nil {
-		return
-	}
+func buildTerm(term uint64, resp *raftcmdpb.RaftCMDResponse) { _ = "STUB: not implemented"; return }
 
-	resp.Header.CurrentTerm = term
-}
+func buildUUID(uuid []byte, resp *raftcmdpb.RaftCMDResponse) { _ = "STUB: not implemented"; return }
 
-func buildUUID(uuid []byte, resp *raftcmdpb.RaftCMDResponse) {
-	if resp.Header == nil {
-		return
-	}
-
-	if resp.Header.UUID != nil {
-		resp.Header.UUID = uuid
-	}
-}
-
-func errorOtherCMDResp(err error) *raftcmdpb.RaftCMDResponse {
-	resp := errorBaseResp(nil, 0)
-	resp.Header.Error.Message = err.Error()
-	return resp
-}
+func errorOtherCMDResp(err error) *raftcmdpb.RaftCMDResponse { _ = "STUB: not implemented"; return nil }
 
 func errorPbResp(err *errorpb.Error, uuid []byte, currentTerm uint64) *raftcmdpb.RaftCMDResponse {
-	resp := errorBaseResp(uuid, currentTerm)
-	resp.Header.Error = *err
-
-	return resp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func errorStaleCMDResp(uuid []byte, currentTerm uint64) *raftcmdpb.RaftCMDResponse {
-	resp := errorBaseResp(uuid, currentTerm)
-	resp.Header.Error.Message = errStaleCMD.Error()
-	resp.Header.Error.StaleCommand = infoStaleCMD
-
-	return resp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func errorStaleEpochResp(uuid []byte, currentTerm uint64, newCells ...metapb.Cell) *raftcmdpb.RaftCMDResponse {
-	resp := errorBaseResp(uuid, currentTerm)
-
-	resp.Header.Error.Message = errStaleCMD.Error()
-	resp.Header.Error.StaleEpoch = &errorpb.StaleEpoch{
-		NewCells: newCells,
-	}
-
-	return resp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func errorBaseResp(uuid []byte, currentTerm uint64) *raftcmdpb.RaftCMDResponse {
-	resp := pool.AcquireRaftCMDResponse()
-	resp.Header = pool.AcquireRaftResponseHeader()
-	buildTerm(currentTerm, resp)
-	buildUUID(uuid, resp)
-
-	return resp
+	_ = "STUB: not implemented"
+	return nil
 }

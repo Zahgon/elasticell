@@ -6,11 +6,12 @@ package grpc_reflection_v1alpha
 import (
 	context "context"
 	fmt "fmt"
+	math "math"
+
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -105,7 +106,8 @@ func (*ServerReflectionRequest_FileContainingSymbol) isServerReflectionRequest_M
 
 func (*ServerReflectionRequest_FileContainingExtension) isServerReflectionRequest_MessageRequest() {}
 
-func (*ServerReflectionRequest_AllExtensionNumbersOfType) isServerReflectionRequest_MessageRequest() {}
+func (*ServerReflectionRequest_AllExtensionNumbersOfType) isServerReflectionRequest_MessageRequest() {
+}
 
 func (*ServerReflectionRequest_ListServices) isServerReflectionRequest_MessageRequest() {}
 
@@ -289,7 +291,8 @@ type ServerReflectionResponse_ErrorResponse struct {
 	ErrorResponse *ErrorResponse `protobuf:"bytes,7,opt,name=error_response,json=errorResponse,proto3,oneof"`
 }
 
-func (*ServerReflectionResponse_FileDescriptorResponse) isServerReflectionResponse_MessageResponse() {}
+func (*ServerReflectionResponse_FileDescriptorResponse) isServerReflectionResponse_MessageResponse() {
+}
 
 func (*ServerReflectionResponse_AllExtensionNumbersResponse) isServerReflectionResponse_MessageResponse() {
 }

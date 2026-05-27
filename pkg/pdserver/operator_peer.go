@@ -14,8 +14,6 @@
 package pdserver
 
 import (
-	"fmt"
-
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
 )
 
@@ -26,41 +24,23 @@ type changePeerOperator struct {
 	ChangePeer pdpb.ChangePeer `json:"changePeer"`
 }
 
-func (op *changePeerOperator) String() string {
-	return fmt.Sprintf("%+v", *op)
-}
+func (op *changePeerOperator) String() string { _ = "STUB: not implemented"; return "" }
 
-func (op *changePeerOperator) GetCellID() uint64 {
-	return op.CellID
-}
+func (op *changePeerOperator) GetCellID() uint64 { _ = "STUB: not implemented"; return 0 }
 
 func (op *changePeerOperator) GetResourceKind() ResourceKind {
-	return cellKind
+	_ = "STUB: not implemented"
+	return *new(ResourceKind)
 }
 
 func (op *changePeerOperator) Do(cell *CellInfo) (*pdpb.CellHeartbeatRsp, bool) {
+	_ = "STUB: not implemented"
 	// Check if operator is finished.
-	peer := op.ChangePeer.Peer
-
-	switch op.ChangePeer.Type {
-	case pdpb.AddNode:
-		if cell.getPendingPeer(peer.ID) != nil {
-			// Peer is added but not finished.
-			return nil, false
-		}
-		if cell.getPeer(peer.ID) != nil {
-			// Peer is added and finished.
-			return nil, true
-		}
-	case pdpb.RemoveNode:
-		if cell.getPeer(peer.ID) == nil {
-			// Peer is removed.
-			return nil, true
-		}
-	}
-
-	res := &pdpb.CellHeartbeatRsp{
-		ChangePeer: &op.ChangePeer,
-	}
-	return res, false
+	return nil, false
 }
+
+// Peer is added but not finished.
+
+// Peer is added and finished.
+
+// Peer is removed.

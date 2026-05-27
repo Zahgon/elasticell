@@ -24,18 +24,10 @@ type Limiter struct {
 }
 
 // NewLimiter return a limiter with max
-func NewLimiter(max uint64) *Limiter {
-	return &Limiter{
-		limter: semaphore.NewWeighted(int64(max)),
-	}
-}
+func NewLimiter(max uint64) *Limiter { _ = "STUB: not implemented"; return nil }
 
 // Wait wait until get the token
-func (l *Limiter) Wait(ctx context.Context) error {
-	return l.limter.Acquire(ctx, 1)
-}
+func (l *Limiter) Wait(ctx context.Context) error { _ = "STUB: not implemented"; return nil }
 
 // Release release token
-func (l *Limiter) Release() {
-	l.limter.Release(1)
-}
+func (l *Limiter) Release() { _ = "STUB: not implemented"; return }

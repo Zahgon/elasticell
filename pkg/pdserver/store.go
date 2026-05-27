@@ -19,10 +19,8 @@ import (
 
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/embed"
-	"github.com/fagongzi/log"
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
-	"github.com/pkg/errors"
 )
 
 const (
@@ -106,164 +104,65 @@ type pdStore struct {
 }
 
 // NewStore create a store
-func NewStore(cfg *embed.Config) (Store, error) {
-	c, err := initEtcdClient(cfg)
-	if err != nil {
-		return nil, err
-	}
-
-	s := new(pdStore)
-	s.client = c
-	return s, nil
-}
+func NewStore(cfg *embed.Config) (Store, error) { _ = "STUB: not implemented"; return *new(Store), nil }
 
 func initEtcdClient(cfg *embed.Config) (*clientv3.Client, error) {
-	endpoints := []string{cfg.LCUrls[0].String()}
-
-	log.Infof("bootstrap: create etcd v3 client, endpoints=<%v>", endpoints)
-
-	client, err := clientv3.New(clientv3.Config{
-		Endpoints:   endpoints,
-		DialTimeout: DefaultTimeout,
-	})
-	if err != nil {
-		return nil, errors.Wrap(err, "")
-	}
-
-	return client, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Close close etcd client
-func (s *pdStore) Close() error {
-	if s.client != nil {
-		return s.client.Close()
-	}
-
-	return nil
-}
+func (s *pdStore) Close() error { _ = "STUB: not implemented"; return nil }
 
 // RawClient return raw etcd client
 func (s *pdStore) RawClient() *clientv3.Client {
-	return s.client
+	_ = "STUB: not implemented"
+
+	// slowLogTxn wraps etcd transaction and log slow one.
+	return nil
 }
 
-// slowLogTxn wraps etcd transaction and log slow one.
 type slowLogTxn struct {
 	clientv3.Txn
 	cancel context.CancelFunc
 }
 
 func newSlowLogTxn(client *clientv3.Client) clientv3.Txn {
-	ctx, cancel := context.WithTimeout(client.Ctx(), DefaultRequestTimeout)
-	return &slowLogTxn{
-		Txn:    client.Txn(ctx),
-		cancel: cancel,
-	}
+	_ = "STUB: not implemented"
+	return *new(clientv3.Txn)
 }
 
 func (t *slowLogTxn) If(cs ...clientv3.Cmp) clientv3.Txn {
-	return &slowLogTxn{
-		Txn:    t.Txn.If(cs...),
-		cancel: t.cancel,
-	}
+	_ = "STUB: not implemented"
+	return *new(clientv3.Txn)
 }
 
 func (t *slowLogTxn) Then(ops ...clientv3.Op) clientv3.Txn {
-	return &slowLogTxn{
-		Txn:    t.Txn.Then(ops...),
-		cancel: t.cancel,
-	}
+	_ = "STUB: not implemented"
+	return *new(clientv3.Txn)
 }
 
 // Commit implements Txn Commit interface.
 func (t *slowLogTxn) Commit() (*clientv3.TxnResponse, error) {
-	start := time.Now()
-	resp, err := t.Txn.Commit()
-	t.cancel()
-
-	cost := time.Now().Sub(start)
-	if cost > DefaultSlowRequestTime {
-		log.Warnf("embed-etcd: txn runs too slow, resp=<%+v> cost=<%s> errors:\n %+v",
-			resp,
-			cost,
-			err)
-	}
-
-	return resp, errors.Wrap(err, "")
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *pdStore) getValue(key string, opts ...clientv3.OpOption) ([]byte, error) {
-	resp, err := s.get(key, opts...)
-	if err != nil {
-		return nil, errors.Wrap(err, "")
-	}
-
-	if n := len(resp.Kvs); n == 0 {
-		return nil, nil
-	} else if n > 1 {
-		return nil, errors.Errorf("invalid get value resp %v, must only one", resp.Kvs)
-	}
-
-	return resp.Kvs[0].Value, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *pdStore) get(key string, opts ...clientv3.OpOption) (*clientv3.GetResponse, error) {
-	ctx, cancel := context.WithTimeout(s.client.Ctx(), DefaultRequestTimeout)
-	defer cancel()
-
-	start := time.Now()
-	resp, err := clientv3.NewKV(s.client).Get(ctx, key, opts...)
-	if err != nil {
-		log.Errorf("embed-etcd: read option failure, key=<%s>, errors:\n %+v",
-			key,
-			err)
-		return resp, errors.Wrap(err, "")
-	}
-
-	if cost := time.Since(start); cost > DefaultSlowRequestTime {
-		log.Warnf("embed-etcd: read option is too slow, key=<%s>, cost=<%d>",
-			key,
-			cost)
-	}
-
-	return resp, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func (s *pdStore) save(key, value string) error {
-	resp, err := s.txn().Then(clientv3.OpPut(key, value)).Commit()
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
+func (s *pdStore) save(key, value string) error { _ = "STUB: not implemented"; return nil }
 
-	if !resp.Succeeded {
-		return errors.Wrap(errTxnFailed, "")
-	}
-
-	return nil
-}
-
-func (s *pdStore) create(key, value string) error {
-	resp, err := s.txn().If(clientv3.Compare(clientv3.CreateRevision(key), "=", 0)).Then(clientv3.OpPut(key, value)).Commit()
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-
-	if !resp.Succeeded {
-		return errors.Wrap(errTxnFailed, "")
-	}
-
-	return nil
-}
+func (s *pdStore) create(key, value string) error { _ = "STUB: not implemented"; return nil }
 
 func (s *pdStore) delete(key string, opts ...clientv3.OpOption) error {
-	resp, err := s.txn().Then(clientv3.OpDelete(key, opts...)).Commit()
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-
-	if !resp.Succeeded {
-		return errors.Wrap(errTxnFailed, "")
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }

@@ -62,19 +62,11 @@ var (
 		}, []string{"type"})
 )
 
-func initMetricsForSnapshot() {
-	prometheus.MustRegister(snapshotBuildingDurationHistogram)
-	prometheus.MustRegister(snapshortActionGaugeVec)
-	prometheus.MustRegister(snapshotSizeHistogram)
-	prometheus.MustRegister(snapshotSendingDurationHistogram)
-}
+func initMetricsForSnapshot() { _ = "STUB: not implemented"; return }
 
 func observeSnapshotBuild(start time.Time) time.Duration {
-	value := time.Now().Sub(start)
-	snapshotBuildingDurationHistogram.Observe(value.Seconds())
-	return value
+	_ = "STUB: not implemented"
+	return *new(time.Duration)
 }
 
-func observeSnapshotSending(start time.Time) {
-	snapshotSendingDurationHistogram.Observe(time.Now().Sub(start).Seconds())
-}
+func observeSnapshotSending(start time.Time) { _ = "STUB: not implemented"; return }

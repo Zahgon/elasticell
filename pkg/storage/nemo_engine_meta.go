@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package storage
@@ -18,7 +19,6 @@ package storage
 import (
 	"github.com/deepfabric/elasticell/pkg/util"
 	gonemo "github.com/deepfabric/go-nemo"
-	"golang.org/x/net/context"
 )
 
 type nemoMetaEngine struct {
@@ -28,74 +28,44 @@ type nemoMetaEngine struct {
 }
 
 func newNemoMetaEngine(db *gonemo.NEMO, cfg *NemoCfg) Engine {
-	return &nemoMetaEngine{
-		limiter: util.NewLimiter(cfg.LimitConcurrencyWrite),
-		db:      db,
-		handler: db.GetMetaHandle(),
-	}
+	_ = "STUB: not implemented"
+	return *new(Engine)
 }
 
 func (e *nemoMetaEngine) Set(key []byte, value []byte) error {
+	_ = "STUB: not implemented"
 	// TODO: cfg
-	e.limiter.Wait(context.TODO())
-	err := e.db.PutWithHandle(e.handler, key, value, false)
-	e.limiter.Release()
-
-	return err
+	return nil
 }
 
 func (e *nemoMetaEngine) Get(key []byte) ([]byte, error) {
-	return e.db.GetWithHandle(e.handler, key)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoMetaEngine) Delete(key []byte) error {
+	_ = "STUB: not implemented"
 	// TODO: cfg
-	e.limiter.Wait(context.TODO())
-	err := e.db.DeleteWithHandle(e.handler, key, false)
-	e.limiter.Release()
-
-	return err
+	return nil
 }
 
 func (e *nemoMetaEngine) RangeDelete(start, end []byte) error {
-	e.limiter.Wait(context.TODO())
-	err := e.db.RangeDelWithHandle(e.handler, start, end)
-	e.limiter.Release()
-
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Scan scans the range and execute the handler fun.
 // returns false means end the scan.
 func (e *nemoMetaEngine) Scan(startKey []byte, endKey []byte, handler func(key, value []byte) (bool, error), pooledKey bool) error {
-	var key []byte
-	var err error
-	c := false
-
-	it := e.db.KScanWithHandle(e.handler, startKey, endKey, true)
-	for ; it.Valid(); it.Next() {
-		if pooledKey {
-			key = it.PooledKey()
-		} else {
-			key = it.Key()
-		}
-
-		c, err = handler(key, it.Value())
-		if err != nil || !c {
-			break
-		}
-	}
-	it.Free()
-
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Free free unsafe the key or value
-func (e *nemoMetaEngine) Free(unsafe []byte) {
-	gonemo.MemPool.Free(unsafe)
-}
+func (e *nemoMetaEngine) Free(unsafe []byte) { _ = "STUB: not implemented"; return }
 
 // Seek the first key >= given key, if no found, return None.
 func (e *nemoMetaEngine) Seek(key []byte) ([]byte, []byte, error) {
-	return e.db.SeekWithHandle(e.handler, key)
+	_ = "STUB: not implemented"
+	return nil, nil, nil
 }

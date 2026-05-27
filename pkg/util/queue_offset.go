@@ -14,7 +14,6 @@
 package util
 
 import (
-	"fmt"
 	"sync"
 )
 
@@ -27,65 +26,18 @@ type OffsetQueue struct {
 }
 
 // NewOffsetQueue returns a offset queue
-func NewOffsetQueue() *OffsetQueue {
-	return &OffsetQueue{}
-}
+func NewOffsetQueue() *OffsetQueue { _ = "STUB: not implemented"; return nil }
 
 // Add add a item to the queue
-func (q *OffsetQueue) Add(item interface{}) uint64 {
-	q.Lock()
-	q.end++
-	q.items = append(q.items, item)
-	max := q.getMaxOffset0()
-	q.Unlock()
-	return max
-}
+func (q *OffsetQueue) Add(item interface{}) uint64 { _ = "STUB: not implemented"; return 0 }
 
 // Get returns all the items after the offset, and remove all items before this offset
 func (q *OffsetQueue) Get(offset uint64) ([]interface{}, uint64) {
-	q.Lock()
-	max := q.getMaxOffset0()
-	if offset > max {
-		panic(fmt.Sprintf("bug: error offset %d, end is %d", offset, q.end))
-	} else if offset < q.start || (offset == q.start && q.start == 0) {
-		value := q.items[0:]
-		q.Unlock()
-		return value, max
-	}
-
-	var value []interface{}
-	for i := q.start; i < q.end; i++ {
-		if i <= offset {
-			q.items[i-q.start] = nil
-		} else {
-			value = append(value, q.items[i-q.start])
-		}
-	}
-
-	old := q.start
-	q.start = offset + 1
-	if q.start < q.end {
-		q.items = q.items[q.start-old:]
-	} else {
-		q.items = make([]interface{}, 0, 0)
-	}
-	q.Unlock()
-
-	return value, max
+	_ = "STUB: not implemented"
+	return nil, 0
 }
 
 // GetMaxOffset returns the max offset in the queue
-func (q *OffsetQueue) GetMaxOffset() uint64 {
-	q.Lock()
-	v := q.getMaxOffset0()
-	q.Unlock()
-	return v
-}
+func (q *OffsetQueue) GetMaxOffset() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (q *OffsetQueue) getMaxOffset0() uint64 {
-	if q.end == 0 {
-		return 0
-	}
-
-	return q.end - 1
-}
+func (q *OffsetQueue) getMaxOffset0() uint64 { _ = "STUB: not implemented"; return 0 }

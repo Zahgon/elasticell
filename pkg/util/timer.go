@@ -25,6 +25,4 @@ var (
 )
 
 // DefaultTimeoutWheel returns default timeout wheel
-func DefaultTimeoutWheel() *goetty.TimeoutWheel {
-	return defaultTW
-}
+func DefaultTimeoutWheel() *goetty.TimeoutWheel { _ = "STUB: not implemented"; return nil }

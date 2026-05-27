@@ -14,12 +14,8 @@
 package pdapi
 
 import (
-	"io/ioutil"
 	"net/http"
 	"net/url"
-
-	"github.com/fagongzi/log"
-	"github.com/deepfabric/elasticell/pkg/util"
 )
 
 const (
@@ -35,39 +31,14 @@ type redirector struct {
 	service Service
 }
 
-func newRedirector(service Service) *redirector {
-	return &redirector{service: service}
-}
+func newRedirector(service Service) *redirector { _ = "STUB: not implemented"; return nil }
 
 func (h *redirector) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
-	if h.service.IsLeader() {
-		next(w, r)
-		return
-	}
-
-	// Prevent more than one redirection.
-	if name := r.Header.Get(redirectorHeader); len(name) != 0 {
-		log.Errorf("api: redirect from %v, but %v is not leader", name, h.service.Name())
-		http.Error(w, errRedirectToNotLeader, http.StatusInternalServerError)
-		return
-	}
-
-	r.Header.Set(redirectorHeader, h.service.Name())
-
-	leader, err := h.service.GetLeader()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	urls, err := util.ParseUrls(leader.EtcdClientAddr)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	newCustomReverseProxies(urls).ServeHTTP(w, r)
+	_ = "STUB: not implemented"
+	return
 }
+
+// Prevent more than one redirection.
 
 type customReverseProxies struct {
 	urls   []url.URL
@@ -75,59 +46,13 @@ type customReverseProxies struct {
 }
 
 func newCustomReverseProxies(urls []url.URL) *customReverseProxies {
-	p := &customReverseProxies{
-		client: &http.Client{},
-	}
-
-	for _, u := range urls {
-		p.urls = append(p.urls, u)
-	}
-
-	return p
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (p *customReverseProxies) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	for _, url := range p.urls {
-		r.RequestURI = ""
-		r.URL.Host = url.Host
-		r.URL.Scheme = url.Scheme
-
-		resp, err := p.client.Do(r)
-		if err != nil {
-			log.Error(err)
-			continue
-		}
-
-		b, err := ioutil.ReadAll(resp.Body)
-		resp.Body.Close()
-		if err != nil {
-			log.Error(err)
-			continue
-		}
-
-		copyHeader(w.Header(), resp.Header)
-		w.WriteHeader(resp.StatusCode)
-		if _, err := w.Write(b); err != nil {
-			log.Error(err)
-			continue
-		}
-
-		return
-	}
-
-	http.Error(w, errRedirectFailed, http.StatusInternalServerError)
+	_ = "STUB: not implemented"
+	return
 }
 
-func copyHeader(dst, src http.Header) {
-	for k, vv := range src {
-		for _, v := range vv {
-			if k == headerAccess ||
-				k == headerAccessMethods ||
-				k == headerAccessHeaders {
-				dst.Set(k, v)
-			} else {
-				dst.Add(k, v)
-			}
-		}
-	}
-}
+func copyHeader(dst, src http.Header) { _ = "STUB: not implemented"; return }

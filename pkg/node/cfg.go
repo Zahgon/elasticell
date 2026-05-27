@@ -28,8 +28,4 @@ type Cfg struct {
 }
 
 // NewCfg returns default cfg
-func NewCfg() *Cfg {
-	return &Cfg{
-		RaftStore: raftstore.NewCfg(),
-	}
-}
+func NewCfg() *Cfg { _ = "STUB: not implemented"; return nil }

@@ -14,7 +14,6 @@
 package pdserver
 
 import (
-	"github.com/fagongzi/log"
 	"github.com/deepfabric/elasticell/pkg/pb"
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
 	"github.com/deepfabric/elasticell/pkg/pd"
@@ -28,353 +27,109 @@ type RPCHandler struct {
 
 // NewRPCHandler create a new instance
 func NewRPCHandler(server *Server) pdpb.PDServiceServer {
-	return &RPCHandler{
-		server: server,
-	}
+	_ = "STUB: not implemented"
+	return *new(pdpb.PDServiceServer)
 }
 
 // RegisterWatcher regsiter a watcher for newest cell info notify
 func (h *RPCHandler) RegisterWatcher(c context.Context, req *pdpb.RegisterWatcherReq) (*pdpb.RegisterWatcherRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.registerWatcher(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.RegisterWatcher(c, req)
-	}
-
-	rsp, err := h.doHandle("RegisterWatcher", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.RegisterWatcherRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // WatcherHeartbeat update the watcher lastest alive time
 func (h *RPCHandler) WatcherHeartbeat(c context.Context, req *pdpb.WatcherHeartbeatReq) (*pdpb.WatcherHeartbeatRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.watcherHeartbeat(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.WatcherHeartbeat(c, req)
-	}
-
-	rsp, err := h.doHandle("WatcherHeartbeat", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.WatcherHeartbeatRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // GetClusterID returns cluster id
 func (h *RPCHandler) GetClusterID(c context.Context, req *pdpb.GetClusterIDReq) (*pdpb.GetClusterIDRsp, error) {
-	doFun := func() (interface{}, error) {
-		return &pdpb.GetClusterIDRsp{
-			ID: h.server.GetClusterID(),
-		}, nil
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.GetClusterID(c, req)
-	}
-
-	rsp, err := h.doHandle("GetClusterID", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.GetClusterIDRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // GetInitParams returns cluster init params
 func (h *RPCHandler) GetInitParams(c context.Context, req *pdpb.GetInitParamsReq) (*pdpb.GetInitParamsRsp, error) {
-	doFun := func() (interface{}, error) {
-		params, err := h.server.GetInitParamsValue()
-		if err != nil {
-			return nil, err
-		}
-
-		return &pdpb.GetInitParamsRsp{
-			Params: params,
-		}, nil
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.GetInitParams(c, req)
-	}
-
-	rsp, err := h.doHandle("GetInitParams", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.GetInitParamsRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // AllocID returns alloc id for kv node
 func (h *RPCHandler) AllocID(c context.Context, req *pdpb.AllocIDReq) (*pdpb.AllocIDRsp, error) {
-	doFun := func() (interface{}, error) {
-		id, err := h.server.idAlloc.newID()
-		if err != nil {
-			return nil, err
-		}
-
-		return &pdpb.AllocIDRsp{
-			ID: id,
-		}, nil
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.AllocID(c, req)
-	}
-
-	rsp, err := h.doHandle("AllocID", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.AllocIDRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // GetLeader returns current leader
 func (h *RPCHandler) GetLeader(c context.Context, req *pdpb.LeaderReq) (*pdpb.LeaderRsp, error) {
-	doFun := func() (interface{}, error) {
-		leader, err := h.server.store.GetCurrentLeader()
-		if err != nil {
-			return nil, err
-		}
-
-		return &pdpb.LeaderRsp{
-			Leader: *leader,
-		}, nil
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.GetLeader(c, req)
-	}
-
-	rsp, err := h.doHandle("GetLeader", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.LeaderRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // IsClusterBootstrap returns cluster is bootstrap already
 func (h *RPCHandler) IsClusterBootstrap(c context.Context, req *pdpb.IsClusterBootstrapReq) (*pdpb.IsClusterBootstrapRsp, error) {
-	doFun := func() (interface{}, error) {
-		return &pdpb.IsClusterBootstrapRsp{
-			Value: h.server.isClusterBootstrapped(),
-		}, nil
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.IsClusterBootstrapped(c, req)
-	}
-
-	rsp, err := h.doHandle("IsClusterBootstrap", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.IsClusterBootstrapRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // BootstrapCluster returns bootstrap cluster response
 func (h *RPCHandler) BootstrapCluster(c context.Context, req *pdpb.BootstrapClusterReq) (*pdpb.BootstrapClusterRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.bootstrapCluster(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.BootstrapCluster(c, req)
-	}
-
-	rsp, err := h.doHandle("BootstrapCluster", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.BootstrapClusterRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ListStore puts store
 func (h *RPCHandler) ListStore(c context.Context, req *pdpb.ListStoreReq) (*pdpb.ListStoreRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.listStore(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.ListStore(c, req)
-	}
-
-	rsp, err := h.doHandle("ListStore", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.ListStoreRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // PutStore puts store
 func (h *RPCHandler) PutStore(c context.Context, req *pdpb.PutStoreReq) (*pdpb.PutStoreRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.putStore(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.PutStore(c, req)
-	}
-
-	rsp, err := h.doHandle("PutStore", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.PutStoreRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // GetStore get store info
 func (h *RPCHandler) GetStore(c context.Context, req *pdpb.GetStoreReq) (*pdpb.GetStoreRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.getStore(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.GetStore(c, req)
-	}
-
-	rsp, err := h.doHandle("GetStore", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.GetStoreRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CellHeartbeat returns cell heartbeat response
 func (h *RPCHandler) CellHeartbeat(c context.Context, req *pdpb.CellHeartbeatReq) (*pdpb.CellHeartbeatRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.cellHeartbeat(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.CellHeartbeat(c, req)
-	}
-
-	rsp, err := h.doHandle("CellHeartbeat", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.CellHeartbeatRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // StoreHeartbeat returns store heartbeat response
 func (h *RPCHandler) StoreHeartbeat(c context.Context, req *pdpb.StoreHeartbeatReq) (*pdpb.StoreHeartbeatRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.storeHeartbeat(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.StoreHeartbeat(c, req)
-	}
-
-	rsp, err := h.doHandle("StoreHeartbeat", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.StoreHeartbeatRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // AskSplit returns ask split response
 func (h *RPCHandler) AskSplit(c context.Context, req *pdpb.AskSplitReq) (*pdpb.AskSplitRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.askSplit(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.AskSplit(c, req)
-	}
-
-	rsp, err := h.doHandle("AskSplit", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.AskSplitRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReportSplit returns report split response
 func (h *RPCHandler) ReportSplit(c context.Context, req *pdpb.ReportSplitReq) (*pdpb.ReportSplitRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.reportSplit(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.ReportSplit(c, req)
-	}
-
-	rsp, err := h.doHandle("AskSplit", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.ReportSplitRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // GetLastRanges returns lastest key ranges
 func (h *RPCHandler) GetLastRanges(c context.Context, req *pdpb.GetLastRangesReq) (*pdpb.GetLastRangesRsp, error) {
-	doFun := func() (interface{}, error) {
-		return h.server.getLastRanges(req)
-	}
-
-	forwardFun := func(proxy *pd.Client) (interface{}, error) {
-		return proxy.GetLastRanges(c, req)
-	}
-
-	rsp, err := h.doHandle("GetLastRanges", req, forwardFun, doFun)
-	if err != nil {
-		return nil, err
-	}
-
-	return rsp.(*pdpb.GetLastRangesRsp), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (h *RPCHandler) doHandle(name string, req pb.BaseReq, forwardFun func(*pd.Client) (interface{}, error), doFun func() (interface{}, error)) (interface{}, error) {
-	log.Debugf("rpc: req<%s-%d>, type=<%s> req=<%v>",
-		req.GetFrom(),
-		req.GetID(),
-		name,
-		req)
-
-	// forward to leader
-	if !h.server.IsLeader() {
-		proxy := h.server.GetLeaderProxy()
-		if nil == proxy {
-			return nil, pd.ErrNotLeader
-		}
-
-		log.Debugf("rpc: forward a req<%s-%d>, target=<%s>",
-			req.GetFrom(),
-			req.GetID(),
-			proxy.GetLastPD())
-		return forwardFun(proxy)
-	}
-
-	rsp, err := doFun()
-	if err == nil {
-		log.Debugf("rpc: rsp<%s-%d>, rsp=<%v>",
-			req.GetFrom(),
-			req.GetID(),
-			rsp,
-		)
-	}
-
-	return rsp, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
+
+// forward to leader

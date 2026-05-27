@@ -14,13 +14,8 @@
 package raftstore
 
 import (
-	"bytes"
-	"encoding/binary"
-	"fmt"
-
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/fagongzi/goetty"
-	"github.com/fagongzi/log"
 )
 
 // for cell meta
@@ -80,162 +75,69 @@ var (
 )
 
 // GetStoreIdentKey return key of StoreIdent
-func GetStoreIdentKey() []byte {
-	return storeIdentKey
-}
+func GetStoreIdentKey() []byte { _ = "STUB: not implemented"; return nil }
 
 // GetMaxKey return max key
 func GetMaxKey() []byte {
-	return maxKey
+	_ = "STUB: not implemented"
+
+	// GetMinKey return min key
+	return nil
 }
 
-// GetMinKey return min key
-func GetMinKey() []byte {
-	return minKey
-}
+func GetMinKey() []byte { _ = "STUB: not implemented"; return nil }
 
 func decodeCellMetaKey(key []byte) (uint64, byte, error) {
-	prefixLen := len(cellMetaPrefixKey)
-	keyLen := len(key)
-
-	if prefixLen+9 != len(key) {
-		return 0, 0, fmt.Errorf("invalid cell meta key length for key %v", key)
-	}
-
-	if !bytes.HasPrefix(key, cellMetaPrefixKey) {
-		return 0, 0, fmt.Errorf("invalid region meta prefix for key %v", key)
-	}
-
-	return binary.BigEndian.Uint64(key[prefixLen:keyLen]), key[keyLen-1], nil
+	_ = "STUB: not implemented"
+	return 0, 0, nil
 }
 
-func getCellStateKey(cellID uint64) []byte {
-	return getCellMetaKey(cellID, cellStateSuffix)
-}
+func getCellStateKey(cellID uint64) []byte { _ = "STUB: not implemented"; return nil }
 
-func getCellMetaKey(cellID uint64, suffix byte) []byte {
-	buf := acquireBuf()
-	buf.Write(cellMetaPrefixKey)
-	buf.WriteInt64(int64(cellID))
-	buf.WriteByte(suffix)
-	_, data, _ := buf.ReadBytes(buf.Readable())
+func getCellMetaKey(cellID uint64, suffix byte) []byte { _ = "STUB: not implemented"; return nil }
 
-	releaseBuf(buf)
-	return data
-}
+func getCellMetaPrefix(cellID uint64) []byte { _ = "STUB: not implemented"; return nil }
 
-func getCellMetaPrefix(cellID uint64) []byte {
-	buf := acquireBuf()
-	buf.Write(cellMetaPrefixKey)
-	buf.WriteInt64(int64(cellID))
-	_, data, _ := buf.ReadBytes(buf.Readable())
+func getDataKey(key []byte) []byte { _ = "STUB: not implemented"; return nil }
 
-	releaseBuf(buf)
-	return data
-}
+func getDataKey0(key []byte, buf *goetty.ByteBuf) []byte { _ = "STUB: not implemented"; return nil }
 
-func getDataKey(key []byte) []byte {
-	buf := acquireBuf()
-	data := getDataKey0(key, buf)
-	releaseBuf(buf)
-	return data
-}
+func getOriginKey(key []byte) []byte { _ = "STUB: not implemented"; return nil }
 
-func getDataKey0(key []byte, buf *goetty.ByteBuf) []byte {
-	buf.Write(dataPrefixKey)
-	buf.Write(key)
-	_, data, _ := buf.ReadBytes(buf.Readable())
-
-	return data
-}
-
-func getOriginKey(key []byte) []byte {
-	return key[len(dataPrefixKey):]
-}
-
-func getDataEndKey(endKey []byte) []byte {
-	if len(endKey) == 0 {
-		return dataMaxKey
-	}
-	return getDataKey(endKey)
-}
+func getDataEndKey(endKey []byte) []byte { _ = "STUB: not implemented"; return nil }
 
 // Get the `startKey` of current cell in encoded form.
 func encStartKey(cell *metapb.Cell) []byte {
+	_ = "STUB: not implemented"
 	// only initialized cell's startKey can be encoded, otherwise there must be bugs
 	// somewhere.
 	// cell
-	if len(cell.Peers) == 0 {
-		log.Fatalf("bug: cell peers len is empty")
-	}
-
-	return getDataKey(cell.Start)
+	return nil
 }
 
-/// Get the `endKey` of current region in encoded form.
+// / Get the `endKey` of current region in encoded form.
 func encEndKey(cell *metapb.Cell) []byte {
+	_ = "STUB: not implemented"
 	// only initialized region's end_key can be encoded, otherwise there must be bugs
 	// somewhere.
-	if len(cell.Peers) == 0 {
-		log.Fatalf("bug: cell peers len is empty")
-	}
-	return getDataEndKey(cell.End)
+	return nil
 }
 
-func getRaftStateKey(cellID uint64) []byte {
-	return getCellIDKey(cellID, raftStateSuffix, 0, 0)
-}
+func getRaftStateKey(cellID uint64) []byte { _ = "STUB: not implemented"; return nil }
 
-func getApplyStateKey(cellID uint64) []byte {
-	return getCellIDKey(cellID, applyStateSuffix, 0, 0)
-}
+func getApplyStateKey(cellID uint64) []byte { _ = "STUB: not implemented"; return nil }
 
-func getCellRaftPrefix(cellID uint64) []byte {
-	buf := acquireBuf()
-	buf.Write(cellRaftPrefixKey)
-	buf.WriteInt64(int64(cellID))
-	_, data, _ := buf.ReadBytes(buf.Readable())
+func getCellRaftPrefix(cellID uint64) []byte { _ = "STUB: not implemented"; return nil }
 
-	releaseBuf(buf)
-	return data
-}
+func getRaftLogKey(cellID uint64, logIndex uint64) []byte { _ = "STUB: not implemented"; return nil }
 
-func getRaftLogKey(cellID uint64, logIndex uint64) []byte {
-	return getCellIDKey(cellID, raftLogSuffix, 8, logIndex)
-}
+func getDocIDKey(docID uint64) []byte { _ = "STUB: not implemented"; return nil }
 
-func getDocIDKey(docID uint64) []byte {
-	buf := acquireBuf()
-	buf.Write(cellDocIDPrefixKey)
-	buf.WriteInt64(int64(docID))
-	_, data, _ := buf.ReadBytes(buf.Readable())
-	releaseBuf(buf)
-	return data
-}
+func getIdxReqQueueKey() []byte { _ = "STUB: not implemented"; return nil }
 
-func getIdxReqQueueKey() []byte {
-	return idxReqQueueKey
-}
-
-func getRaftLogIndex(key []byte) (uint64, error) {
-	expectKeyLen := len(cellRaftPrefixKey) + 8*2 + 1
-	if len(key) != expectKeyLen {
-		return 0, fmt.Errorf("key<%v> is not a valid raft log key", key)
-	}
-
-	return binary.BigEndian.Uint64(key[len(cellRaftPrefixKey)+9:]), nil
-}
+func getRaftLogIndex(key []byte) (uint64, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func getCellIDKey(cellID uint64, suffix byte, extraCap int, extra uint64) []byte {
-	buf := acquireBuf()
-	buf.Write(cellRaftPrefixKey)
-	buf.WriteInt64(int64(cellID))
-	buf.WriteByte(suffix)
-	if extraCap > 0 {
-		buf.WriteInt64(int64(extra))
-	}
-	_, data, _ := buf.ReadBytes(buf.Readable())
-
-	releaseBuf(buf)
-	return data
+	_ = "STUB: not implemented"
+	return nil
 }

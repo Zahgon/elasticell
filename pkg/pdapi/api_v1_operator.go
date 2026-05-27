@@ -26,29 +26,16 @@ type operatorHandler struct {
 }
 
 func initAPIForOperator(router *mux.Router, service Service, rd *render.Render) {
-	handler := newOperatorHandlerr(service, rd)
-
-	router.HandleFunc("/api/v1/operators", handler.list).Methods("GET")
+	_ = "STUB: not implemented"
+	return
 }
 
 func newOperatorHandlerr(service Service, rd *render.Render) *operatorHandler {
-	return &operatorHandler{
-		service: service,
-		rd:      rd,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (h *operatorHandler) list(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	opts, err := h.service.GetOperators()
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	}
-
-	result.Value = opts
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }

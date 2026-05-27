@@ -27,59 +27,22 @@ type routingMap struct {
 	m map[int64]*session
 }
 
-func (m *routingMap) put(key int64, value *session) {
-	m.Lock()
-	m.m[key] = value
-	m.Unlock()
-}
+func (m *routingMap) put(key int64, value *session) { _ = "STUB: not implemented"; return }
 
-func (m *routingMap) delete(key int64) *session {
-	m.Lock()
-	value := m.m[key]
-	delete(m.m, key)
-	m.Unlock()
+func (m *routingMap) delete(key int64) *session { _ = "STUB: not implemented"; return nil }
 
-	return value
-}
-
-func (m *routingMap) get(key int64) *session {
-	m.Lock()
-	value := m.m[key]
-	m.Unlock()
-
-	return value
-}
+func (m *routingMap) get(key int64) *session { _ = "STUB: not implemented"; return nil }
 
 type routing struct {
 	rms []*routingMap
 }
 
-func newRouting() *routing {
-	r := &routing{
-		rms: make([]*routingMap, bucketSize, bucketSize),
-	}
+func newRouting() *routing { _ = "STUB: not implemented"; return nil }
 
-	for i := int64(0); i < bucketSize; i++ {
-		r.rms[i] = &routingMap{
-			m: make(map[int64]*session),
-		}
-	}
+func (r *routing) put(id int64, value *session) { _ = "STUB: not implemented"; return }
 
-	return r
-}
+func (r *routing) get(id int64) *session { _ = "STUB: not implemented"; return nil }
 
-func (r *routing) put(id int64, value *session) {
-	r.rms[getIndex(id)].put(id, value)
-}
+func (r *routing) delete(id int64) *session { _ = "STUB: not implemented"; return nil }
 
-func (r *routing) get(id int64) *session {
-	return r.rms[getIndex(id)].get(id)
-}
-
-func (r *routing) delete(id int64) *session {
-	return r.rms[getIndex(id)].delete(id)
-}
-
-func getIndex(id int64) int64 {
-	return id & bucketM
-}
+func getIndex(id int64) int64 { _ = "STUB: not implemented"; return 0 }

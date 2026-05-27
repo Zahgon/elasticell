@@ -91,7 +91,7 @@ func SysctlUvmexp(name string) (*Uvmexp, error) {
 	return &u, nil
 }
 
-//sysnb pipe(p *[2]_C_int) (err error)
+// sysnb pipe(p *[2]_C_int) (err error)
 func Pipe(p []int) (err error) {
 	if len(p) != 2 {
 		return EINVAL
@@ -103,7 +103,7 @@ func Pipe(p []int) (err error) {
 	return
 }
 
-//sys Getdents(fd int, buf []byte) (n int, err error)
+// sys Getdents(fd int, buf []byte) (n int, err error)
 func Getdirentries(fd int, buf []byte, basep *uintptr) (n int, err error) {
 	n, err = Getdents(fd, buf)
 	if err != nil || basep == nil {

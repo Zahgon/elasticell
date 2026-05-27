@@ -14,11 +14,6 @@
 package codec
 
 import (
-	"fmt"
-	"log"
-
-	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
-	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
 	"github.com/fagongzi/goetty"
 	"github.com/fagongzi/util/protoc"
 )
@@ -44,113 +39,37 @@ type ProxyEncoder struct {
 
 // Decode return a decoded msg or wait for next tcp packet
 func (decoder *ProxyDecoder) Decode(in *goetty.ByteBuf) (bool, interface{}, error) {
-	for {
-		// remember the begin read index,
-		// if we found has no enough data, we will resume this read index,
-		// and waiting for next.
-		backupReaderIndex := in.GetReaderIndex()
+	_ = "STUB: not implemented"
 
-		c, err := in.ReadByte()
-		if err != nil {
-			return false, nil, err
-		}
-
-		if c == RedisBegin {
-			if ok, size := hasEnoughData(in, backupReaderIndex); ok {
-				return readRedis(in, size)
-			}
-			return false, nil, nil
-		} else if c == WatcherNotifyBegin {
-			if ok, size := hasEnoughData(in, backupReaderIndex); ok {
-				return readPB(in, size, new(pdpb.WatcherNotify))
-			}
-			return false, nil, nil
-		} else if c == WatcherNotifySyncBegin {
-			if ok, size := hasEnoughData(in, backupReaderIndex); ok {
-				return readPB(in, size, new(pdpb.WatcherNotifySync))
-			}
-			return false, nil, nil
-		} else if c == WatcherNotifyRspBegin {
-			if ok, size := hasEnoughData(in, backupReaderIndex); ok {
-				return readPB(in, size, new(pdpb.WatcherNotifyRsp))
-			}
-			return false, nil, nil
-		}
-
-		return false, nil, fmt.Errorf("Error packet data with start char: %c", c)
-	}
+	// remember the begin read index,
+	// if we found has no enough data, we will resume this read index,
+	// and waiting for next.
+	return false, nil, nil
 }
 
 // Encode encode proxy message
 func (encoder *ProxyEncoder) Encode(data interface{}, out *goetty.ByteBuf) error {
-	if msg, ok := data.(*raftcmdpb.Request); ok {
-		return WriteProxyMessage(RedisBegin, msg, out)
-	} else if msg, ok := data.(*pdpb.WatcherNotify); ok {
-		return WriteProxyMessage(WatcherNotifyBegin, msg, out)
-	} else if msg, ok := data.(*pdpb.WatcherNotifySync); ok {
-		return WriteProxyMessage(WatcherNotifySyncBegin, msg, out)
-	} else if msg, ok := data.(*pdpb.WatcherNotifyRsp); ok {
-		return WriteProxyMessage(WatcherNotifyRspBegin, msg, out)
-	}
-
-	return fmt.Errorf("not support message: %v", data)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // WriteProxyMessage write a proxy to the buf
 func WriteProxyMessage(tag byte, req protoc.PB, out *goetty.ByteBuf) error {
-	value, err := req.Marshal()
-	if err != nil {
-		log.Fatalf("bug: marshal error, req=<%d> errors:%+v\n", req, err)
-	}
-
-	out.WriteByte(tag)
-	out.WriteInt(len(value))
-	out.Write(value)
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func hasEnoughData(in *goetty.ByteBuf, backupReaderIndex int) (bool, int) {
-	if in.Readable() < 4 {
-		in.SetReaderIndex(backupReaderIndex)
-		return false, 0
-	}
-
-	size, _ := in.PeekInt(0)
-	if in.Readable() < 4+size {
-		in.SetReaderIndex(backupReaderIndex)
-		return false, 0
-	}
-
-	in.Skip(4)
-	return true, size
+	_ = "STUB: not implemented"
+	return false, 0
 }
 
 func readRedis(in *goetty.ByteBuf, size int) (bool, interface{}, error) {
-	n, data, err := in.ReadBytes(size)
-	if err != nil {
-		return false, nil, err
-	}
-
-	if n != size {
-		return false, nil, fmt.Errorf("read bytes not match length field, expect=<%d>, read=<%d>", size, n)
-	}
-
-	resp := new(raftcmdpb.Response)
-	protoc.MustUnmarshal(resp, data)
-	return true, resp, nil
+	_ = "STUB: not implemented"
+	return false, nil, nil
 }
 
 func readPB(in *goetty.ByteBuf, size int, pb protoc.PB) (bool, interface{}, error) {
-	n, data, err := in.ReadBytes(size)
-	if err != nil {
-		return false, nil, err
-	}
-
-	if n != size {
-		return false, nil, fmt.Errorf("read bytes not match length field, expect=<%d>, read=<%d>", size, n)
-	}
-
-	protoc.MustUnmarshal(pb, data)
-	return true, pb, nil
+	_ = "STUB: not implemented"
+	return false, nil, nil
 }

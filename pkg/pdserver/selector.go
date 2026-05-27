@@ -20,10 +20,8 @@ type Selector interface {
 }
 
 func newBalanceSelector(kind ResourceKind, filters []Filter) *balanceSelector {
-	return &balanceSelector{
-		kind:    kind,
-		filters: filters,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 type balanceSelector struct {
@@ -32,31 +30,11 @@ type balanceSelector struct {
 }
 
 func (s *balanceSelector) SelectSource(stores []*StoreInfo, filters ...Filter) *StoreInfo {
-	filters = append(filters, s.filters...)
-
-	var result *StoreInfo
-	for _, store := range stores {
-		if filterSource(store, filters) {
-			continue
-		}
-		if result == nil || result.resourceScore(s.kind) < store.resourceScore(s.kind) {
-			result = store
-		}
-	}
-	return result
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *balanceSelector) SelectTarget(stores []*StoreInfo, filters ...Filter) *StoreInfo {
-	filters = append(filters, s.filters...)
-
-	var result *StoreInfo
-	for _, store := range stores {
-		if filterTarget(store, filters) {
-			continue
-		}
-		if result == nil || result.resourceScore(s.kind) > store.resourceScore(s.kind) {
-			result = store
-		}
-	}
-	return result
+	_ = "STUB: not implemented"
+	return nil
 }

@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package storage
@@ -41,23 +42,8 @@ type nemoDrvier struct {
 
 // NewNemoDriver return a driver implemention by nemo
 func NewNemoDriver(cfg *NemoCfg) (Driver, error) {
-	var opts *gonemo.Options
-
-	if cfg.OptionPath != "" {
-		opts, _ = gonemo.NewOptions(cfg.OptionPath)
-	} else {
-		opts = gonemo.NewDefaultOptions()
-	}
-
-	db := gonemo.OpenNemo(opts, cfg.DataPath)
-
-	driver := &nemoDrvier{
-		db: db,
-	}
-
-	driver.init(cfg)
-
-	return driver, nil
+	_ = "STUB: not implemented"
+	return *new(Driver), nil
 }
 
 func (n *nemoDrvier) init(cfg *NemoCfg) {
@@ -74,40 +60,20 @@ func (n *nemoDrvier) init(cfg *NemoCfg) {
 	n.zsetEngine = newNemoZSetEngine(n.db, cfg)
 }
 
-func (n *nemoDrvier) GetEngine() Engine {
-	return n.metaEngine
-}
+func (n *nemoDrvier) GetEngine() Engine { _ = "STUB: not implemented"; return *new(Engine) }
 
-func (n *nemoDrvier) GetDataEngine() DataEngine {
-	return n.dataEngine
-}
+func (n *nemoDrvier) GetDataEngine() DataEngine { _ = "STUB: not implemented"; return *new(DataEngine) }
 
-func (n *nemoDrvier) GetKVEngine() KVEngine {
-	return n.kvEngine
-}
+func (n *nemoDrvier) GetKVEngine() KVEngine { _ = "STUB: not implemented"; return *new(KVEngine) }
 
-func (n *nemoDrvier) GetHashEngine() HashEngine {
-	return n.hashEngine
-}
+func (n *nemoDrvier) GetHashEngine() HashEngine { _ = "STUB: not implemented"; return *new(HashEngine) }
 
-func (n *nemoDrvier) GetListEngine() ListEngine {
-	return n.listEngine
-}
+func (n *nemoDrvier) GetListEngine() ListEngine { _ = "STUB: not implemented"; return *new(ListEngine) }
 
-func (n *nemoDrvier) GetSetEngine() SetEngine {
-	return n.setEngine
-}
+func (n *nemoDrvier) GetSetEngine() SetEngine { _ = "STUB: not implemented"; return *new(SetEngine) }
 
-func (n *nemoDrvier) GetZSetEngine() ZSetEngine {
-	return n.zsetEngine
-}
+func (n *nemoDrvier) GetZSetEngine() ZSetEngine { _ = "STUB: not implemented"; return *new(ZSetEngine) }
 
-func (n *nemoDrvier) NewWriteBatch() WriteBatch {
-	wb := gonemo.NewWriteBatch()
-	return newNemoWriteBatch(wb)
-}
+func (n *nemoDrvier) NewWriteBatch() WriteBatch { _ = "STUB: not implemented"; return *new(WriteBatch) }
 
-func (n *nemoDrvier) Write(wb WriteBatch, sync bool) error {
-	nwb := wb.(*nemoWriteBatch)
-	return n.db.BatchWrite(n.db.GetMetaHandle(), nwb.wb, sync)
-}
+func (n *nemoDrvier) Write(wb WriteBatch, sync bool) error { _ = "STUB: not implemented"; return nil }

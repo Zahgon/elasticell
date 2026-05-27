@@ -16,11 +16,7 @@ package pdserver
 import (
 	"sync"
 
-	"github.com/fagongzi/log"
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
-	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
-	"github.com/deepfabric/elasticell/pkg/pd"
-	"github.com/pkg/errors"
 )
 
 const (
@@ -28,22 +24,11 @@ const (
 )
 
 func newCache(clusterID uint64, store Store, allocator *idAllocator, notify *watcherNotifier) *cache {
-	c := new(cache)
-	c.clusterID = clusterID
-	c.sc = newStoreCache()
-	c.cc = newCellCache()
-	c.store = store
-	c.allocator = allocator
-	c.notify = notify
-
-	return c
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func newClusterRuntime(cluster metapb.Cluster) *ClusterInfo {
-	return &ClusterInfo{
-		Meta: cluster,
-	}
-}
+func newClusterRuntime(cluster metapb.Cluster) *ClusterInfo { _ = "STUB: not implemented"; return nil }
 
 // ClusterInfo The cluster info
 type ClusterInfo struct {
@@ -64,172 +49,31 @@ type cache struct {
 	store Store
 }
 
-func (c *cache) getStoreCache() *storeCache {
-	return c.sc
-}
+func (c *cache) getStoreCache() *storeCache { _ = "STUB: not implemented"; return nil }
 
-func (c *cache) getCellCache() *cellCache {
-	return c.cc
-}
+func (c *cache) getCellCache() *cellCache { _ = "STUB: not implemented"; return nil }
 
 func (c *cache) allocPeer(storeID uint64, allocPeerID bool) (metapb.Peer, error) {
-	if allocPeerID {
-		peerID, err := c.allocator.newID()
-		if err != nil {
-			return metapb.Peer{}, errors.Wrap(err, "")
-		}
-
-		return metapb.Peer{
-			ID:      peerID,
-			StoreID: storeID,
-		}, nil
-	}
-
-	return metapb.Peer{
-		StoreID: storeID,
-	}, nil
+	_ = "STUB: not implemented"
+	return *new(metapb.Peer), nil
 }
 
-func (c *cache) handleCellHeartbeat(source *CellInfo) error {
-	current := c.getCellCache().getCell(source.Meta.ID)
+func (c *cache) handleCellHeartbeat(source *CellInfo) error { _ = "STUB: not implemented"; return nil }
 
-	// add new cell
-	if nil == current {
-		err := c.doSaveCellInfo(source)
-		if err != nil {
-			return err
-		}
+// add new cell
 
-		c.notifyChangedRange(source.Meta.ID, pd.EventCellCreated)
-		return nil
-	}
+// update cell
 
-	// update cell
-	currentEpoch := current.Meta.Epoch
-	sourceEpoch := source.Meta.Epoch
+// cell meta is stale, return an error.
 
-	// cell meta is stale, return an error.
-	if sourceEpoch.CellVer < currentEpoch.CellVer ||
-		sourceEpoch.ConfVer < currentEpoch.ConfVer {
-		log.Warnf("cell-heartbeat[%d]: cell is stale, current<%d,%d> source<%d,%d>",
-			source.Meta.ID,
-			currentEpoch.CellVer,
-			currentEpoch.ConfVer,
-			sourceEpoch.CellVer,
-			sourceEpoch.ConfVer)
-		return errStaleCell
-	}
+// cell meta is updated, update kv and cache.
 
-	rangeChanged := sourceEpoch.CellVer > currentEpoch.CellVer
-	peersChanged := sourceEpoch.ConfVer > currentEpoch.ConfVer
-	// cell meta is updated, update kv and cache.
-	if rangeChanged || peersChanged {
-		log.Infof("cell-heartbeat[%d]: cell version updated, cellVer=<%d->%d> confVer=<%d->%d>",
-			source.Meta.ID,
-			currentEpoch.CellVer,
-			sourceEpoch.CellVer,
-			currentEpoch.ConfVer,
-			sourceEpoch.ConfVer)
-		err := c.doSaveCellInfo(source)
-		if err != nil {
-			return err
-		}
+// cell meta is the same, update cache only.
 
-		if rangeChanged {
-			c.notifyChangedRange(source.Meta.ID, pd.EventCellRangeChaned)
-		} else {
-			c.notifyChangedRange(source.Meta.ID, pd.EventCellPeersChaned)
-		}
+func (c *cache) doSaveCellInfo(source *CellInfo) error { _ = "STUB: not implemented"; return nil }
 
-		return nil
-	}
+func (c *cache) notifyStoreRange(id uint64) { _ = "STUB: not implemented"; return }
 
-	leaderChanged := false
-	if current.LeaderPeer == nil || (current.LeaderPeer != nil && current.LeaderPeer.ID != source.LeaderPeer.ID) {
-		log.Infof("cell-heartbeat[%d]: update cell leader, from=<%v> to=<%+v>",
-			current.getID(),
-			current,
-			source)
-		leaderChanged = true
-	}
+func (c *cache) notifyChangedRange(id uint64, event uint32) { _ = "STUB: not implemented"; return }
 
-	// cell meta is the same, update cache only.
-	c.getCellCache().addOrUpdate(source)
-
-	if leaderChanged {
-		c.notifyChangedRange(source.Meta.ID, pd.EventCellLeaderChanged)
-	}
-
-	return nil
-}
-
-func (c *cache) doSaveCellInfo(source *CellInfo) error {
-	err := c.store.SetCellMeta(c.clusterID, source.Meta)
-	if err != nil {
-		return err
-	}
-
-	c.getCellCache().addOrUpdate(source)
-	return nil
-}
-
-func (c *cache) notifyStoreRange(id uint64) {
-	store := c.getStoreCache().getStore(id)
-	if store != nil {
-		et := pd.EventStoreUp
-		switch store.Meta.State {
-		case metapb.UP:
-			et = pd.EventStoreUp
-		case metapb.Down:
-			et = pd.EventStoreDown
-		case metapb.Tombstone:
-			et = pd.EventStoreTombstone
-		}
-
-		meta := &metapb.Store{}
-		*meta = store.Meta
-		c.notify.notify(&pdpb.WatchEvent{
-			Event: et,
-			StoreEvent: &pdpb.StoreEvent{
-				Store: meta,
-			},
-		})
-	}
-}
-
-func (c *cache) notifyChangedRange(id uint64, event uint32) {
-	cr := c.getCellCache().getCell(id)
-	r := &pdpb.Range{
-		Cell: cr.Meta,
-	}
-	if cr.LeaderPeer != nil {
-		r.LeaderStore = c.getStoreCache().getStore(cr.LeaderPeer.StoreID).Meta
-	}
-
-	c.notify.notify(&pdpb.WatchEvent{
-		Event: event,
-		CellEvent: &pdpb.CellEvent{
-			Range: r,
-		},
-	})
-}
-
-func randCell(cells map[uint64]*CellInfo) *CellInfo {
-	for _, cell := range cells {
-		if cell.LeaderPeer == nil {
-			log.Fatalf("rand cell without leader: cell=<%+v>", cell)
-		}
-
-		if len(cell.DownPeers) > 0 {
-			continue
-		}
-
-		if len(cell.PendingPeers) > 0 {
-			continue
-		}
-
-		return cell.clone()
-	}
-
-	return nil
-}
+func randCell(cells map[uint64]*CellInfo) *CellInfo { _ = "STUB: not implemented"; return nil }

@@ -13,49 +13,6 @@
 
 package pdserver
 
-import (
-	"net"
+func (s *Server) startRPC() { _ = "STUB: not implemented"; return }
 
-	"github.com/fagongzi/log"
-	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
-)
-
-func (s *Server) startRPC() {
-	defer func() {
-		if err := recover(); err != nil {
-			log.Errorf("rpc: crash, errors:\n %+v", err)
-		}
-	}()
-
-	lis, err := net.Listen("tcp", s.cfg.AddrRPC)
-	if err != nil {
-		log.Fatalf("bootstrap: start grpc server failure, listen=<%s> errors:\n %+v",
-			s.cfg.AddrRPC,
-			err)
-		return
-	}
-
-	s.rpcServer = grpc.NewServer()
-	pdpb.RegisterPDServiceServer(s.rpcServer, NewRPCHandler(s))
-	reflection.Register(s.rpcServer)
-
-	if err := s.rpcServer.Serve(lis); err != nil {
-		if !s.callStop {
-			log.Fatalf("bootstrap: start grpc server failure, listen=<%s> errors:\n %+v",
-				s.cfg.AddrRPC,
-				err)
-		}
-
-		return
-	}
-
-	log.Infof("stop: grpc server stopped, addr=<%s>", s.cfg.AddrRPC)
-}
-
-func (s *Server) closeRPC() {
-	if s.rpcServer != nil {
-		s.rpcServer.GracefulStop()
-	}
-}
+func (s *Server) closeRPC() { _ = "STUB: not implemented"; return }

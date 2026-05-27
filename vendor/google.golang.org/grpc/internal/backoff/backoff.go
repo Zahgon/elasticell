@@ -30,7 +30,6 @@ import (
 
 // Strategy defines the methodology for backing off after a grpc connection
 // failure.
-//
 type Strategy interface {
 	// Backoff returns the amount of time to wait before the next retry given
 	// the number of consecutive failures.

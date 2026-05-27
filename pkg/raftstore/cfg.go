@@ -14,7 +14,6 @@
 package raftstore
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -56,14 +55,8 @@ type Cfg struct {
 }
 
 // NewCfg return default cfg
-func NewCfg() *Cfg {
-	return &Cfg{}
-}
+func NewCfg() *Cfg { _ = "STUB: not implemented"; return nil }
 
-func (c *Cfg) getSnapDir() string {
-	return fmt.Sprintf("%s/%s", c.DataPath, getSnapDirName())
-}
+func (c *Cfg) getSnapDir() string { _ = "STUB: not implemented"; return "" }
 
-func getSnapDirName() string {
-	return "snap"
-}
+func getSnapDirName() string { _ = "STUB: not implemented"; return "" }

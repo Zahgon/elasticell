@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package storage
@@ -24,17 +25,10 @@ type nemoWriteBatch struct {
 }
 
 func newNemoWriteBatch(wb *gonemo.WriteBatch) WriteBatch {
-	return &nemoWriteBatch{
-		wb: wb,
-	}
+	_ = "STUB: not implemented"
+	return *new(WriteBatch)
 }
 
-func (n *nemoWriteBatch) Delete(key []byte) error {
-	n.wb.WriteBatchDel(key)
-	return nil
-}
+func (n *nemoWriteBatch) Delete(key []byte) error { _ = "STUB: not implemented"; return nil }
 
-func (n *nemoWriteBatch) Set(key []byte, value []byte) error {
-	n.wb.WriteBatchPut(key, value)
-	return nil
-}
+func (n *nemoWriteBatch) Set(key []byte, value []byte) error { _ = "STUB: not implemented"; return nil }

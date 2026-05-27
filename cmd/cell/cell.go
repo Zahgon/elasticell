@@ -16,17 +16,13 @@ package main
 import (
 	"bytes"
 	"flag"
-	"fmt"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	runPprof "runtime/pprof"
-	"strings"
 	"syscall"
-	"time"
 
-	"github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/deepfabric/elasticell/pkg/server"
 	"github.com/deepfabric/elasticell/pkg/util"
 	"github.com/fagongzi/log"
@@ -143,102 +139,6 @@ func main() {
 	}
 }
 
-func parseCfg() *server.Cfg {
-	if *pd == "" {
-		fmt.Println("PD must be set")
-		os.Exit(-1)
-	}
+func parseCfg() *server.Cfg { _ = "STUB: not implemented"; return nil }
 
-	if *dataPath == "" {
-		fmt.Println("Data dir must be set")
-		os.Exit(-1)
-	}
-
-	if *rack == "" {
-		fmt.Println("Location rack must be set")
-		os.Exit(-1)
-	}
-
-	if *zone == "" {
-		fmt.Println("Location zone must be set")
-		os.Exit(-1)
-	}
-
-	adjust()
-
-	cfg := server.NewCfg()
-
-	cfg.Node.ClusterID = *clusterID
-	cfg.Node.PDEndpoints = strings.Split(*pd, ",")
-	cfg.Node.RaftStore.Addr = *addr
-	cfg.AddrCli = *addrCli
-	cfg.Node.RaftStore.DataPath = *dataPath
-	cfg.Node.RaftStore.OptionPath = *optionPath
-	cfg.Node.StoreLables = append(cfg.Node.StoreLables, metapb.Label{
-		Key:   "zone",
-		Value: *zone,
-	})
-	cfg.Node.StoreLables = append(cfg.Node.StoreLables, metapb.Label{
-		Key:   "rack",
-		Value: *rack,
-	})
-	cfg.BufferCliRead = *bufferCliRead
-	cfg.BufferCliWrite = *bufferCliWrite
-	cfg.BatchCliResps = *batchCliResps
-
-	cfg.Node.RaftStore.CellCapacity = *cellCapacityMB * mb
-	cfg.Node.RaftStore.DurationHeartbeatStore = time.Second * time.Duration(*intervalHeartbeatStore)
-	cfg.Node.RaftStore.DurationHeartbeatCell = time.Second * time.Duration(*intervalHeartbeatCell)
-	cfg.Node.RaftStore.DurationSplitCheck = time.Second * time.Duration(*intervalSplitCheck)
-	cfg.Node.RaftStore.DurationCompact = time.Second * time.Duration(*intervalCompact)
-	cfg.Node.RaftStore.DurationReportMetric = time.Second * time.Duration(*intervalReportMetric)
-	cfg.Node.RaftStore.DurationRaftTick = time.Millisecond * time.Duration(*intervalRaftTick)
-	cfg.Node.RaftStore.DurationRetrySentSnapshot = time.Second * time.Duration(*intervalRetrySentSnapshot)
-	cfg.Node.RaftStore.LimitPeerDownDuration = time.Second * time.Duration(*limitPeerDown)
-	cfg.Node.RaftStore.LimitCompactCount = *limitCompactCount
-	cfg.Node.RaftStore.LimitCompactBytes = *limitCompactBytesMB * mb
-	cfg.Node.RaftStore.LimitCompactLag = *limitCompactLag
-	cfg.Node.RaftStore.LimitRaftMsgCount = *limitRaftMsgCount
-	cfg.Node.RaftStore.LimitRaftMsgBytes = *limitRaftMsgBytesMB * mb
-	cfg.Node.RaftStore.LimitRaftEntryBytes = *limitRaftEntryBytesMB * mb
-	cfg.Node.RaftStore.LimitSnapChunkBytes = *limitSnapChunkBytesKB * kb
-	cfg.Node.RaftStore.LimitSnapChunkRate = *limitSnapChunkRate
-	cfg.Node.RaftStore.LimitConcurrencyWrite = *limitConcurrencyWrite
-	cfg.Node.RaftStore.LimitNemoInstance = *limitNemoInstance
-	cfg.Node.RaftStore.ThresholdCompact = *thresholdCompact
-	cfg.Node.RaftStore.ThresholdSplitCheckBytes = *thresholdSplitCheckMB * mb
-	cfg.Node.RaftStore.ThresholdRaftElection = *thresholdRaftElection
-	cfg.Node.RaftStore.ThresholdRaftHeartbeat = *thresholdRaftHeartbeat
-	cfg.Node.RaftStore.BatchSizeProposal = *batchSizeProposal
-	cfg.Node.RaftStore.BatchSizeSent = *batchSizeSent
-	cfg.Node.RaftStore.WorkerCountSent = *workerCountSent
-	cfg.Node.RaftStore.WorkerCountSentSnap = *workerCountSentSnap
-	cfg.Node.RaftStore.WorkerCountApply = *workerCountApply
-	cfg.Node.RaftStore.EnableMetricsRequest = *enableMetricsRequest
-	cfg.Node.RaftStore.EnableSyncRaftLog = *enableSyncRaftLog
-
-	cfg.Metric = util.NewMetricCfg(*metricJob, *metricInstance, *metricAddress, time.Second*time.Duration(*metricIntervalSync))
-	return cfg
-}
-
-func adjust() {
-	if *cellCapacityMB == 0 {
-		*cellCapacityMB = defaultCapacity
-	}
-
-	if *limitCompactCount == 0 {
-		*limitCompactCount = *cellCapacityMB * mb * 3 / 4 / kb
-	}
-
-	if *limitCompactBytesMB == 0 {
-		*limitCompactBytesMB = *cellCapacityMB * 3 / 4
-	}
-
-	if *limitCompactLag == 0 {
-		*limitCompactLag = *cellCapacityMB * mb / 256 / 16
-	}
-
-	if *thresholdSplitCheckMB == 0 {
-		*thresholdSplitCheckMB = *cellCapacityMB / 16
-	}
-}
+func adjust() { _ = "STUB: not implemented"; return }

@@ -14,13 +14,8 @@
 package redis
 
 import (
-	"strconv"
-
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
 	"github.com/fagongzi/goetty"
-	gredis "github.com/fagongzi/goetty/protocol/redis"
-	"github.com/fagongzi/util/format"
-	"github.com/fagongzi/util/hack"
 )
 
 const (
@@ -36,42 +31,12 @@ var (
 
 // WriteFVPairArray write field value pair array resp
 func WriteFVPairArray(lst []*raftcmdpb.FVPair, buf *goetty.ByteBuf) {
-	buf.WriteByte('*')
-	if len(lst) == 0 {
-		buf.Write(gredis.NullArray)
-		buf.Write(gredis.Delims)
-	} else {
-		buf.Write(hack.StringToSlice(strconv.Itoa(len(lst) * 2)))
-		buf.Write(gredis.Delims)
-
-		for i := 0; i < len(lst); i++ {
-			gredis.WriteBulk(lst[i].Field, buf)
-			gredis.WriteBulk(lst[i].Value, buf)
-		}
-	}
+	_ = "STUB: not implemented"
+	return
 }
 
 // WriteScorePairArray write score member pair array resp
 func WriteScorePairArray(lst []*raftcmdpb.ScorePair, withScores bool, buf *goetty.ByteBuf) {
-	buf.WriteByte('*')
-	if len(lst) == 0 {
-		buf.Write(gredis.NullArray)
-		buf.Write(gredis.Delims)
-	} else {
-		if withScores {
-			buf.Write(hack.StringToSlice(strconv.Itoa(len(lst) * 2)))
-			buf.Write(gredis.Delims)
-		} else {
-			buf.Write(hack.StringToSlice(strconv.Itoa(len(lst))))
-			buf.Write(gredis.Delims)
-		}
-
-		for i := 0; i < len(lst); i++ {
-			gredis.WriteBulk(lst[i].Member, buf)
-
-			if withScores {
-				gredis.WriteBulk(format.Float64ToString(lst[i].Score), buf)
-			}
-		}
-	}
+	_ = "STUB: not implemented"
+	return
 }

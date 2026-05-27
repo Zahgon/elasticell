@@ -15,448 +15,69 @@ package raftstore
 
 import (
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
-	"github.com/deepfabric/elasticell/pkg/pool"
-	"github.com/deepfabric/elasticell/pkg/redis"
-	"github.com/fagongzi/util/format"
-	"github.com/fagongzi/util/hack"
 )
 
 func (s *Store) execLIndex(id uint64, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	index, err := format.ParseStrInt64(hack.SliceToString(args[1]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	value, err := s.getListEngine(id).LIndex(args[0], index)
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.BulkResult = value
-	rsp.HasEmptyBulkResult = len(value) == 0
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLLEN(id uint64, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 1 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	value, err := s.getListEngine(id).LLen(args[0])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.IntegerResult = &value
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLRange(id uint64, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	start, err := format.ParseStrInt64(hack.SliceToString(args[1]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	end, err := format.ParseStrInt64(hack.SliceToString(args[2]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	value, err := s.getListEngine(id).LRange(args[0], start, end)
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.SliceArrayResult = value
-	rsp.HasEmptySliceArrayResult = len(value) == 0
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLInsert(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 4 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	pos, err := format.ParseStrInt64(hack.SliceToString(args[1]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).LInsert(args[0], int(pos), args[2], args[3])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	if value > 0 {
-		size := uint64(len(args[3]))
-
-		if value == 0 {
-			size += uint64(len(args[0]))
-			ctx.metrics.writtenKeys++
-		}
-
-		ctx.metrics.writtenBytes += size
-		ctx.metrics.sizeDiffHint += size
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.IntegerResult = &value
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLPop(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 1 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).LPop(args[0])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	size := uint64(len(value))
-	ctx.metrics.sizeDiffHint -= size
-
-	rsp := pool.AcquireResponse()
-	rsp.BulkResult = value
-	rsp.HasEmptyBulkResult = len(value) == 0
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLPush(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) < 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).LPush(args[0], args[1:]...)
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	if value > 0 {
-		var size uint64
-		for _, arg := range args[1:] {
-			size += uint64(len(arg))
-		}
-
-		if value == 1 {
-			size += uint64(len(args[0]))
-			ctx.metrics.writtenKeys++
-		}
-
-		ctx.metrics.writtenBytes += size
-		ctx.metrics.sizeDiffHint += size
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.IntegerResult = &value
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLPushX(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).LPushX(args[0], args[1])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	if value > 0 {
-		var size uint64
-
-		size += uint64(len(args[1]))
-		if value == 1 {
-			size += uint64(len(args[0]))
-			ctx.metrics.writtenKeys++
-		}
-
-		ctx.metrics.writtenBytes += size
-		ctx.metrics.sizeDiffHint += size
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.IntegerResult = &value
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLRem(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	count, err := format.ParseStrInt64(hack.SliceToString(args[1]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).LRem(args[0], count, args[2])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	if value > 0 {
-		size := uint64(len(args[2])) * uint64(value)
-		ctx.metrics.sizeDiffHint += size
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.IntegerResult = &value
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLSet(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	index, err := format.ParseStrInt64(hack.SliceToString(args[1]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	err = s.getListEngine(ctx.req.Header.CellId).LSet(args[0], index, args[2])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.StatusResult = redis.OKStatusResp
-
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execLTrim(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	begin, err := format.ParseStrInt64(hack.SliceToString(args[1]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	end, err := format.ParseStrInt64(hack.SliceToString(args[2]))
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	err = s.getListEngine(ctx.req.Header.CellId).LTrim(args[0], begin, end)
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.StatusResult = redis.OKStatusResp
-
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execRPop(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 1 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).RPop(args[0])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	size := uint64(len(value))
-	ctx.metrics.sizeDiffHint -= size
-
-	rsp := pool.AcquireResponse()
-	rsp.BulkResult = value
-	rsp.HasEmptyBulkResult = len(value) == 0
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execRPush(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) < 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).RPush(args[0], args[1:]...)
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	if value > 0 {
-		var size uint64
-		for _, arg := range args[1:] {
-			size += uint64(len(arg))
-		}
-
-		if value == 1 {
-			size += uint64(len(args[0]))
-			ctx.metrics.writtenKeys++
-		}
-
-		ctx.metrics.writtenBytes += size
-		ctx.metrics.sizeDiffHint += size
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.IntegerResult = &value
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (s *Store) execRPushX(ctx *applyContext, req *raftcmdpb.Request) *raftcmdpb.Response {
-	cmd := redis.Command(req.Cmd)
-	args := cmd.Args()
-
-	if len(args) != 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-
-		return rsp
-	}
-
-	value, err := s.getListEngine(ctx.req.Header.CellId).RPushX(args[0], args[1])
-	if err != nil {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = hack.StringToSlice(err.Error())
-		return rsp
-	}
-
-	if value > 0 {
-		var size uint64
-
-		size += uint64(len(args[1]))
-		if value == 1 {
-			size += uint64(len(args[0]))
-			ctx.metrics.writtenKeys++
-		}
-
-		ctx.metrics.writtenBytes += size
-		ctx.metrics.sizeDiffHint += size
-	}
-
-	rsp := pool.AcquireResponse()
-	rsp.IntegerResult = &value
-	return rsp
+	_ = "STUB: not implemented"
+	return nil
 }

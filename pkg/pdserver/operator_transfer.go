@@ -14,8 +14,6 @@
 package pdserver
 
 import (
-	"fmt"
-
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
 )
@@ -28,36 +26,21 @@ type transferLeaderOperator struct {
 }
 
 func newTransferLeaderOperator(cellID uint64, oldLeader, newLeader *metapb.Peer) *transferLeaderOperator {
-	return &transferLeaderOperator{
-		Name:      "transfer_leader",
-		CellID:    cellID,
-		OldLeader: oldLeader,
-		NewLeader: newLeader,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (op *transferLeaderOperator) String() string {
-	return fmt.Sprintf("%+v", *op)
-}
+func (op *transferLeaderOperator) String() string { _ = "STUB: not implemented"; return "" }
 
-func (op *transferLeaderOperator) GetCellID() uint64 {
-	return op.CellID
-}
+func (op *transferLeaderOperator) GetCellID() uint64 { _ = "STUB: not implemented"; return 0 }
 
 func (op *transferLeaderOperator) GetResourceKind() ResourceKind {
-	return leaderKind
+	_ = "STUB: not implemented"
+	return *new(ResourceKind)
 }
 
 func (op *transferLeaderOperator) Do(cell *CellInfo) (*pdpb.CellHeartbeatRsp, bool) {
+	_ = "STUB: not implemented"
 	// Check if operator is finished.
-	if cell.LeaderPeer.ID == op.NewLeader.ID {
-		return nil, true
-	}
-
-	res := &pdpb.CellHeartbeatRsp{
-		TransferLeader: &pdpb.TransferLeader{
-			Peer: *op.NewLeader,
-		},
-	}
-	return res, false
+	return nil, false
 }

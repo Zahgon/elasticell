@@ -17,12 +17,7 @@ import (
 	"sync"
 
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
-	"github.com/deepfabric/elasticell/pkg/pool"
-	"github.com/deepfabric/elasticell/pkg/redis"
 	"github.com/fagongzi/goetty"
-	gedis "github.com/fagongzi/goetty/protocol/redis"
-	"github.com/fagongzi/log"
-	"github.com/fagongzi/util/protoc"
 	"github.com/fagongzi/util/task"
 )
 
@@ -40,117 +35,19 @@ type session struct {
 	fromProxy bool
 }
 
-func newSession(conn goetty.IOSession) *session {
-	return &session{
-		id:    conn.ID().(int64),
-		resps: &task.Queue{},
-		conn:  conn,
-		addr:  conn.RemoteAddr(),
-	}
-}
+func newSession(conn goetty.IOSession) *session { _ = "STUB: not implemented"; return nil }
 
-func (s *session) close() {
-	s.Lock()
-	resps := s.resps.Dispose()
-	for _, resp := range resps {
-		pool.ReleaseResponse(resp.(*raftcmdpb.Response))
-	}
-	log.Debugf("redis-[%s]: closed", s.addr)
-	s.Unlock()
-}
+func (s *session) close() { _ = "STUB: not implemented"; return }
 
-func (s *session) setFromProxy() {
-	s.fromProxy = true
-}
+func (s *session) setFromProxy() { _ = "STUB: not implemented"; return }
 
-func (s *session) onResp(resp *raftcmdpb.Response) {
-	if s != nil {
-		s.resps.Put(resp)
-	} else {
-		pool.ReleaseResponse(resp)
-	}
-}
+func (s *session) onResp(resp *raftcmdpb.Response) { _ = "STUB: not implemented"; return }
 
-func (s *session) writeLoop() {
-	defer func() {
-		if err := recover(); err != nil {
-			log.Errorf("painc: %+v", err)
-		}
-	}()
+func (s *session) writeLoop() { _ = "STUB: not implemented"; return }
 
-	items := make([]interface{}, globalCfg.BatchCliResps, globalCfg.BatchCliResps)
-
-	for {
-		// If in the read goroutine, the connection is closed, so we need a lock
-		s.RLock()
-		n, err := s.resps.Get(globalCfg.BatchCliResps, items)
-		if nil != err {
-			s.RUnlock()
-			return
-		}
-
-		buf := s.conn.OutBuf()
-		for i := int64(0); i < n; i++ {
-			rsp := items[i].(*raftcmdpb.Response)
-			s.doResp(rsp, buf)
-			pool.ReleaseResponse(rsp)
-
-			if i > 0 && i%globalCfg.BatchCliResps == 0 {
-				s.conn.Flush()
-			}
-		}
-
-		if buf.Readable() > 0 {
-			s.conn.Flush()
-		}
-		s.RUnlock()
-	}
-}
+// If in the read goroutine, the connection is closed, so we need a lock
 
 func (s *session) doResp(resp *raftcmdpb.Response, buf *goetty.ByteBuf) {
-	if s.fromProxy {
-		size := resp.Size()
-		buf.WriteByte(redis.ProxyBegin)
-		buf.WriteInt(size)
-
-		index := buf.GetWriteIndex()
-		buf.Expansion(size)
-		protoc.MustMarshalTo(resp, buf.RawBuf()[index:index+size])
-		buf.SetWriterIndex(index + size)
-		return
-	}
-
-	if resp.ErrorResult != nil {
-		gedis.WriteError(resp.ErrorResult, buf)
-	}
-
-	if resp.ErrorResults != nil {
-		for _, err := range resp.ErrorResults {
-			gedis.WriteError(err, buf)
-		}
-	}
-
-	if len(resp.BulkResult) > 0 || resp.HasEmptyBulkResult {
-		gedis.WriteBulk(resp.BulkResult, buf)
-	}
-
-	if len(resp.FvPairArrayResult) > 0 || resp.HasEmptyFVPairArrayResult {
-		redis.WriteFVPairArray(resp.FvPairArrayResult, buf)
-	}
-
-	if resp.IntegerResult != nil {
-		gedis.WriteInteger(*resp.IntegerResult, buf)
-	}
-
-	if len(resp.ScorePairArrayResult) > 0 || resp.HasEmptyScorePairArrayResult {
-		redis.WriteScorePairArray(resp.ScorePairArrayResult, resp.Withscores, buf)
-	}
-
-	if len(resp.SliceArrayResult) > 0 || resp.HasEmptySliceArrayResult {
-		gedis.WriteSliceArray(resp.SliceArrayResult, buf)
-	}
-
-	if resp.StatusResult != nil {
-		gedis.WriteStatus(resp.StatusResult, buf)
-	}
+	_ = "STUB: not implemented"
+	return
 }

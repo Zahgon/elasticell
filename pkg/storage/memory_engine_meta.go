@@ -21,44 +21,41 @@ type memoryMetaEngine struct {
 	kv *util.KVTree
 }
 
-func newMemoryMetaEngine() Engine {
-	return &memoryMetaEngine{
-		kv: util.NewKVTree(),
-	}
-}
+func newMemoryMetaEngine() Engine { _ = "STUB: not implemented"; return *new(Engine) }
 
 func (e *memoryMetaEngine) Set(key []byte, value []byte) error {
-	e.kv.Put(key, value)
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (e *memoryMetaEngine) Get(key []byte) ([]byte, error) {
-	return e.kv.Get(key), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func (e *memoryMetaEngine) Delete(key []byte) error {
-	e.kv.Delete(key)
-	return nil
-}
+func (e *memoryMetaEngine) Delete(key []byte) error { _ = "STUB: not implemented"; return nil }
 
 func (e *memoryMetaEngine) RangeDelete(start, end []byte) error {
-	e.kv.RangeDelete(start, end)
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // Scan scans the range and execute the handler fun.
 // returns false means end the scan.
 func (e *memoryMetaEngine) Scan(start, end []byte, handler func(key, value []byte) (bool, error), pooledKey bool) error {
-	return e.kv.Scan(start, end, handler)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Free free unsafe the key or value
 func (e *memoryMetaEngine) Free(unsafe []byte) {
+	_ = "STUB: not implemented"
 
+	// Seek the first key >= given key, if no found, return None.
+	return
 }
 
-// Seek the first key >= given key, if no found, return None.
 func (e *memoryMetaEngine) Seek(key []byte) ([]byte, []byte, error) {
-	k, v := e.kv.Seek(key)
-	return k, v, nil
+	_ = "STUB: not implemented"
+	return nil, nil, nil
 }

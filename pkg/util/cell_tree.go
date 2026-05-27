@@ -14,7 +14,6 @@
 package util
 
 import (
-	"bytes"
 	"sync"
 
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
@@ -30,19 +29,15 @@ var (
 	itemPool  sync.Pool
 )
 
-func acquireItem() *CellItem {
-	v := itemPool.Get()
-	if v == nil {
-		return &CellItem{}
-	}
-	return v.(*CellItem)
-}
+func acquireItem() *CellItem { _ = "STUB: not implemented"; return nil }
 
 func releaseItem(item *CellItem) {
-	itemPool.Put(item)
+	_ = "STUB: not implemented"
+
+	// CellItem is the cell btree item
+	return
 }
 
-// CellItem is the cell btree item
 type CellItem struct {
 	cell metapb.Cell
 }
@@ -54,165 +49,51 @@ type CellTree struct {
 }
 
 // NewCellTree returns a default cell btree
-func NewCellTree() *CellTree {
-	return &CellTree{
-		tree: btree.New(defaultBTreeDegree),
-	}
-}
+func NewCellTree() *CellTree { _ = "STUB: not implemented"; return nil }
 
 // Less returns true if the cell start key is greater than the other.
 // So we will sort the cell with start key reversely.
-func (r *CellItem) Less(other btree.Item) bool {
-	left := r.cell.Start
-	right := other.(*CellItem).cell.Start
-	return bytes.Compare(left, right) > 0
-}
+func (r *CellItem) Less(other btree.Item) bool { _ = "STUB: not implemented"; return false }
 
 // Contains returns the item contains the key
-func (r *CellItem) Contains(key []byte) bool {
-	start, end := r.cell.Start, r.cell.End
-	// len(end) == 0: max field is positive infinity
-	return bytes.Compare(key, start) >= 0 && (len(end) == 0 || bytes.Compare(key, end) < 0)
-}
+func (r *CellItem) Contains(key []byte) bool { _ = "STUB: not implemented"; return false }
 
-func (t *CellTree) length() int {
-	return t.tree.Len()
-}
+// len(end) == 0: max field is positive infinity
+
+func (t *CellTree) length() int { _ = "STUB: not implemented"; return 0 }
 
 // Update updates the tree with the cell.
 // It finds and deletes all the overlapped cells first, and then
 // insert the cell.
-func (t *CellTree) Update(cell metapb.Cell) {
-	t.Lock()
-	item := &CellItem{cell: cell}
+func (t *CellTree) Update(cell metapb.Cell) { _ = "STUB: not implemented"; return }
 
-	result := t.find(cell)
-	if result == nil {
-		result = item
-	}
+// between [cell, first], so is iterator all.min >= cell.min' cell
+// until all.min > cell.max
 
-	var overlaps []*CellItem
-
-	// between [cell, first], so is iterator all.min >= cell.min' cell
-	// until all.min > cell.max
-	t.tree.DescendLessOrEqual(result, func(i btree.Item) bool {
-		over := i.(*CellItem)
-		// cell.max <= i.start, so cell and i has no overlaps,
-		// otherwise cell and i has overlaps
-		if len(cell.End) > 0 && bytes.Compare(cell.End, over.cell.Start) <= 0 {
-			return false
-		}
-		overlaps = append(overlaps, over)
-		return true
-	})
-
-	for _, item := range overlaps {
-		t.tree.Delete(item)
-	}
-
-	t.tree.ReplaceOrInsert(item)
-	t.Unlock()
-}
+// cell.max <= i.start, so cell and i has no overlaps,
+// otherwise cell and i has overlaps
 
 // Remove removes a cell if the cell is in the tree.
 // It will do nothing if it cannot find the cell or the found cell
 // is not the same with the cell.
-func (t *CellTree) Remove(cell metapb.Cell) bool {
-	t.Lock()
-
-	result := t.find(cell)
-	if result == nil || result.cell.ID != cell.ID {
-		t.Unlock()
-		return false
-	}
-
-	t.tree.Delete(result)
-	t.Unlock()
-	return true
-}
+func (t *CellTree) Remove(cell metapb.Cell) bool { _ = "STUB: not implemented"; return false }
 
 // Ascend asc iterator the tree until fn returns false
-func (t *CellTree) Ascend(fn func(cell *metapb.Cell) bool) {
-	t.RLock()
-	t.tree.Descend(func(item btree.Item) bool {
-		return fn(&item.(*CellItem).cell)
-	})
-	t.RUnlock()
-}
+func (t *CellTree) Ascend(fn func(cell *metapb.Cell) bool) { _ = "STUB: not implemented"; return }
 
 // NextCell return the next bigger key range cell
-func (t *CellTree) NextCell(start []byte) *metapb.Cell {
-	var value *CellItem
-
-	p := &CellItem{
-		cell: metapb.Cell{Start: start},
-	}
-
-	t.RLock()
-	t.tree.DescendLessOrEqual(p, func(item btree.Item) bool {
-		if bytes.Compare(item.(*CellItem).cell.Start, start) > 0 {
-			value = item.(*CellItem)
-			return false
-		}
-
-		return true
-	})
-	t.RUnlock()
-
-	if nil == value {
-		return nil
-	}
-
-	return &value.cell
-}
+func (t *CellTree) NextCell(start []byte) *metapb.Cell { _ = "STUB: not implemented"; return nil }
 
 // AscendRange asc iterator the tree in the range [start, end) until fn returns false
 func (t *CellTree) AscendRange(start, end []byte, fn func(cell *metapb.Cell) bool) {
-	startItem := &CellItem{
-		cell: metapb.Cell{Start: start},
-	}
-
-	endItem := &CellItem{
-		cell: metapb.Cell{Start: end},
-	}
-
-	t.RLock()
-	t.tree.DescendRange(startItem, endItem, func(item btree.Item) bool {
-		return fn(&item.(*CellItem).cell)
-	})
-	t.RUnlock()
+	_ = "STUB: not implemented"
+	return
 }
 
 // Search returns a cell that contains the key.
 func (t *CellTree) Search(key []byte) metapb.Cell {
-	cell := metapb.Cell{Start: key}
-
-	t.RLock()
-	result := t.find(cell)
-	t.RUnlock()
-
-	if result == nil {
-		return emptyCell
-	}
-
-	return result.cell
+	_ = "STUB: not implemented"
+	return *new(metapb.Cell)
 }
 
-func (t *CellTree) find(cell metapb.Cell) *CellItem {
-	item := acquireItem()
-	item.cell = cell
-
-	var result *CellItem
-	t.tree.AscendGreaterOrEqual(item, func(i btree.Item) bool {
-		result = i.(*CellItem)
-		return false
-	})
-
-	if result == nil || !result.Contains(cell.Start) {
-		releaseItem(item)
-		return nil
-	}
-
-	releaseItem(item)
-	return result
-}
+func (t *CellTree) find(cell metapb.Cell) *CellItem { _ = "STUB: not implemented"; return nil }

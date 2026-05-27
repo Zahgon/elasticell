@@ -66,30 +66,30 @@ func (ResourceDescriptor_History) EnumDescriptor() ([]byte, []int) {
 //
 // Example:
 //
-//   message Topic {
-//     // Indicates this message defines a resource schema.
-//     // Declares the resource type in the format of {service}/{kind}.
-//     // For Kubernetes resources, the format is {api group}/{kind}.
-//     option (google.api.resource) = {
-//       type: "pubsub.googleapis.com/Topic"
-//       pattern: "projects/{project}/topics/{topic}"
-//     };
-//   }
+//	message Topic {
+//	  // Indicates this message defines a resource schema.
+//	  // Declares the resource type in the format of {service}/{kind}.
+//	  // For Kubernetes resources, the format is {api group}/{kind}.
+//	  option (google.api.resource) = {
+//	    type: "pubsub.googleapis.com/Topic"
+//	    pattern: "projects/{project}/topics/{topic}"
+//	  };
+//	}
 //
 // Sometimes, resources have multiple patterns, typically because they can
 // live under multiple parents.
 //
 // Example:
 //
-//   message LogEntry {
-//     option (google.api.resource) = {
-//       type: "logging.googleapis.com/LogEntry"
-//       pattern: "projects/{project}/logs/{log}"
-//       pattern: "organizations/{organization}/logs/{log}"
-//       pattern: "folders/{folder}/logs/{log}"
-//       pattern: "billingAccounts/{billing_account}/logs/{log}"
-//     };
-//   }
+//	message LogEntry {
+//	  option (google.api.resource) = {
+//	    type: "logging.googleapis.com/LogEntry"
+//	    pattern: "projects/{project}/logs/{log}"
+//	    pattern: "organizations/{organization}/logs/{log}"
+//	    pattern: "folders/{folder}/logs/{log}"
+//	    pattern: "billingAccounts/{billing_account}/logs/{log}"
+//	  };
+//	}
 type ResourceDescriptor struct {
 	// The resource type. It must be in the format of
 	// {service_name}/{resource_type_kind}. The `resource_type_kind` must be

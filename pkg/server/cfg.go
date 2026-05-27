@@ -14,11 +14,8 @@
 package server
 
 import (
-	"encoding/json"
-
 	"github.com/deepfabric/elasticell/pkg/node"
 	"github.com/deepfabric/elasticell/pkg/util"
-	"github.com/pkg/errors"
 )
 
 // Cfg server configuration
@@ -32,20 +29,6 @@ type Cfg struct {
 }
 
 // NewCfg returns default cfg
-func NewCfg() *Cfg {
-	return &Cfg{
-		Node: node.NewCfg(),
-	}
-}
+func NewCfg() *Cfg { _ = "STUB: not implemented"; return nil }
 
-func unmarshal(data []byte) (*Cfg, error) {
-	v := &Cfg{}
-
-	err := json.Unmarshal(data, v)
-
-	if nil != err {
-		return nil, errors.Wrap(err, "")
-	}
-
-	return v, nil
-}
+func unmarshal(data []byte) (*Cfg, error) { _ = "STUB: not implemented"; return nil, nil }

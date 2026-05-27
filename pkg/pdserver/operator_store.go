@@ -30,10 +30,8 @@ type StoreOperator interface {
 }
 
 func newSetLogLevelOperator(id uint64, newLevel int32) StoreOperator {
-	return &setLogLevelOperator{
-		id:       id,
-		newLevel: newLevel,
-	}
+	_ = "STUB: not implemented"
+	return *new(StoreOperator)
 }
 
 type setLogLevelOperator struct {
@@ -41,18 +39,9 @@ type setLogLevelOperator struct {
 	newLevel int32
 }
 
-func (op *setLogLevelOperator) GetStoreID() uint64 {
-	return op.id
-}
+func (op *setLogLevelOperator) GetStoreID() uint64 { _ = "STUB: not implemented"; return 0 }
 
 func (op *setLogLevelOperator) Do(store *StoreInfo) (*pdpb.StoreHeartbeatRsp, bool) {
-	if store.Status.Stats.LogLevel == op.newLevel {
-		return nil, true
-	}
-
-	return &pdpb.StoreHeartbeatRsp{
-		SetLogLevel: &pdpb.SetLogLevel{
-			NewLevel: op.newLevel,
-		},
-	}, false
+	_ = "STUB: not implemented"
+	return nil, false
 }

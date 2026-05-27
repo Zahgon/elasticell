@@ -26,118 +26,34 @@ var (
 	emptyApplyMetrics = applyMetrics{}
 )
 
-func acquireBitmap() *roaring.Bitmap {
-	v := bitmapPool.Get()
-	if v == nil {
-		return roaring.NewBTreeBitmap()
-	}
+func acquireBitmap() *roaring.Bitmap { _ = "STUB: not implemented"; return nil }
 
-	return v.(*roaring.Bitmap)
-}
+func releaseBitmap(value *roaring.Bitmap) { _ = "STUB: not implemented"; return }
 
-func releaseBitmap(value *roaring.Bitmap) {
-	value.Containers.Reset()
-	bitmapPool.Put(value)
-}
+func acquireBuf() *goetty.ByteBuf { _ = "STUB: not implemented"; return nil }
 
-func acquireBuf() *goetty.ByteBuf {
-	v := bufPool.Get()
-	if v == nil {
-		return goetty.NewByteBuf(64)
-	}
+func releaseBuf(buf *goetty.ByteBuf) { _ = "STUB: not implemented"; return }
 
-	buf := v.(*goetty.ByteBuf)
-	buf.Resume(64)
+func acquireEntry() *raftpb.Entry { _ = "STUB: not implemented"; return nil }
 
-	return buf
-}
+func releaseEntry(ent *raftpb.Entry) { _ = "STUB: not implemented"; return }
 
-func releaseBuf(buf *goetty.ByteBuf) {
-	buf.Clear()
-	buf.Release()
-	bufPool.Put(buf)
-}
+func acquireReqCtx() *reqCtx { _ = "STUB: not implemented"; return nil }
 
-func acquireEntry() *raftpb.Entry {
-	v := entryPool.Get()
-	if v == nil {
-		return &raftpb.Entry{}
-	}
+func releaseReqCtx(req *reqCtx) { _ = "STUB: not implemented"; return }
 
-	return v.(*raftpb.Entry)
-}
+func acquireCmd() *cmd { _ = "STUB: not implemented"; return nil }
 
-func releaseEntry(ent *raftpb.Entry) {
-	ent.Reset()
-	entryPool.Put(ent)
-}
+func releaseCmd(c *cmd) { _ = "STUB: not implemented"; return }
 
-func acquireReqCtx() *reqCtx {
-	v := reqCtxPool.Get()
-	if v == nil {
-		return &reqCtx{}
-	}
+func acquireReadyContext() *readyContext { _ = "STUB: not implemented"; return nil }
 
-	return v.(*reqCtx)
-}
+func releaseReadyContext(ctx *readyContext) { _ = "STUB: not implemented"; return }
 
-func releaseReqCtx(req *reqCtx) {
-	req.reset()
-	reqCtxPool.Put(req)
-}
+func acquireAsyncApplyResult() *asyncApplyResult { _ = "STUB: not implemented"; return nil }
 
-func acquireCmd() *cmd {
-	v := cmdPool.Get()
-	if v == nil {
-		return &cmd{}
-	}
+func releaseAsyncApplyResult(res *asyncApplyResult) { _ = "STUB: not implemented"; return }
 
-	return v.(*cmd)
-}
+func acquireApplyContext() *applyContext { _ = "STUB: not implemented"; return nil }
 
-func releaseCmd(c *cmd) {
-	c.reset()
-	cmdPool.Put(c)
-}
-
-func acquireReadyContext() *readyContext {
-	v := readyContextPool.Get()
-	if v == nil {
-		return &readyContext{}
-	}
-
-	return v.(*readyContext)
-}
-
-func releaseReadyContext(ctx *readyContext) {
-	ctx.reset()
-	readyContextPool.Put(ctx)
-}
-
-func acquireAsyncApplyResult() *asyncApplyResult {
-	v := asyncApplyResultPool.Get()
-	if v == nil {
-		return &asyncApplyResult{}
-	}
-
-	return v.(*asyncApplyResult)
-}
-
-func releaseAsyncApplyResult(res *asyncApplyResult) {
-	res.reset()
-	asyncApplyResultPool.Put(res)
-}
-
-func acquireApplyContext() *applyContext {
-	v := applyContextPool.Get()
-	if v == nil {
-		return newApplyContext()
-	}
-
-	return v.(*applyContext)
-}
-
-func releaseApplyContext(ctx *applyContext) {
-	ctx.reset()
-	applyContextPool.Put(ctx)
-}
+func releaseApplyContext(ctx *applyContext) { _ = "STUB: not implemented"; return }

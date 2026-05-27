@@ -14,10 +14,8 @@
 package pdserver
 
 import (
-	"fmt"
 	"time"
 
-	"github.com/fagongzi/log"
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
 )
 
@@ -34,31 +32,18 @@ type aggregationOperator struct {
 	Ops       []Operator `json:"ops"`
 }
 
-func (op *aggregationOperator) String() string {
-	return fmt.Sprintf("%+v", *op)
-}
+func (op *aggregationOperator) String() string { _ = "STUB: not implemented"; return "" }
 
-func (op *aggregationOperator) GetCellID() uint64 {
-	return op.CellID
-}
+func (op *aggregationOperator) GetCellID() uint64 { _ = "STUB: not implemented"; return 0 }
 
 func (op *aggregationOperator) GetResourceKind() ResourceKind {
-	return op.Ops[0].GetResourceKind()
+	_ = "STUB: not implemented"
+	return *new(ResourceKind)
 }
 
 func (op *aggregationOperator) Do(target *CellInfo) (*pdpb.CellHeartbeatRsp, bool) {
-	if time.Since(op.StartAt) > maxOperatorWaitTime {
-		log.Errorf("scheduler: operator timeout, operator=<%s>", op)
-		return nil, true
-	}
-
-	// If an operator is not finished, do it.
-	for ; op.LastIndex < len(op.Ops); op.LastIndex++ {
-		if res, finished := op.Ops[op.LastIndex].Do(target); !finished {
-			return res, false
-		}
-	}
-
-	op.EndAt = time.Now()
-	return nil, true
+	_ = "STUB: not implemented"
+	return nil, false
 }
+
+// If an operator is not finished, do it.

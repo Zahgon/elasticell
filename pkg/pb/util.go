@@ -25,22 +25,8 @@ type BaseReq interface {
 
 // NewCell returns a cell meta
 func NewCell(cellID, peerID, storeID uint64) metapb.Cell {
-	c := metapb.Cell{
-		ID:    cellID,
-		Epoch: newCellEpoch(),
-	}
-
-	c.Peers = append(c.Peers, &metapb.Peer{
-		ID:      peerID,
-		StoreID: storeID,
-	})
-
-	return c
+	_ = "STUB: not implemented"
+	return *new(metapb.Cell)
 }
 
-func newCellEpoch() metapb.CellEpoch {
-	return metapb.CellEpoch{
-		ConfVer: 1,
-		CellVer: 1,
-	}
-}
+func newCellEpoch() metapb.CellEpoch { _ = "STUB: not implemented"; return *new(metapb.CellEpoch) }

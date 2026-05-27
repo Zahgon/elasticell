@@ -1,11 +1,7 @@
 package proxy
 
 import (
-	"encoding/json"
 	"flag"
-	"io/ioutil"
-
-	"github.com/fagongzi/log"
 )
 
 var (
@@ -25,34 +21,6 @@ type Cfg struct {
 }
 
 // GetCfg get cfg from command
-func GetCfg() *Cfg {
-	data, err := ioutil.ReadFile(*cfgFile)
-	if err != nil {
-		log.Fatalf("bootstrap: read configuration file failure, cfg=<%s>, errors:\n %+v",
-			*cfgFile,
-			err)
-		return nil
-	}
+func GetCfg() *Cfg { _ = "STUB: not implemented"; return nil }
 
-	cfg, err := unmarshal(data)
-	if err != nil {
-		log.Fatalf("bootstrap: parse configuration file failure, cfg=<%s>, errors:\n %+v",
-			*cfgFile,
-			err)
-		return nil
-	}
-
-	return cfg
-}
-
-func unmarshal(data []byte) (*Cfg, error) {
-	v := &Cfg{}
-
-	err := json.Unmarshal(data, v)
-
-	if nil != err {
-		return nil, err
-	}
-
-	return v, nil
-}
+func unmarshal(data []byte) (*Cfg, error) { _ = "STUB: not implemented"; return nil, nil }

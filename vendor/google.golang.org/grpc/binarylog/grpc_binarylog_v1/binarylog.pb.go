@@ -3,11 +3,17 @@
 
 package grpc_binarylog_v1 // import "google.golang.org/grpc/binarylog/grpc_binarylog_v1"
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import duration "github.com/golang/protobuf/ptypes/duration"
-import timestamp "github.com/golang/protobuf/ptypes/timestamp"
+import (
+	fmt "fmt"
+
+	proto "github.com/golang/protobuf/proto"
+
+	math "math"
+
+	duration "github.com/golang/protobuf/ptypes/duration"
+
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -666,12 +672,12 @@ func (m *Message) GetData() []byte {
 // Header keys added by gRPC are omitted. To be more specific,
 // implementations will not log the following entries, and this is
 // not to be treated as a truncation:
-// - entries handled by grpc that are not user visible, such as those
-//   that begin with 'grpc-' (with exception of grpc-trace-bin)
-//   or keys like 'lb-token'
-// - transport specific entries, including but not limited to:
-//   ':path', ':authority', 'content-encoding', 'user-agent', 'te', etc
-// - entries added for call credentials
+//   - entries handled by grpc that are not user visible, such as those
+//     that begin with 'grpc-' (with exception of grpc-trace-bin)
+//     or keys like 'lb-token'
+//   - transport specific entries, including but not limited to:
+//     ':path', ':authority', 'content-encoding', 'user-agent', 'te', etc
+//   - entries added for call credentials
 //
 // Implementations must always log grpc-trace-bin if it is present.
 // Practically speaking it will only be visible on server side because

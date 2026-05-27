@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package storage
@@ -18,7 +19,6 @@ package storage
 import (
 	"github.com/deepfabric/elasticell/pkg/util"
 	gonemo "github.com/deepfabric/go-nemo"
-	"golang.org/x/net/context"
 )
 
 type nemoSetEngine struct {
@@ -27,58 +27,33 @@ type nemoSetEngine struct {
 }
 
 func newNemoSetEngine(db *gonemo.NEMO, cfg *NemoCfg) SetEngine {
-	return &nemoSetEngine{
-		limiter: util.NewLimiter(cfg.LimitConcurrencyWrite),
-		db:      db,
-	}
+	_ = "STUB: not implemented"
+	return *new(SetEngine)
 }
 
 func (e *nemoSetEngine) SAdd(key []byte, members ...[]byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.SAdd(key, members...)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoSetEngine) SRem(key []byte, members ...[]byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.SRem(key, members...)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (e *nemoSetEngine) SCard(key []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.SCard(key)
-	e.limiter.Release()
-
-	return n, err
-}
+func (e *nemoSetEngine) SCard(key []byte) (int64, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (e *nemoSetEngine) SMembers(key []byte) ([][]byte, error) {
-	return e.db.SMembers(key)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoSetEngine) SIsMember(key []byte, member []byte) (int64, error) {
-	yes, err := e.db.SIsMember(key, member)
-	var value int64
-	if yes {
-		value = 1
-	}
-
-	return value, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoSetEngine) SPop(key []byte) ([]byte, error) {
-	e.limiter.Wait(context.TODO())
-	exists, value, err := e.db.SPop(key)
-	e.limiter.Release()
-
-	if !exists {
-		return nil, err
-	}
-
-	return value, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }

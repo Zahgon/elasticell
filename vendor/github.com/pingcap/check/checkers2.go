@@ -35,8 +35,7 @@ func (checker *isBoolValueChecker) Check(
 //
 // For example:
 //
-//     c.Assert(value, IsTrue)
-//
+//	c.Assert(value, IsTrue)
 var IsTrue Checker = &isBoolValueChecker{
 	&CheckerInfo{Name: "IsTrue", Params: []string{"obtained"}},
 	true,
@@ -46,8 +45,7 @@ var IsTrue Checker = &isBoolValueChecker{
 //
 // For example:
 //
-//     c.Assert(value, IsFalse)
-//
+//	c.Assert(value, IsFalse)
 var IsFalse Checker = &isBoolValueChecker{
 	&CheckerInfo{Name: "IsFalse", Params: []string{"obtained"}},
 	false,
@@ -83,13 +81,13 @@ func (b *bytesEquals) Info() *CheckerInfo {
 //
 // For example:
 //
-//     c.Assert(b, BytesEquals, []byte("bar"))
+//	c.Assert(b, BytesEquals, []byte("bar"))
 //
 // Main difference between DeepEquals and BytesEquals is that BytesEquals treats
 // `nil` as empty byte sequence while DeepEquals doesn't.
 //
-//     c.Assert(nil, BytesEquals, []byte("")) // succeeds
-//     c.Assert(nil, DeepEquals, []byte("")) // fails
+//	c.Assert(nil, BytesEquals, []byte("")) // succeeds
+//	c.Assert(nil, DeepEquals, []byte("")) // fails
 var BytesEquals = &bytesEquals{}
 
 // -----------------------------------------------------------------------
@@ -126,6 +124,5 @@ func (h *hasKey) Info() *CheckerInfo {
 //
 // For example:
 //
-//     c.Assert(myMap, HasKey, "foo")
-//
+//	c.Assert(myMap, HasKey, "foo")
 var HasKey = &hasKey{}

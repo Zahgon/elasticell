@@ -5,13 +5,10 @@ package metapb
 
 import (
 	"fmt"
-	"io"
 	"math"
 
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/golang/protobuf/proto"
-
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -45,28 +42,13 @@ var StoreState_value = map[string]int32{
 	"Tombstone": 2,
 }
 
-func (x StoreState) Enum() *StoreState {
-	p := new(StoreState)
-	*p = x
-	return p
-}
+func (x StoreState) Enum() *StoreState { _ = "STUB: not implemented"; return nil }
 
-func (x StoreState) String() string {
-	return proto.EnumName(StoreState_name, int32(x))
-}
+func (x StoreState) String() string { _ = "STUB: not implemented"; return "" }
 
-func (x *StoreState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(StoreState_value, data, "StoreState")
-	if err != nil {
-		return err
-	}
-	*x = StoreState(value)
-	return nil
-}
+func (x *StoreState) UnmarshalJSON(data []byte) error { _ = "STUB: not implemented"; return nil }
 
-func (StoreState) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_77b4d575d5a68dda, []int{0}
-}
+func (StoreState) EnumDescriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
 
 type Label struct {
 	Key                  string   `protobuf:"bytes,1,opt,name=key" json:"key"`
@@ -76,52 +58,29 @@ type Label struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Label) Reset()         { *m = Label{} }
-func (m *Label) String() string { return proto.CompactTextString(m) }
-func (*Label) ProtoMessage()    {}
-func (*Label) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77b4d575d5a68dda, []int{0}
-}
-func (m *Label) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *Label) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *Label) String() string            { _ = "STUB: not implemented"; return "" }
+func (*Label) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*Label) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *Label) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *Label) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Label.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *Label) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Label.Merge(m, src)
-}
-func (m *Label) XXX_Size() int {
-	return m.Size()
-}
-func (m *Label) XXX_DiscardUnknown() {
-	xxx_messageInfo_Label.DiscardUnknown(m)
-}
+
+func (m *Label) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *Label) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *Label) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_Label proto.InternalMessageInfo
 
-func (m *Label) GetKey() string {
-	if m != nil {
-		return m.Key
-	}
-	return ""
-}
+func (m *Label) GetKey() string { _ = "STUB: not implemented"; return "" }
 
-func (m *Label) GetValue() string {
-	if m != nil {
-		return m.Value
-	}
-	return ""
-}
+func (m *Label) GetValue() string { _ = "STUB: not implemented"; return "" }
 
 type Cluster struct {
 	ID                   uint64   `protobuf:"varint,1,opt,name=id" json:"id"`
@@ -131,52 +90,29 @@ type Cluster struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Cluster) Reset()         { *m = Cluster{} }
-func (m *Cluster) String() string { return proto.CompactTextString(m) }
-func (*Cluster) ProtoMessage()    {}
-func (*Cluster) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77b4d575d5a68dda, []int{1}
-}
-func (m *Cluster) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *Cluster) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *Cluster) String() string            { _ = "STUB: not implemented"; return "" }
+func (*Cluster) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*Cluster) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *Cluster) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *Cluster) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Cluster.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *Cluster) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Cluster.Merge(m, src)
-}
-func (m *Cluster) XXX_Size() int {
-	return m.Size()
-}
-func (m *Cluster) XXX_DiscardUnknown() {
-	xxx_messageInfo_Cluster.DiscardUnknown(m)
-}
+
+func (m *Cluster) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *Cluster) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *Cluster) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_Cluster proto.InternalMessageInfo
 
-func (m *Cluster) GetID() uint64 {
-	if m != nil {
-		return m.ID
-	}
-	return 0
-}
+func (m *Cluster) GetID() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *Cluster) GetMaxReplicas() uint32 {
-	if m != nil {
-		return m.MaxReplicas
-	}
-	return 0
-}
+func (m *Cluster) GetMaxReplicas() uint32 { _ = "STUB: not implemented"; return 0 }
 
 type Peer struct {
 	ID                   uint64   `protobuf:"varint,1,opt,name=id" json:"id"`
@@ -186,52 +122,29 @@ type Peer struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Peer) Reset()         { *m = Peer{} }
-func (m *Peer) String() string { return proto.CompactTextString(m) }
-func (*Peer) ProtoMessage()    {}
-func (*Peer) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77b4d575d5a68dda, []int{2}
-}
-func (m *Peer) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *Peer) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *Peer) String() string            { _ = "STUB: not implemented"; return "" }
+func (*Peer) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*Peer) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *Peer) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *Peer) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Peer.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *Peer) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Peer.Merge(m, src)
-}
-func (m *Peer) XXX_Size() int {
-	return m.Size()
-}
-func (m *Peer) XXX_DiscardUnknown() {
-	xxx_messageInfo_Peer.DiscardUnknown(m)
-}
+
+func (m *Peer) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *Peer) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *Peer) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_Peer proto.InternalMessageInfo
 
-func (m *Peer) GetID() uint64 {
-	if m != nil {
-		return m.ID
-	}
-	return 0
-}
+func (m *Peer) GetID() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *Peer) GetStoreID() uint64 {
-	if m != nil {
-		return m.StoreID
-	}
-	return 0
-}
+func (m *Peer) GetStoreID() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type CellEpoch struct {
 	ConfVer              uint64   `protobuf:"varint,1,opt,name=confVer" json:"confVer"`
@@ -241,52 +154,29 @@ type CellEpoch struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CellEpoch) Reset()         { *m = CellEpoch{} }
-func (m *CellEpoch) String() string { return proto.CompactTextString(m) }
-func (*CellEpoch) ProtoMessage()    {}
-func (*CellEpoch) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77b4d575d5a68dda, []int{3}
-}
-func (m *CellEpoch) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *CellEpoch) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *CellEpoch) String() string            { _ = "STUB: not implemented"; return "" }
+func (*CellEpoch) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*CellEpoch) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *CellEpoch) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *CellEpoch) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_CellEpoch.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *CellEpoch) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CellEpoch.Merge(m, src)
-}
-func (m *CellEpoch) XXX_Size() int {
-	return m.Size()
-}
-func (m *CellEpoch) XXX_DiscardUnknown() {
-	xxx_messageInfo_CellEpoch.DiscardUnknown(m)
-}
+
+func (m *CellEpoch) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *CellEpoch) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *CellEpoch) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_CellEpoch proto.InternalMessageInfo
 
-func (m *CellEpoch) GetConfVer() uint64 {
-	if m != nil {
-		return m.ConfVer
-	}
-	return 0
-}
+func (m *CellEpoch) GetConfVer() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *CellEpoch) GetCellVer() uint64 {
-	if m != nil {
-		return m.CellVer
-	}
-	return 0
-}
+func (m *CellEpoch) GetCellVer() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type Cell struct {
 	ID                   uint64    `protobuf:"varint,1,opt,name=id" json:"id"`
@@ -299,73 +189,35 @@ type Cell struct {
 	XXX_sizecache        int32     `json:"-"`
 }
 
-func (m *Cell) Reset()         { *m = Cell{} }
-func (m *Cell) String() string { return proto.CompactTextString(m) }
-func (*Cell) ProtoMessage()    {}
-func (*Cell) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77b4d575d5a68dda, []int{4}
-}
-func (m *Cell) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *Cell) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *Cell) String() string            { _ = "STUB: not implemented"; return "" }
+func (*Cell) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*Cell) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *Cell) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *Cell) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Cell.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *Cell) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Cell.Merge(m, src)
-}
-func (m *Cell) XXX_Size() int {
-	return m.Size()
-}
-func (m *Cell) XXX_DiscardUnknown() {
-	xxx_messageInfo_Cell.DiscardUnknown(m)
-}
+
+func (m *Cell) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *Cell) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *Cell) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_Cell proto.InternalMessageInfo
 
-func (m *Cell) GetID() uint64 {
-	if m != nil {
-		return m.ID
-	}
-	return 0
-}
+func (m *Cell) GetID() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *Cell) GetStart() []byte {
-	if m != nil {
-		return m.Start
-	}
-	return nil
-}
+func (m *Cell) GetStart() []byte { _ = "STUB: not implemented"; return nil }
 
-func (m *Cell) GetEnd() []byte {
-	if m != nil {
-		return m.End
-	}
-	return nil
-}
+func (m *Cell) GetEnd() []byte { _ = "STUB: not implemented"; return nil }
 
-func (m *Cell) GetEpoch() CellEpoch {
-	if m != nil {
-		return m.Epoch
-	}
-	return CellEpoch{}
-}
+func (m *Cell) GetEpoch() CellEpoch { _ = "STUB: not implemented"; return *new(CellEpoch) }
 
-func (m *Cell) GetPeers() []*Peer {
-	if m != nil {
-		return m.Peers
-	}
-	return nil
-}
+func (m *Cell) GetPeers() []*Peer { _ = "STUB: not implemented"; return nil }
 
 type Store struct {
 	ID                   uint64     `protobuf:"varint,1,opt,name=id" json:"id"`
@@ -378,73 +230,35 @@ type Store struct {
 	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *Store) Reset()         { *m = Store{} }
-func (m *Store) String() string { return proto.CompactTextString(m) }
-func (*Store) ProtoMessage()    {}
-func (*Store) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77b4d575d5a68dda, []int{5}
-}
-func (m *Store) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *Store) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *Store) String() string            { _ = "STUB: not implemented"; return "" }
+func (*Store) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*Store) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *Store) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *Store) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Store.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *Store) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Store.Merge(m, src)
-}
-func (m *Store) XXX_Size() int {
-	return m.Size()
-}
-func (m *Store) XXX_DiscardUnknown() {
-	xxx_messageInfo_Store.DiscardUnknown(m)
-}
+
+func (m *Store) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *Store) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *Store) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_Store proto.InternalMessageInfo
 
-func (m *Store) GetID() uint64 {
-	if m != nil {
-		return m.ID
-	}
-	return 0
-}
+func (m *Store) GetID() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *Store) GetAddress() string {
-	if m != nil {
-		return m.Address
-	}
-	return ""
-}
+func (m *Store) GetAddress() string { _ = "STUB: not implemented"; return "" }
 
-func (m *Store) GetLables() []Label {
-	if m != nil {
-		return m.Lables
-	}
-	return nil
-}
+func (m *Store) GetLables() []Label { _ = "STUB: not implemented"; return nil }
 
-func (m *Store) GetState() StoreState {
-	if m != nil {
-		return m.State
-	}
-	return UP
-}
+func (m *Store) GetState() StoreState { _ = "STUB: not implemented"; return *new(StoreState) }
 
-func (m *Store) GetClientAddress() string {
-	if m != nil {
-		return m.ClientAddress
-	}
-	return ""
-}
+func (m *Store) GetClientAddress() string { _ = "STUB: not implemented"; return "" }
 
 func init() {
 	proto.RegisterEnum("metapb.StoreState", StoreState_name, StoreState_value)
@@ -490,1292 +304,91 @@ var fileDescriptor_77b4d575d5a68dda = []byte{
 	0x00,
 }
 
-func (m *Label) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *Label) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *Label) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *Label) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *Label) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i -= len(m.Value)
-	copy(dAtA[i:], m.Value)
-	i = encodeVarintMetapb(dAtA, i, uint64(len(m.Value)))
-	i--
-	dAtA[i] = 0x12
-	i -= len(m.Key)
-	copy(dAtA[i:], m.Key)
-	i = encodeVarintMetapb(dAtA, i, uint64(len(m.Key)))
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (m *Cluster) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *Cluster) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *Cluster) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *Cluster) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *Cluster) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMetapb(dAtA, i, uint64(m.MaxReplicas))
-	i--
-	dAtA[i] = 0x10
-	i = encodeVarintMetapb(dAtA, i, uint64(m.ID))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (m *Peer) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *Peer) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *Peer) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *Peer) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *Peer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMetapb(dAtA, i, uint64(m.StoreID))
-	i--
-	dAtA[i] = 0x10
-	i = encodeVarintMetapb(dAtA, i, uint64(m.ID))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (m *CellEpoch) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *CellEpoch) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *CellEpoch) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *CellEpoch) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *CellEpoch) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMetapb(dAtA, i, uint64(m.CellVer))
-	i--
-	dAtA[i] = 0x10
-	i = encodeVarintMetapb(dAtA, i, uint64(m.ConfVer))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (m *Cell) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *Cell) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *Cell) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *Cell) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *Cell) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	if len(m.Peers) > 0 {
-		for iNdEx := len(m.Peers) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Peers[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintMetapb(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x2a
-		}
-	}
-	{
-		size, err := m.Epoch.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMetapb(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x22
-	if m.End != nil {
-		i -= len(m.End)
-		copy(dAtA[i:], m.End)
-		i = encodeVarintMetapb(dAtA, i, uint64(len(m.End)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if m.Start != nil {
-		i -= len(m.Start)
-		copy(dAtA[i:], m.Start)
-		i = encodeVarintMetapb(dAtA, i, uint64(len(m.Start)))
-		i--
-		dAtA[i] = 0x12
-	}
-	i = encodeVarintMetapb(dAtA, i, uint64(m.ID))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (m *Store) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *Store) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *Store) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *Store) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *Store) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i -= len(m.ClientAddress)
-	copy(dAtA[i:], m.ClientAddress)
-	i = encodeVarintMetapb(dAtA, i, uint64(len(m.ClientAddress)))
-	i--
-	dAtA[i] = 0x2a
-	i = encodeVarintMetapb(dAtA, i, uint64(m.State))
-	i--
-	dAtA[i] = 0x20
-	if len(m.Lables) > 0 {
-		for iNdEx := len(m.Lables) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.Lables[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintMetapb(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x1a
-		}
-	}
-	i -= len(m.Address)
-	copy(dAtA[i:], m.Address)
-	i = encodeVarintMetapb(dAtA, i, uint64(len(m.Address)))
-	i--
-	dAtA[i] = 0x12
-	i = encodeVarintMetapb(dAtA, i, uint64(m.ID))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func encodeVarintMetapb(dAtA []byte, offset int, v uint64) int {
-	offset -= sovMetapb(v)
-	base := offset
-	for v >= 1<<7 {
-		dAtA[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	dAtA[offset] = uint8(v)
-	return base
-}
-func (m *Label) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Key)
-	n += 1 + l + sovMetapb(uint64(l))
-	l = len(m.Value)
-	n += 1 + l + sovMetapb(uint64(l))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func encodeVarintMetapb(dAtA []byte, offset int, v uint64) int { _ = "STUB: not implemented"; return 0 }
 
-func (m *Cluster) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMetapb(uint64(m.ID))
-	n += 1 + sovMetapb(uint64(m.MaxReplicas))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *Label) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *Peer) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMetapb(uint64(m.ID))
-	n += 1 + sovMetapb(uint64(m.StoreID))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *Cluster) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *CellEpoch) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMetapb(uint64(m.ConfVer))
-	n += 1 + sovMetapb(uint64(m.CellVer))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *Peer) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *Cell) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMetapb(uint64(m.ID))
-	if m.Start != nil {
-		l = len(m.Start)
-		n += 1 + l + sovMetapb(uint64(l))
-	}
-	if m.End != nil {
-		l = len(m.End)
-		n += 1 + l + sovMetapb(uint64(l))
-	}
-	l = m.Epoch.Size()
-	n += 1 + l + sovMetapb(uint64(l))
-	if len(m.Peers) > 0 {
-		for _, e := range m.Peers {
-			l = e.Size()
-			n += 1 + l + sovMetapb(uint64(l))
-		}
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *CellEpoch) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *Store) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMetapb(uint64(m.ID))
-	l = len(m.Address)
-	n += 1 + l + sovMetapb(uint64(l))
-	if len(m.Lables) > 0 {
-		for _, e := range m.Lables {
-			l = e.Size()
-			n += 1 + l + sovMetapb(uint64(l))
-		}
-	}
-	n += 1 + sovMetapb(uint64(m.State))
-	l = len(m.ClientAddress)
-	n += 1 + l + sovMetapb(uint64(l))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *Cell) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func sovMetapb(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
-}
-func sozMetapb(x uint64) (n int) {
-	return sovMetapb(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *Label) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMetapb
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Label: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Label: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Key", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Key = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Value = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMetapb(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *Store) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Cluster) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMetapb
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Cluster: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Cluster: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ID", wireType)
-			}
-			m.ID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MaxReplicas", wireType)
-			}
-			m.MaxReplicas = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.MaxReplicas |= uint32(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMetapb(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func sovMetapb(x uint64) (n int) { _ = "STUB: not implemented"; return 0 }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Peer) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMetapb
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Peer: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Peer: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ID", wireType)
-			}
-			m.ID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StoreID", wireType)
-			}
-			m.StoreID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.StoreID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMetapb(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func sozMetapb(x uint64) (n int) { _ = "STUB: not implemented"; return 0 }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *CellEpoch) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMetapb
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: CellEpoch: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: CellEpoch: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ConfVer", wireType)
-			}
-			m.ConfVer = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ConfVer |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CellVer", wireType)
-			}
-			m.CellVer = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.CellVer |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMetapb(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *Label) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Cell) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMetapb
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Cell: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Cell: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ID", wireType)
-			}
-			m.ID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Start", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Start = append(m.Start[:0], dAtA[iNdEx:postIndex]...)
-			if m.Start == nil {
-				m.Start = []byte{}
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field End", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.End = append(m.End[:0], dAtA[iNdEx:postIndex]...)
-			if m.End == nil {
-				m.End = []byte{}
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Epoch", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.Epoch.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Peers", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Peers = append(m.Peers, &Peer{})
-			if err := m.Peers[len(m.Peers)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMetapb(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *Cluster) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Store) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMetapb
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Store: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Store: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ID", wireType)
-			}
-			m.ID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Address = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Lables", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Lables = append(m.Lables, Label{})
-			if err := m.Lables[len(m.Lables)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field State", wireType)
-			}
-			m.State = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.State |= StoreState(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClientAddress", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.ClientAddress = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMetapb(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMetapb
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *Peer) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func skipMetapb(dAtA []byte) (n int, err error) {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return 0, ErrIntOverflowMetapb
-			}
-			if iNdEx >= l {
-				return 0, io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		wireType := int(wire & 0x7)
-		switch wireType {
-		case 0:
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return 0, ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return 0, io.ErrUnexpectedEOF
-				}
-				iNdEx++
-				if dAtA[iNdEx-1] < 0x80 {
-					break
-				}
-			}
-			return iNdEx, nil
-		case 1:
-			iNdEx += 8
-			return iNdEx, nil
-		case 2:
-			var length int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return 0, ErrIntOverflowMetapb
-				}
-				if iNdEx >= l {
-					return 0, io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				length |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if length < 0 {
-				return 0, ErrInvalidLengthMetapb
-			}
-			iNdEx += length
-			if iNdEx < 0 {
-				return 0, ErrInvalidLengthMetapb
-			}
-			return iNdEx, nil
-		case 3:
-			for {
-				var innerWire uint64
-				var start int = iNdEx
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return 0, ErrIntOverflowMetapb
-					}
-					if iNdEx >= l {
-						return 0, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					innerWire |= (uint64(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				innerWireType := int(innerWire & 0x7)
-				if innerWireType == 4 {
-					break
-				}
-				next, err := skipMetapb(dAtA[start:])
-				if err != nil {
-					return 0, err
-				}
-				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthMetapb
-				}
-			}
-			return iNdEx, nil
-		case 4:
-			return iNdEx, nil
-		case 5:
-			iNdEx += 4
-			return iNdEx, nil
-		default:
-			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
-		}
-	}
-	panic("unreachable")
-}
+func (m *CellEpoch) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
+
+func (m *Cell) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
+
+func (m *Store) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
+
+func skipMetapb(dAtA []byte) (n int, err error) { _ = "STUB: not implemented"; return 0, nil }
 
 var (
 	ErrInvalidLengthMetapb = fmt.Errorf("proto: negative length found during unmarshaling")

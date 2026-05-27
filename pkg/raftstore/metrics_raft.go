@@ -135,27 +135,10 @@ var (
 		}, []string{"type", "store_id"})
 )
 
-func initMetricsForRaft() {
-	prometheus.MustRegister(raftLogCompactCounter)
-	prometheus.MustRegister(raftLogLagHistogram)
-	prometheus.MustRegister(raftFlowProposalCounterVec)
-	prometheus.MustRegister(raftLogAppendDurationHistogram)
-	prometheus.MustRegister(raftLogApplyDurationHistogram)
-	prometheus.MustRegister(raftFlowReadyCounterVec)
-	prometheus.MustRegister(raftFlowProcessReadyDurationHistogram)
-	prometheus.MustRegister(raftFlowProposalSizeHistogram)
-	prometheus.MustRegister(raftFlowFailureReportCounterVec)
-	prometheus.MustRegister(raftFlowSentMsgCounterVec)
-}
+func initMetricsForRaft() { _ = "STUB: not implemented"; return }
 
-func observeRaftLogAppend(start time.Time) {
-	raftLogAppendDurationHistogram.Observe(time.Now().Sub(start).Seconds())
-}
+func observeRaftLogAppend(start time.Time) { _ = "STUB: not implemented"; return }
 
-func observeRaftLogApply(start time.Time) {
-	raftLogApplyDurationHistogram.Observe(time.Now().Sub(start).Seconds())
-}
+func observeRaftLogApply(start time.Time) { _ = "STUB: not implemented"; return }
 
-func observeRaftFlowProcessReady(start time.Time) {
-	raftFlowProcessReadyDurationHistogram.Observe(time.Now().Sub(start).Seconds())
-}
+func observeRaftFlowProcessReady(start time.Time) { _ = "STUB: not implemented"; return }

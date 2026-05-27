@@ -15,8 +15,6 @@ package storage
 
 import (
 	"sync"
-
-	"github.com/deepfabric/elasticell/pkg/util"
 )
 
 type opt struct {
@@ -31,31 +29,12 @@ type memoryWriteBatch struct {
 	opts []*opt
 }
 
-func newMemoryWriteBatch() WriteBatch {
-	return &memoryWriteBatch{}
-}
+func newMemoryWriteBatch() WriteBatch { _ = "STUB: not implemented"; return *new(WriteBatch) }
 
-func (wb *memoryWriteBatch) Delete(key []byte) error {
-	wb.Lock()
-	defer wb.Unlock()
-
-	wb.opts = append(wb.opts, &opt{
-		key:      key,
-		isDelete: true,
-	})
-
-	return nil
-}
+func (wb *memoryWriteBatch) Delete(key []byte) error { _ = "STUB: not implemented"; return nil }
 
 func (wb *memoryWriteBatch) Set(key []byte, value []byte) error {
-	wb.Lock()
-	defer wb.Unlock()
-
-	wb.opts = append(wb.opts, &opt{
-		key:   key,
-		value: value,
-	})
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
@@ -70,57 +49,37 @@ type memoryDriver struct {
 }
 
 // NewMemoryDriver returns Driver with memory implemention
-func NewMemoryDriver() Driver {
-	kv := util.NewKVTree()
-	return &memoryDriver{
-		metaEngine: newMemoryMetaEngine(),
-		kvEngine:   newMemoryKVEngine(kv),
-		dataEngine: newMemoryDataEngine(kv),
-	}
-}
+func NewMemoryDriver() Driver { _ = "STUB: not implemented"; return *new(Driver) }
 
-func (d *memoryDriver) GetEngine() Engine {
-	return d.metaEngine
-}
+func (d *memoryDriver) GetEngine() Engine { _ = "STUB: not implemented"; return *new(Engine) }
 
 func (d *memoryDriver) GetDataEngine() DataEngine {
-	return d.dataEngine
+	_ = "STUB: not implemented"
+	return *new(DataEngine)
 }
 
-func (d *memoryDriver) GetKVEngine() KVEngine {
-	return d.kvEngine
-}
+func (d *memoryDriver) GetKVEngine() KVEngine { _ = "STUB: not implemented"; return *new(KVEngine) }
 
 func (d *memoryDriver) GetHashEngine() HashEngine {
-	return d.hashEngine
+	_ = "STUB: not implemented"
+	return *new(HashEngine)
 }
 
 func (d *memoryDriver) GetListEngine() ListEngine {
-	return d.listEngine
+	_ = "STUB: not implemented"
+	return *new(ListEngine)
 }
 
-func (d *memoryDriver) GetSetEngine() SetEngine {
-	return d.setEngine
-}
+func (d *memoryDriver) GetSetEngine() SetEngine { _ = "STUB: not implemented"; return *new(SetEngine) }
 
 func (d *memoryDriver) GetZSetEngine() ZSetEngine {
-	return d.zsetEngine
+	_ = "STUB: not implemented"
+	return *new(ZSetEngine)
 }
 
 func (d *memoryDriver) NewWriteBatch() WriteBatch {
-	return newMemoryWriteBatch()
+	_ = "STUB: not implemented"
+	return *new(WriteBatch)
 }
 
-func (d *memoryDriver) Write(wb WriteBatch, sync bool) error {
-	mwb := wb.(*memoryWriteBatch)
-
-	for _, opt := range mwb.opts {
-		if opt.isDelete {
-			d.metaEngine.Delete(opt.key)
-		} else {
-			d.metaEngine.Set(opt.key, opt.value)
-		}
-	}
-
-	return nil
-}
+func (d *memoryDriver) Write(wb WriteBatch, sync bool) error { _ = "STUB: not implemented"; return nil }

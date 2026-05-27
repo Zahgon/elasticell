@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build amd64 && darwin
 // +build amd64,darwin
 
 package unix
@@ -21,7 +22,7 @@ func setTimeval(sec, usec int64) Timeval {
 	return Timeval{Sec: sec, Usec: int32(usec)}
 }
 
-//sysnb	gettimeofday(tp *Timeval) (sec int64, usec int32, err error)
+// sysnb	gettimeofday(tp *Timeval) (sec int64, usec int32, err error)
 func Gettimeofday(tv *Timeval) (err error) {
 	// The tv passed to gettimeofday must be non-nil
 	// but is otherwise unused. The answers come back

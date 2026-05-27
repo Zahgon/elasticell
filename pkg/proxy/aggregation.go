@@ -1,8 +1,6 @@
 package proxy
 
 import (
-	"strconv"
-
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
 )
 
@@ -19,34 +17,19 @@ type aggregationReq struct {
 }
 
 func newAggregationReq(n int, mergeFn func([][]byte, ...*raftcmdpb.Response) *raftcmdpb.Response, args [][]byte) *aggregationReq {
-	return &aggregationReq{
-		reply:   n,
-		parts:   make([]*raftcmdpb.Response, n, n),
-		mergeFn: mergeFn,
-		args:    args,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (req *aggregationReq) addPart(index int, rsp *raftcmdpb.Response) bool {
-	req.parts[index] = rsp
-	req.reply--
-
-	return req.reply == 0
+	_ = "STUB: not implemented"
+	return false
 }
 
-func (req *aggregationReq) merge() *raftcmdpb.Response {
-	return req.mergeFn(req.args, req.parts...)
-}
+func (req *aggregationReq) merge() *raftcmdpb.Response { _ = "STUB: not implemented"; return nil }
 
-func isAggregationPart(id []byte) bool {
-	return len(id) > 16
-}
+func isAggregationPart(id []byte) bool { _ = "STUB: not implemented"; return false }
 
-func parseAggregationPart(id []byte) ([]byte, int) {
-	return id[0:16], parseStrInt64(id[16:])
-}
+func parseAggregationPart(id []byte) ([]byte, int) { _ = "STUB: not implemented"; return nil, 0 }
 
-func parseStrInt64(data []byte) int {
-	v, _ := strconv.ParseInt(string(data), 10, 64)
-	return int(v)
-}
+func parseStrInt64(data []byte) int { _ = "STUB: not implemented"; return 0 }

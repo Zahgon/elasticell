@@ -1,10 +1,7 @@
 package proxy
 
 import (
-	"hash/crc32"
 	"sync"
-
-	"github.com/fagongzi/util/hack"
 )
 
 const (
@@ -17,47 +14,18 @@ type routingMap struct {
 	m map[string]*req
 }
 
-func (m *routingMap) put(key string, value *req) {
-	m.Lock()
-	m.m[key] = value
-	m.Unlock()
-}
+func (m *routingMap) put(key string, value *req) { _ = "STUB: not implemented"; return }
 
-func (m *routingMap) delete(key string) *req {
-	m.Lock()
-	value := m.m[key]
-	delete(m.m, key)
-	m.Unlock()
-
-	return value
-}
+func (m *routingMap) delete(key string) *req { _ = "STUB: not implemented"; return nil }
 
 type routing struct {
 	rms []*routingMap
 }
 
-func newRouting() *routing {
-	r := &routing{
-		rms: make([]*routingMap, bucketSize, bucketSize),
-	}
+func newRouting() *routing { _ = "STUB: not implemented"; return nil }
 
-	for i := 0; i < bucketSize; i++ {
-		r.rms[i] = &routingMap{
-			m: make(map[string]*req),
-		}
-	}
+func (r *routing) put(uuid []byte, value *req) { _ = "STUB: not implemented"; return }
 
-	return r
-}
+func (r *routing) delete(uuid []byte) *req { _ = "STUB: not implemented"; return nil }
 
-func (r *routing) put(uuid []byte, value *req) {
-	r.rms[getIndex(uuid)].put(hack.SliceToString(uuid), value)
-}
-
-func (r *routing) delete(uuid []byte) *req {
-	return r.rms[getIndex(uuid)].delete(hack.SliceToString(uuid))
-}
-
-func getIndex(key []byte) int {
-	return int(crc32.ChecksumIEEE(key) & bucketM)
-}
+func getIndex(key []byte) int { _ = "STUB: not implemented"; return 0 }

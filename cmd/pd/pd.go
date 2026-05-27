@@ -15,12 +15,9 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
-	"time"
 
 	server "github.com/deepfabric/elasticell/pkg/pdserver"
 	"github.com/deepfabric/elasticell/pkg/util"
@@ -84,53 +81,4 @@ func main() {
 	}
 }
 
-func parseCfg() *server.Cfg {
-	if *name == "" {
-		fmt.Println("PD name must be set")
-		os.Exit(-1)
-	}
-
-	if *dataPath == "" {
-		fmt.Println("PD data path must be set")
-		os.Exit(-1)
-	}
-
-	if *addrRPC == "" {
-		fmt.Println("PD rpc addr must be set")
-		os.Exit(-1)
-	}
-
-	if *urlsPeer == "" {
-		fmt.Println("PD embed etcd peer urls must be set")
-		os.Exit(-1)
-	}
-
-	if *initialCluster == "" {
-		fmt.Println("PD embed etcd embed etcd initial cluster must be set")
-		os.Exit(-1)
-	}
-
-	cfg := &server.Cfg{}
-	cfg.Name = *name
-	cfg.DataPath = *dataPath
-	cfg.AddrRPC = *addrRPC
-	cfg.DurationLeaderLease = *intervalLeaderLeaseSec
-	cfg.DurationHeartbeatWatcher = time.Second * time.Duration(*intervalHeartbeatWatcherSec)
-	cfg.ThresholdPauseWatcher = *thresholdPauseWatcher
-	cfg.URLsClient = *urlsClient
-	cfg.URLsAdvertiseClient = *urlsAdvertiseClient
-	cfg.URLsPeer = *urlsPeer
-	cfg.URLsAdvertisePeer = *urlsAdvertisePeer
-	cfg.InitialCluster = *initialCluster
-	cfg.InitialClusterState = *initialClusterState
-	cfg.LabelsLocation = strings.Split(*labelsLocation, ",")
-	cfg.LimitReplicas = uint32(*limitReplicas)
-	cfg.LimitSnapshots = *limitSnapshots
-	cfg.LimitStoreDownDuration = time.Second * time.Duration(*limitStoreDownSec)
-	cfg.LimitScheduleLeader = *limitScheduleLeader
-	cfg.LimitScheduleCell = *limitScheduleCell
-	cfg.LimitScheduleReplica = *limitScheduleReplica
-	cfg.ThresholdStorageRate = *thresholdStorageRate
-
-	return cfg
-}
+func parseCfg() *server.Cfg { _ = "STUB: not implemented"; return nil }

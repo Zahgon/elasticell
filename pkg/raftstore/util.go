@@ -14,17 +14,11 @@
 package raftstore
 
 import (
-	"bytes"
-
-	"github.com/coreos/etcd/raft/raftpb"
 	"github.com/deepfabric/elasticell/pkg/pb/errorpb"
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
-	"github.com/deepfabric/elasticell/pkg/pb/mraft"
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
 	"github.com/deepfabric/elasticell/pkg/storage"
-	"github.com/fagongzi/log"
-	"github.com/fagongzi/util/protoc"
 )
 
 const (
@@ -33,178 +27,59 @@ const (
 
 // check whether epoch is staler than checkEpoch.
 func isEpochStale(epoch metapb.CellEpoch, checkEpoch metapb.CellEpoch) bool {
-	return epoch.CellVer < checkEpoch.CellVer ||
-		epoch.ConfVer < checkEpoch.ConfVer
+	_ = "STUB: not implemented"
+	return false
 }
 
 func findPeer(cell *metapb.Cell, storeID uint64) *metapb.Peer {
-	for _, peer := range cell.Peers {
-		if peer.StoreID == storeID {
-			return peer
-		}
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
-func removePeer(cell *metapb.Cell, storeID uint64) {
-	var newPeers []*metapb.Peer
-	for _, peer := range cell.Peers {
-		if peer.StoreID != storeID {
-			newPeers = append(newPeers, peer)
-		}
-	}
-
-	cell.Peers = newPeers
-}
+func removePeer(cell *metapb.Cell, storeID uint64) { _ = "STUB: not implemented"; return }
 
 func newPeer(peerID, storeID uint64) metapb.Peer {
-	return metapb.Peer{
-		ID:      peerID,
-		StoreID: storeID,
-	}
+	_ = "STUB: not implemented"
+	return *new(metapb.Peer)
 }
 
-func removedPeers(new, old metapb.Cell) []uint64 {
-	var ids []uint64
-
-	for _, o := range old.Peers {
-		c := 0
-		for _, n := range new.Peers {
-			if n.ID == o.ID {
-				c++
-				break
-			}
-		}
-
-		if c == 0 {
-			ids = append(ids, o.ID)
-		}
-	}
-
-	return ids
-}
+func removedPeers(new, old metapb.Cell) []uint64 { _ = "STUB: not implemented"; return nil }
 
 // Check if key in cell range [`startKey`, `endKey`).
 func checkKeyInCell(key []byte, cell *metapb.Cell) *errorpb.Error {
-	if bytes.Compare(key, cell.Start) >= 0 && (len(cell.End) == 0 || bytes.Compare(key, cell.End) < 0) {
-		return nil
-	}
-
-	e := &errorpb.KeyNotInCell{
-		Key:      key,
-		CellID:   cell.ID,
-		StartKey: cell.Start,
-		EndKey:   cell.End,
-	}
-
-	return &errorpb.Error{
-		Message:      errKeyNotInCell.Error(),
-		KeyNotInCell: e,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func newChangePeerRequest(changeType pdpb.ConfChangeType, peer metapb.Peer) *raftcmdpb.AdminRequest {
-	req := new(raftcmdpb.AdminRequest)
-	req.Type = raftcmdpb.ChangePeer
-
-	subReq := new(raftcmdpb.ChangePeerRequest)
-	subReq.ChangeType = changeType
-	subReq.Peer = peer
-	req.Body = protoc.MustMarshal(subReq)
-
-	return req
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func newTransferLeaderRequest(rsp *pdpb.TransferLeader) *raftcmdpb.AdminRequest {
-	req := new(raftcmdpb.AdminRequest)
-	req.Type = raftcmdpb.TransferLeader
-
-	subReq := new(raftcmdpb.TransferLeaderRequest)
-	subReq.Peer = rsp.Peer
-	req.Body = protoc.MustMarshal(subReq)
-
-	return req
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func newCompactLogRequest(index, term uint64) *raftcmdpb.AdminRequest {
-	req := new(raftcmdpb.AdminRequest)
-	req.Type = raftcmdpb.RaftLogGC
-
-	subReq := new(raftcmdpb.RaftLogGCRequest)
-	subReq.CompactIndex = index
-	subReq.CompactTerm = term
-	req.Body = protoc.MustMarshal(subReq)
-
-	return req
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SaveCell save  cell with state, raft state and apply state.
-func SaveCell(driver storage.Driver, cell metapb.Cell) error {
-	wb := driver.NewWriteBatch()
+func SaveCell(driver storage.Driver, cell metapb.Cell) error { _ = "STUB: not implemented"; return nil }
 
-	// save state
-	err := wb.Set(getCellStateKey(cell.ID), protoc.MustMarshal(&mraft.CellLocalState{Cell: cell}))
-	if err != nil {
-		return err
-	}
-
-	raftState := new(mraft.RaftLocalState)
-	raftState.LastIndex = raftInitLogIndex
-	raftState.HardState = raftpb.HardState{
-		Term:   raftInitLogTerm,
-		Commit: raftInitLogIndex,
-	}
-
-	err = wb.Set(getRaftStateKey(cell.ID), protoc.MustMarshal(raftState))
-	if err != nil {
-		return err
-	}
-
-	applyState := new(mraft.RaftApplyState)
-	applyState.AppliedIndex = raftInitLogIndex
-	applyState.TruncatedState = mraft.RaftTruncatedState{
-		Term:  raftInitLogTerm,
-		Index: raftInitLogIndex,
-	}
-	err = wb.Set(getApplyStateKey(cell.ID), protoc.MustMarshal(applyState))
-	if err != nil {
-		return err
-	}
-
-	log.Infof("bootstrap: begin to write first cell to local")
-	return driver.Write(wb, false)
-}
+// save state
 
 // DeleteCell delete cell with state, raft state and apply state.
 func DeleteCell(id uint64, wb storage.WriteBatch) error {
+	_ = "STUB: not implemented"
 	// save state
-	err := wb.Delete(getCellStateKey(id))
-	if err != nil {
-		return err
-	}
-
-	err = wb.Delete(getRaftStateKey(id))
-	if err != nil {
-		return err
-	}
-
-	err = wb.Delete(getApplyStateKey(id))
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
 
 // HasOverlap check cells has overlap
-func HasOverlap(c1, c2 *metapb.Cell) bool {
-	return bytes.Compare(encStartKey(c1), encEndKey(c2)) < 0 &&
-		bytes.Compare(encEndKey(c1), encStartKey(c2)) > 0
-}
+func HasOverlap(c1, c2 *metapb.Cell) bool { _ = "STUB: not implemented"; return false }
 
 // StalEpoch returns true if the target epoch is stale
-func StalEpoch(target, check metapb.CellEpoch) bool {
-	return (target.ConfVer < check.ConfVer) ||
-		(target.CellVer < check.CellVer)
-}
+func StalEpoch(target, check metapb.CellEpoch) bool { _ = "STUB: not implemented"; return false }

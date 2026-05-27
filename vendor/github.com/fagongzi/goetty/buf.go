@@ -10,7 +10,7 @@ const (
 	minScale = 128
 )
 
-//ReadN read n bytes from a reader
+// ReadN read n bytes from a reader
 func ReadN(r io.Reader, n int) ([]byte, error) {
 	data := make([]byte, n)
 	_, err := r.Read(data)
@@ -22,7 +22,7 @@ func ReadN(r io.Reader, n int) ([]byte, error) {
 	return data, nil
 }
 
-//ReadInt read a int value from a reader
+// ReadInt read a int value from a reader
 func ReadInt(r io.Reader) (int, error) {
 	data, err := ReadN(r, 4)
 
@@ -127,7 +127,6 @@ func UInt16ToBytes(v uint16) []byte {
 // |                    |                    |                    |
 // |                    |                    |                    |
 // 0      <=       readerIndex    <=     writerIndex    <=     capacity
-//
 type ByteBuf struct {
 	capacity    int
 	pool        Pool

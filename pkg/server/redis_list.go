@@ -15,162 +15,70 @@ package server
 
 import (
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
-	"github.com/deepfabric/elasticell/pkg/pool"
 	"github.com/deepfabric/elasticell/pkg/redis"
 )
 
 func (s *RedisServer) onLIndex(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLInsert(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 4 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLLen(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 1 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLPop(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 1 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLPush(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) < 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLPushX(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLRange(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLRem(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLSet(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onLTrim(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 3 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onRPop(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 1 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onRPush(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) < 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (s *RedisServer) onRPushX(cmdType raftcmdpb.CMDType, cmd redis.Command, session *session) ([]byte, error) {
-	args := cmd.Args()
-	if len(args) != 2 {
-		rsp := pool.AcquireResponse()
-		rsp.ErrorResult = redis.ErrInvalidCommandResp
-		session.onResp(rsp)
-		return nil, nil
-	}
-
-	return s.store.OnRedisCommand(session.id, cmdType, cmd, s.onResp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }

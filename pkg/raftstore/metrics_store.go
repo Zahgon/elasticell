@@ -60,9 +60,4 @@ var (
 		})
 )
 
-func initMetricsForStore() {
-	prometheus.MustRegister(storeCellCountGaugeVec)
-	prometheus.MustRegister(storeStorageGaugeVec)
-	prometheus.MustRegister(storeWrittenBytesHistogram)
-	prometheus.MustRegister(storeWrittenKeysHistogram)
-}
+func initMetricsForStore() { _ = "STUB: not implemented"; return }

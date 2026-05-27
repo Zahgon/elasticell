@@ -18,16 +18,8 @@ type redisKVBatch struct {
 	kvValues [][]byte
 }
 
-func (rb *redisKVBatch) set(key, value []byte) {
-	rb.kvKeys = append(rb.kvKeys, key)
-	rb.kvValues = append(rb.kvValues, value)
-}
+func (rb *redisKVBatch) set(key, value []byte) { _ = "STUB: not implemented"; return }
 
-func (rb *redisKVBatch) hasSetBatch() bool {
-	return len(rb.kvKeys) > 0
-}
+func (rb *redisKVBatch) hasSetBatch() bool { _ = "STUB: not implemented"; return false }
 
-func (rb *redisKVBatch) reset() {
-	rb.kvKeys = rb.kvKeys[:0]
-	rb.kvValues = rb.kvValues[:0]
-}
+func (rb *redisKVBatch) reset() { _ = "STUB: not implemented"; return }

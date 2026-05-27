@@ -1,5 +1,5 @@
-// +build darwin
-// +build 386
+//go:build darwin && 386
+// +build darwin,386
 
 package disk
 

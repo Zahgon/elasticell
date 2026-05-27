@@ -17,8 +17,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/unrolled/render"
-	"github.com/urfave/negroni"
 )
 
 const (
@@ -28,31 +26,11 @@ const (
 
 // NewAPIHandler returns a HTTP handler for API.
 func NewAPIHandler(service Service) http.Handler {
-	engine := negroni.New()
-
-	engine.Use(negroni.NewRecovery())
-
-	router := mux.NewRouter()
-	router.PathPrefix(APIPrefix).Handler(negroni.New(
-		newRedirector(service),
-		newCross(),
-		negroni.Wrap(createRouter(APIPrefix, service)),
-	))
-
-	engine.UseHandler(router)
-	return engine
+	_ = "STUB: not implemented"
+	return *new(http.Handler)
 }
 
 func createRouter(prefix string, service Service) *mux.Router {
-	rd := render.New(render.Options{
-		IndentJSON: true,
-	})
-
-	router := mux.NewRouter().PathPrefix(prefix).Subrouter()
-	initAPIForStore(router, service, rd)
-	initAPIForCell(router, service, rd)
-	initAPIForSystem(router, service, rd)
-	initAPIForOperator(router, service, rd)
-	initAPIForIndex(router, service, rd)
-	return router
+	_ = "STUB: not implemented"
+	return nil
 }

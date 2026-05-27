@@ -14,14 +14,10 @@
 package pdapi
 
 import (
-	"encoding/json"
 	"io"
-	"io/ioutil"
-	"regexp"
 
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
-	"github.com/pkg/errors"
 )
 
 // SetLogLevel set log level for components
@@ -78,14 +74,7 @@ type InitParams struct {
 }
 
 // Marshal marshal
-func (p *InitParams) Marshal() (string, error) {
-	v, err := json.Marshal(p)
-	if err != nil {
-		return "", err
-	}
-
-	return string(v), nil
-}
+func (p *InitParams) Marshal() (string, error) { _ = "STUB: not implemented"; return "", nil }
 
 // Service service interface
 type Service interface {
@@ -122,43 +111,25 @@ type TransferLeader struct {
 }
 
 func readTransferLeader(r io.ReadCloser) (*TransferLeader, error) {
-	value := &TransferLeader{}
-	return value, readJSON(r, value)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func readSetLogLevel(r io.ReadCloser) (*SetLogLevel, error) {
-	value := &SetLogLevel{}
-	return value, readJSON(r, value)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func readInitParams(r io.ReadCloser) (*InitParams, error) {
-	value := &InitParams{}
-	return value, readJSON(r, value)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func readIndexDef(r io.ReadCloser) (value *pdpb.IndexDef, err error) {
-	value = &pdpb.IndexDef{}
-	if err = readJSON(r, value); err != nil {
-		return
-	}
-	//input validation
-	if _, err = regexp.Compile(value.KeyPattern); err != nil {
-		return
-	}
-	return
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func readJSON(r io.ReadCloser, data interface{}) error {
-	defer r.Close()
+//input validation
 
-	b, err := ioutil.ReadAll(r)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	err = json.Unmarshal(b, data)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-
-	return nil
-}
+func readJSON(r io.ReadCloser, data interface{}) error { _ = "STUB: not implemented"; return nil }

@@ -40,6 +40,4 @@ var (
 )
 
 // MatchEvent returns the flag has the target event
-func MatchEvent(event, flag uint32) bool {
-	return event == 0 || event&flag != 0
-}
+func MatchEvent(event, flag uint32) bool { _ = "STUB: not implemented"; return false }

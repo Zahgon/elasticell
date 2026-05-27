@@ -14,9 +14,6 @@
 package pdserver
 
 import (
-	"time"
-
-	"github.com/fagongzi/log"
 	meta "github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/deepfabric/elasticell/pkg/pb/pdpb"
 )
@@ -29,51 +26,31 @@ type Operator interface {
 }
 
 func newAddPeerAggregationOp(cell *CellInfo, peer *meta.Peer) Operator {
-	addPeerOp := newAddPeerOp(cell.getID(), peer)
-	return newAggregationOp(cell, addPeerOp)
+	_ = "STUB: not implemented"
+	return *new(Operator)
 }
 
 func newTransferLeaderAggregationOp(cell *CellInfo, newLeader *meta.Peer) Operator {
-	transferLeader := newTransferLeaderOperator(cell.Meta.ID, cell.LeaderPeer, newLeader)
-	return newAggregationOp(cell, transferLeader)
+	_ = "STUB: not implemented"
+	return *new(Operator)
 }
 
 func newTransferPeerAggregationOp(cell *CellInfo, oldPeer, newPeer *meta.Peer) Operator {
-	addPeer := newAddPeerOp(cell.getID(), newPeer)
-	removePeer := newRemovePeerOp(cell.getID(), oldPeer)
-	return newAggregationOp(cell, addPeer, removePeer)
+	_ = "STUB: not implemented"
+	return *new(Operator)
 }
 
 func newAddPeerOp(cellID uint64, peer *meta.Peer) *changePeerOperator {
-	return &changePeerOperator{
-		Name:   "add_peer",
-		CellID: cellID,
-		ChangePeer: pdpb.ChangePeer{
-			Type: pdpb.AddNode,
-			Peer: peer,
-		},
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func newRemovePeerOp(cellID uint64, peer *meta.Peer) *changePeerOperator {
-	return &changePeerOperator{
-		Name:   "remove_peer",
-		CellID: cellID,
-		ChangePeer: pdpb.ChangePeer{
-			Type: pdpb.RemoveNode,
-			Peer: peer,
-		},
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func newAggregationOp(cell *CellInfo, ops ...Operator) *aggregationOperator {
-	if len(ops) == 0 {
-		log.Fatal("scheduler: create new cell aggregation operator use empty opts")
-	}
-
-	return &aggregationOperator{
-		CellID:  cell.getID(),
-		StartAt: time.Now(),
-		Ops:     ops,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }

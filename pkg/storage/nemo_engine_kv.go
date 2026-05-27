@@ -11,17 +11,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package storage
 
 import (
-	"context"
-
 	"github.com/deepfabric/elasticell/pkg/util"
 	gonemo "github.com/deepfabric/go-nemo"
-	"github.com/fagongzi/util/format"
-	"github.com/fagongzi/util/hack"
 )
 
 type nemoKVEngine struct {
@@ -30,102 +27,51 @@ type nemoKVEngine struct {
 }
 
 func newNemoKVEngine(db *gonemo.NEMO, cfg *NemoCfg) KVEngine {
-	return &nemoKVEngine{
-		limiter: util.NewLimiter(cfg.LimitConcurrencyWrite),
-		db:      db,
-	}
+	_ = "STUB: not implemented"
+	return *new(KVEngine)
 }
 
-func (e *nemoKVEngine) RangeDelete(start, end []byte) error {
-	e.limiter.Wait(context.TODO())
-	err := e.db.RangeDel(start, end)
-	e.limiter.Release()
+func (e *nemoKVEngine) RangeDelete(start, end []byte) error { _ = "STUB: not implemented"; return nil }
 
-	return err
-}
-
-func (e *nemoKVEngine) Set(key, value []byte) error {
-	e.limiter.Wait(context.TODO())
-	err := e.db.Set(key, value, 0)
-	e.limiter.Release()
-
-	return err
-}
+func (e *nemoKVEngine) Set(key, value []byte) error { _ = "STUB: not implemented"; return nil }
 
 func (e *nemoKVEngine) MSet(keys [][]byte, values [][]byte) error {
-	e.limiter.Wait(context.TODO())
-	err := e.db.MSet(keys, values)
-	e.limiter.Release()
-
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (e *nemoKVEngine) Get(key []byte) ([]byte, error) {
-	return e.db.Get(key)
-}
+func (e *nemoKVEngine) Get(key []byte) ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
 func (e *nemoKVEngine) IncrBy(key []byte, incrment int64) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	v, err := e.db.Incrby(key, incrment)
-	e.limiter.Release()
-
-	if err != nil {
-		return 0, err
-	}
-
-	return format.ParseStrInt64(hack.SliceToString(v))
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoKVEngine) DecrBy(key []byte, incrment int64) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	v, err := e.db.Decrby(key, incrment)
-	e.limiter.Release()
-
-	if err != nil {
-		return 0, err
-	}
-
-	return format.ParseStrInt64(hack.SliceToString(v))
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoKVEngine) GetSet(key, value []byte) ([]byte, error) {
-	e.limiter.Wait(context.TODO())
-	value, err := e.db.GetSet(key, value, 0)
-	e.limiter.Release()
-
-	return value, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoKVEngine) Append(key, value []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.Append(key, value)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoKVEngine) SetNX(key, value []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.Setnx(key, value, 0)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (e *nemoKVEngine) StrLen(key []byte) (int64, error) {
-	return e.db.StrLen(key)
-}
+func (e *nemoKVEngine) StrLen(key []byte) (int64, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (e *nemoKVEngine) NewWriteBatch() WriteBatch {
-	wb := gonemo.NewWriteBatch()
-	return newNemoWriteBatch(wb)
+	_ = "STUB: not implemented"
+	return *new(WriteBatch)
 }
 
-func (e *nemoKVEngine) Write(wb WriteBatch) error {
-	nwb := wb.(*nemoWriteBatch)
-	e.limiter.Wait(context.TODO())
-	err := e.db.BatchWrite(e.db.GetKvHandle(), nwb.wb, false)
-	e.limiter.Release()
-
-	return err
-}
+func (e *nemoKVEngine) Write(wb WriteBatch) error { _ = "STUB: not implemented"; return nil }

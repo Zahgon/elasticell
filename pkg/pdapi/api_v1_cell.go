@@ -15,7 +15,6 @@ package pdapi
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/unrolled/render"
@@ -27,100 +26,31 @@ type cellHandler struct {
 }
 
 func initAPIForCell(router *mux.Router, service Service, rd *render.Render) {
-	handler := newCellHandler(service, rd)
-
-	router.HandleFunc("/api/v1/cells/{id}", handler.get).Methods("GET")
-	router.HandleFunc("/api/v1/cells/{id}/operator", handler.operator).Methods("GET")
-	router.HandleFunc("/api/v1/cells/{id}/leader", handler.leader).Methods("PUT")
-	router.HandleFunc("/api/v1/cells", handler.list).Methods("GET")
+	_ = "STUB: not implemented"
+	return
 }
 
 func newCellHandler(service Service, rd *render.Render) *cellHandler {
-	return &cellHandler{
-		service: service,
-		rd:      rd,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (h *cellHandler) operator(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	vars := mux.Vars(r)
-	cellIDStr := vars["id"]
-	cellID, err := strconv.ParseUint(cellIDStr, 10, 64)
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	} else {
-		operator, err := h.service.GetOperator(cellID)
-		if err != nil {
-			result.Code = CodeError
-			result.Error = err.Error()
-		}
-
-		result.Value = operator
-	}
-
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (h *cellHandler) leader(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	transfer, err := readTransferLeader(r.Body)
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	} else {
-		err := h.service.TransferLeader(transfer)
-		if err != nil {
-			result.Code = CodeError
-			result.Error = err.Error()
-		}
-	}
-
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (h *cellHandler) get(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	vars := mux.Vars(r)
-	cellIDStr := vars["id"]
-	cellID, err := strconv.ParseUint(cellIDStr, 10, 64)
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	} else {
-		cell, err := h.service.GetCell(cellID)
-		if err != nil {
-			result.Code = CodeError
-			result.Error = err.Error()
-		}
-
-		result.Value = cell
-	}
-
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (h *cellHandler) list(w http.ResponseWriter, r *http.Request) {
-	result := &Result{
-		Code: CodeSuccess,
-	}
-
-	cells, err := h.service.ListCell()
-	if err != nil {
-		result.Code = CodeError
-		result.Error = err.Error()
-	}
-
-	result.Value = cells
-	h.rd.JSON(w, http.StatusOK, result)
+	_ = "STUB: not implemented"
+	return
 }

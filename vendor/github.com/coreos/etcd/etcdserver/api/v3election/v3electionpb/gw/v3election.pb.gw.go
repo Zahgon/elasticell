@@ -9,9 +9,10 @@ It translates gRPC into RESTful JSON APIs.
 package gw
 
 import (
-	"github.com/coreos/etcd/etcdserver/api/v3election/v3electionpb"
 	"io"
 	"net/http"
+
+	"github.com/coreos/etcd/etcdserver/api/v3election/v3electionpb"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"

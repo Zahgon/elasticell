@@ -11,20 +11,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build freebsd || openbsd || netbsd || dragonfly || linux
 // +build freebsd openbsd netbsd dragonfly linux
 
 package storage
 
 import (
-	"bytes"
-	"context"
-	"math"
-
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
 	"github.com/deepfabric/elasticell/pkg/util"
 	gonemo "github.com/deepfabric/go-nemo"
-	"github.com/fagongzi/util/format"
-	"github.com/fagongzi/util/hack"
 )
 
 type nemoZSetEngine struct {
@@ -33,181 +28,78 @@ type nemoZSetEngine struct {
 }
 
 func newNemoZSetEngine(db *gonemo.NEMO, cfg *NemoCfg) ZSetEngine {
-	return &nemoZSetEngine{
-		limiter: util.NewLimiter(cfg.LimitConcurrencyWrite),
-		db:      db,
-	}
+	_ = "STUB: not implemented"
+	return *new(ZSetEngine)
 }
 
 func (e *nemoZSetEngine) ZAdd(key []byte, score float64, member []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.ZAdd(key, score, member)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (e *nemoZSetEngine) ZCard(key []byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.ZCard(key)
-	e.limiter.Release()
-
-	return n, err
-}
+func (e *nemoZSetEngine) ZCard(key []byte) (int64, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (e *nemoZSetEngine) ZCount(key []byte, min []byte, max []byte) (int64, error) {
-	minF, includeMin, err := parseInclude(min)
-	if err != nil {
-		return 0, err
-	}
-
-	maxF, includeMax, err := parseInclude(max)
-	if err != nil {
-		return 0, err
-	}
-
-	return e.db.ZCount(key, minF, maxF, includeMin, includeMax)
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoZSetEngine) ZIncrBy(key []byte, member []byte, by float64) ([]byte, error) {
-	e.limiter.Wait(context.TODO())
-	value, err := e.db.ZIncrby(key, member, by)
-	e.limiter.Release()
-
-	return value, err
-
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoZSetEngine) ZLexCount(key []byte, min []byte, max []byte) (int64, error) {
-	min, includeMin := isInclude(min)
-	max, includeMax := isInclude(max)
-
-	return e.db.ZLexcount(key, min, max, includeMin, includeMax)
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoZSetEngine) ZRange(key []byte, start int64, stop int64) ([]*raftcmdpb.ScorePair, error) {
-	scores, values, err := e.db.ZRange(key, start, stop)
-	if err != nil {
-		return nil, err
-	}
-
-	l := len(scores)
-	pairs := make([]*raftcmdpb.ScorePair, l)
-	for i := 0; i < l; i++ {
-		pairs[i] = &raftcmdpb.ScorePair{
-			Score:  scores[i],
-			Member: values[i],
-		}
-	}
-
-	return pairs, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoZSetEngine) ZRangeByLex(key []byte, min []byte, max []byte) ([][]byte, error) {
-	min, includeMin := isInclude(min)
-	max, includeMax := isInclude(max)
-
-	if len(max) == 1 && max[0] == '+' {
-		max[0] = byte('z' + 1)
-	}
-
-	return e.db.ZRangebylex(key, min, max, includeMin, includeMax)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoZSetEngine) ZRangeByScore(key []byte, min []byte, max []byte) ([]*raftcmdpb.ScorePair, error) {
-	minF, includeMin, err := parseInclude(min)
-	if err != nil {
-		return nil, err
-	}
-
-	maxF, includeMax, err := parseInclude(max)
-	if err != nil {
-		return nil, err
-	}
-
-	scores, values, err := e.db.ZRangebyScore(key, minF, maxF, includeMin, includeMax)
-	if err != nil {
-		return nil, err
-	}
-
-	l := len(scores)
-	pairs := make([]*raftcmdpb.ScorePair, l)
-	for i := 0; i < l; i++ {
-		pairs[i] = &raftcmdpb.ScorePair{
-			Score:  scores[i],
-			Member: values[i],
-		}
-	}
-
-	return pairs, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (e *nemoZSetEngine) ZRank(key []byte, member []byte) (int64, error) {
-	return e.db.ZRank(key, member)
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoZSetEngine) ZRem(key []byte, members ...[]byte) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.ZRem(key, members...)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoZSetEngine) ZRemRangeByLex(key []byte, min []byte, max []byte) (int64, error) {
-	min, includeMin := isInclude(min)
-	max, includeMax := isInclude(max)
-
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.ZRemrangebylex(key, min, max, includeMin, includeMax)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoZSetEngine) ZRemRangeByRank(key []byte, start int64, stop int64) (int64, error) {
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.ZRemrangebyrank(key, start, stop)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoZSetEngine) ZRemRangeByScore(key []byte, min []byte, max []byte) (int64, error) {
-	minF, includeMin, err := parseInclude(min)
-	if err != nil {
-		return 0, err
-	}
-
-	maxF, includeMax, err := parseInclude(max)
-	if err != nil {
-		return 0, err
-	}
-
-	e.limiter.Wait(context.TODO())
-	n, err := e.db.ZRemrangebyscore(key, minF, maxF, includeMin, includeMax)
-	e.limiter.Release()
-
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (e *nemoZSetEngine) ZScore(key []byte, member []byte) ([]byte, error) {
-	exists, value, err := e.db.ZScore(key, member)
-	if !exists {
-		return nil, err
-	}
-
-	return format.Float64ToString(value), err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func isInclude(value []byte) ([]byte, bool) {
-	include := value[0] != '('
-	if value[0] == '(' || value[0] == '[' {
-		value = value[1:]
-	}
-
-	return value, !include
-}
+func isInclude(value []byte) ([]byte, bool) { _ = "STUB: not implemented"; return nil, false }
 
 var (
 	max = []byte("+inf")
@@ -215,13 +107,6 @@ var (
 )
 
 func parseInclude(value []byte) (float64, bool, error) {
-	value, include := isInclude(value)
-	if bytes.Compare(value, max) == 0 {
-		return math.MaxFloat64, include, nil
-	} else if bytes.Compare(value, min) == 0 {
-		return math.SmallestNonzeroFloat64, include, nil
-	}
-
-	valueF, err := format.ParseStrFloat64(hack.SliceToString(value))
-	return valueF, include, err
+	_ = "STUB: not implemented"
+	return 0, false, nil
 }

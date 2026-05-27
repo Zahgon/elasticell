@@ -5,14 +5,11 @@ package mraft
 
 import (
 	"fmt"
-	"io"
 	"math"
 
 	raftpb "github.com/coreos/etcd/raft/raftpb"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/golang/protobuf/proto"
-
-	math_bits "math/bits"
 
 	metapb "github.com/deepfabric/elasticell/pkg/pb/metapb"
 )
@@ -48,28 +45,13 @@ var SnapshotState_value = map[string]int32{
 	"Received": 2,
 }
 
-func (x SnapshotState) Enum() *SnapshotState {
-	p := new(SnapshotState)
-	*p = x
-	return p
-}
+func (x SnapshotState) Enum() *SnapshotState { _ = "STUB: not implemented"; return nil }
 
-func (x SnapshotState) String() string {
-	return proto.EnumName(SnapshotState_name, int32(x))
-}
+func (x SnapshotState) String() string { _ = "STUB: not implemented"; return "" }
 
-func (x *SnapshotState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(SnapshotState_value, data, "SnapshotState")
-	if err != nil {
-		return err
-	}
-	*x = SnapshotState(value)
-	return nil
-}
+func (x *SnapshotState) UnmarshalJSON(data []byte) error { _ = "STUB: not implemented"; return nil }
 
-func (SnapshotState) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{0}
-}
+func (SnapshotState) EnumDescriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
 
 type PeerState int32
 
@@ -91,28 +73,13 @@ var PeerState_value = map[string]int32{
 	"Tombstone": 2,
 }
 
-func (x PeerState) Enum() *PeerState {
-	p := new(PeerState)
-	*p = x
-	return p
-}
+func (x PeerState) Enum() *PeerState { _ = "STUB: not implemented"; return nil }
 
-func (x PeerState) String() string {
-	return proto.EnumName(PeerState_name, int32(x))
-}
+func (x PeerState) String() string { _ = "STUB: not implemented"; return "" }
 
-func (x *PeerState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(PeerState_value, data, "PeerState")
-	if err != nil {
-		return err
-	}
-	*x = PeerState(value)
-	return nil
-}
+func (x *PeerState) UnmarshalJSON(data []byte) error { _ = "STUB: not implemented"; return nil }
 
-func (PeerState) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{1}
-}
+func (PeerState) EnumDescriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
 
 type RaftMessage struct {
 	CellID    uint64           `protobuf:"varint,1,opt,name=cellID" json:"cellID"`
@@ -130,94 +97,50 @@ type RaftMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *RaftMessage) Reset()         { *m = RaftMessage{} }
-func (m *RaftMessage) String() string { return proto.CompactTextString(m) }
-func (*RaftMessage) ProtoMessage()    {}
-func (*RaftMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{0}
-}
-func (m *RaftMessage) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *RaftMessage) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *RaftMessage) String() string            { _ = "STUB: not implemented"; return "" }
+func (*RaftMessage) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*RaftMessage) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *RaftMessage) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *RaftMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_RaftMessage.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *RaftMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RaftMessage.Merge(m, src)
-}
-func (m *RaftMessage) XXX_Size() int {
-	return m.Size()
-}
-func (m *RaftMessage) XXX_DiscardUnknown() {
-	xxx_messageInfo_RaftMessage.DiscardUnknown(m)
-}
+
+func (m *RaftMessage) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *RaftMessage) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *RaftMessage) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_RaftMessage proto.InternalMessageInfo
 
-func (m *RaftMessage) GetCellID() uint64 {
-	if m != nil {
-		return m.CellID
-	}
-	return 0
-}
+func (m *RaftMessage) GetCellID() uint64 { _ = "STUB: not implemented"; return 0 }
 
 func (m *RaftMessage) GetFromPeer() metapb.Peer {
-	if m != nil {
-		return m.FromPeer
-	}
-	return metapb.Peer{}
+	_ = "STUB: not implemented"
+	return *new(metapb.Peer)
 }
 
-func (m *RaftMessage) GetToPeer() metapb.Peer {
-	if m != nil {
-		return m.ToPeer
-	}
-	return metapb.Peer{}
-}
+func (m *RaftMessage) GetToPeer() metapb.Peer { _ = "STUB: not implemented"; return *new(metapb.Peer) }
 
 func (m *RaftMessage) GetMessage() raftpb.Message {
-	if m != nil {
-		return m.Message
-	}
-	return raftpb.Message{}
+	_ = "STUB: not implemented"
+	return *new(raftpb.Message)
 }
 
 func (m *RaftMessage) GetCellEpoch() metapb.CellEpoch {
-	if m != nil {
-		return m.CellEpoch
-	}
-	return metapb.CellEpoch{}
+	_ = "STUB: not implemented"
+	return *new(metapb.CellEpoch)
 }
 
-func (m *RaftMessage) GetIsTombstone() bool {
-	if m != nil {
-		return m.IsTombstone
-	}
-	return false
-}
+func (m *RaftMessage) GetIsTombstone() bool { _ = "STUB: not implemented"; return false }
 
-func (m *RaftMessage) GetStart() []byte {
-	if m != nil {
-		return m.Start
-	}
-	return nil
-}
+func (m *RaftMessage) GetStart() []byte { _ = "STUB: not implemented"; return nil }
 
-func (m *RaftMessage) GetEnd() []byte {
-	if m != nil {
-		return m.End
-	}
-	return nil
-}
+func (m *RaftMessage) GetEnd() []byte { _ = "STUB: not implemented"; return nil }
 
 type StoreIdent struct {
 	ClusterID            uint64   `protobuf:"varint,1,opt,name=clusterID" json:"clusterID"`
@@ -227,52 +150,29 @@ type StoreIdent struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *StoreIdent) Reset()         { *m = StoreIdent{} }
-func (m *StoreIdent) String() string { return proto.CompactTextString(m) }
-func (*StoreIdent) ProtoMessage()    {}
-func (*StoreIdent) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{1}
-}
-func (m *StoreIdent) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *StoreIdent) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *StoreIdent) String() string            { _ = "STUB: not implemented"; return "" }
+func (*StoreIdent) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*StoreIdent) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *StoreIdent) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *StoreIdent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_StoreIdent.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *StoreIdent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StoreIdent.Merge(m, src)
-}
-func (m *StoreIdent) XXX_Size() int {
-	return m.Size()
-}
-func (m *StoreIdent) XXX_DiscardUnknown() {
-	xxx_messageInfo_StoreIdent.DiscardUnknown(m)
-}
+
+func (m *StoreIdent) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *StoreIdent) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *StoreIdent) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_StoreIdent proto.InternalMessageInfo
 
-func (m *StoreIdent) GetClusterID() uint64 {
-	if m != nil {
-		return m.ClusterID
-	}
-	return 0
-}
+func (m *StoreIdent) GetClusterID() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *StoreIdent) GetStoreID() uint64 {
-	if m != nil {
-		return m.StoreID
-	}
-	return 0
-}
+func (m *StoreIdent) GetStoreID() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type ACKMessage struct {
 	Seq                  uint64   `protobuf:"varint,1,opt,name=seq" json:"seq"`
@@ -282,52 +182,29 @@ type ACKMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *ACKMessage) Reset()         { *m = ACKMessage{} }
-func (m *ACKMessage) String() string { return proto.CompactTextString(m) }
-func (*ACKMessage) ProtoMessage()    {}
-func (*ACKMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{2}
-}
-func (m *ACKMessage) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *ACKMessage) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *ACKMessage) String() string            { _ = "STUB: not implemented"; return "" }
+func (*ACKMessage) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*ACKMessage) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *ACKMessage) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *ACKMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_ACKMessage.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *ACKMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ACKMessage.Merge(m, src)
-}
-func (m *ACKMessage) XXX_Size() int {
-	return m.Size()
-}
-func (m *ACKMessage) XXX_DiscardUnknown() {
-	xxx_messageInfo_ACKMessage.DiscardUnknown(m)
-}
+
+func (m *ACKMessage) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *ACKMessage) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *ACKMessage) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_ACKMessage proto.InternalMessageInfo
 
-func (m *ACKMessage) GetSeq() uint64 {
-	if m != nil {
-		return m.Seq
-	}
-	return 0
-}
+func (m *ACKMessage) GetSeq() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *ACKMessage) GetTo() uint64 {
-	if m != nil {
-		return m.To
-	}
-	return 0
-}
+func (m *ACKMessage) GetTo() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type SnapshotMessageHeader struct {
 	Cell                 metapb.Cell `protobuf:"bytes,1,opt,name=cell" json:"cell"`
@@ -341,80 +218,52 @@ type SnapshotMessageHeader struct {
 	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *SnapshotMessageHeader) Reset()         { *m = SnapshotMessageHeader{} }
-func (m *SnapshotMessageHeader) String() string { return proto.CompactTextString(m) }
-func (*SnapshotMessageHeader) ProtoMessage()    {}
+func (m *SnapshotMessageHeader) Reset()         { _ = "STUB: not implemented"; return }
+func (m *SnapshotMessageHeader) String() string { _ = "STUB: not implemented"; return "" }
+func (*SnapshotMessageHeader) ProtoMessage()    { _ = "STUB: not implemented"; return }
 func (*SnapshotMessageHeader) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{3}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
+
 func (m *SnapshotMessageHeader) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
+	_ = "STUB: not implemented"
+	return nil
 }
+
 func (m *SnapshotMessageHeader) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SnapshotMessageHeader.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *SnapshotMessageHeader) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SnapshotMessageHeader.Merge(m, src)
-}
-func (m *SnapshotMessageHeader) XXX_Size() int {
-	return m.Size()
-}
-func (m *SnapshotMessageHeader) XXX_DiscardUnknown() {
-	xxx_messageInfo_SnapshotMessageHeader.DiscardUnknown(m)
-}
+
+func (m *SnapshotMessageHeader) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *SnapshotMessageHeader) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *SnapshotMessageHeader) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_SnapshotMessageHeader proto.InternalMessageInfo
 
 func (m *SnapshotMessageHeader) GetCell() metapb.Cell {
-	if m != nil {
-		return m.Cell
-	}
-	return metapb.Cell{}
+	_ = "STUB: not implemented"
+	return *new(metapb.Cell)
 }
 
 func (m *SnapshotMessageHeader) GetFromPeer() metapb.Peer {
-	if m != nil {
-		return m.FromPeer
-	}
-	return metapb.Peer{}
+	_ = "STUB: not implemented"
+	return *new(metapb.Peer)
 }
 
 func (m *SnapshotMessageHeader) GetToPeer() metapb.Peer {
-	if m != nil {
-		return m.ToPeer
-	}
-	return metapb.Peer{}
+	_ = "STUB: not implemented"
+	return *new(metapb.Peer)
 }
 
-func (m *SnapshotMessageHeader) GetTerm() uint64 {
-	if m != nil {
-		return m.Term
-	}
-	return 0
-}
+func (m *SnapshotMessageHeader) GetTerm() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotMessageHeader) GetIndex() uint64 {
-	if m != nil {
-		return m.Index
-	}
-	return 0
-}
+func (m *SnapshotMessageHeader) GetIndex() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotMessageHeader) GetSeq() uint64 {
-	if m != nil {
-		return m.Seq
-	}
-	return 0
-}
+func (m *SnapshotMessageHeader) GetSeq() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type SnapshotMessage struct {
 	Header               SnapshotMessageHeader `protobuf:"bytes,1,opt,name=header" json:"header"`
@@ -426,66 +275,36 @@ type SnapshotMessage struct {
 	XXX_sizecache        int32                 `json:"-"`
 }
 
-func (m *SnapshotMessage) Reset()         { *m = SnapshotMessage{} }
-func (m *SnapshotMessage) String() string { return proto.CompactTextString(m) }
-func (*SnapshotMessage) ProtoMessage()    {}
-func (*SnapshotMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{4}
-}
-func (m *SnapshotMessage) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *SnapshotMessage) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *SnapshotMessage) String() string            { _ = "STUB: not implemented"; return "" }
+func (*SnapshotMessage) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*SnapshotMessage) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *SnapshotMessage) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *SnapshotMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SnapshotMessage.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *SnapshotMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SnapshotMessage.Merge(m, src)
-}
-func (m *SnapshotMessage) XXX_Size() int {
-	return m.Size()
-}
-func (m *SnapshotMessage) XXX_DiscardUnknown() {
-	xxx_messageInfo_SnapshotMessage.DiscardUnknown(m)
-}
+
+func (m *SnapshotMessage) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *SnapshotMessage) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *SnapshotMessage) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_SnapshotMessage proto.InternalMessageInfo
 
 func (m *SnapshotMessage) GetHeader() SnapshotMessageHeader {
-	if m != nil {
-		return m.Header
-	}
-	return SnapshotMessageHeader{}
+	_ = "STUB: not implemented"
+	return *new(SnapshotMessageHeader)
 }
 
-func (m *SnapshotMessage) GetChunk() *SnapshotChunkMessage {
-	if m != nil {
-		return m.Chunk
-	}
-	return nil
-}
+func (m *SnapshotMessage) GetChunk() *SnapshotChunkMessage { _ = "STUB: not implemented"; return nil }
 
-func (m *SnapshotMessage) GetAck() *SnapshotAckMessage {
-	if m != nil {
-		return m.Ack
-	}
-	return nil
-}
+func (m *SnapshotMessage) GetAck() *SnapshotAckMessage { _ = "STUB: not implemented"; return nil }
 
-func (m *SnapshotMessage) GetAsk() *SnapshotAskMessage {
-	if m != nil {
-		return m.Ask
-	}
-	return nil
-}
+func (m *SnapshotMessage) GetAsk() *SnapshotAskMessage { _ = "STUB: not implemented"; return nil }
 
 type SnapshotChunkMessage struct {
 	Data                 []byte   `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
@@ -498,73 +317,38 @@ type SnapshotChunkMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SnapshotChunkMessage) Reset()         { *m = SnapshotChunkMessage{} }
-func (m *SnapshotChunkMessage) String() string { return proto.CompactTextString(m) }
-func (*SnapshotChunkMessage) ProtoMessage()    {}
+func (m *SnapshotChunkMessage) Reset()         { _ = "STUB: not implemented"; return }
+func (m *SnapshotChunkMessage) String() string { _ = "STUB: not implemented"; return "" }
+func (*SnapshotChunkMessage) ProtoMessage()    { _ = "STUB: not implemented"; return }
 func (*SnapshotChunkMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{5}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *SnapshotChunkMessage) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+
+func (m *SnapshotChunkMessage) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *SnapshotChunkMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SnapshotChunkMessage.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *SnapshotChunkMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SnapshotChunkMessage.Merge(m, src)
-}
-func (m *SnapshotChunkMessage) XXX_Size() int {
-	return m.Size()
-}
-func (m *SnapshotChunkMessage) XXX_DiscardUnknown() {
-	xxx_messageInfo_SnapshotChunkMessage.DiscardUnknown(m)
-}
+
+func (m *SnapshotChunkMessage) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *SnapshotChunkMessage) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *SnapshotChunkMessage) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_SnapshotChunkMessage proto.InternalMessageInfo
 
-func (m *SnapshotChunkMessage) GetData() []byte {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
+func (m *SnapshotChunkMessage) GetData() []byte { _ = "STUB: not implemented"; return nil }
 
-func (m *SnapshotChunkMessage) GetFirst() bool {
-	if m != nil {
-		return m.First
-	}
-	return false
-}
+func (m *SnapshotChunkMessage) GetFirst() bool { _ = "STUB: not implemented"; return false }
 
-func (m *SnapshotChunkMessage) GetLast() bool {
-	if m != nil {
-		return m.Last
-	}
-	return false
-}
+func (m *SnapshotChunkMessage) GetLast() bool { _ = "STUB: not implemented"; return false }
 
-func (m *SnapshotChunkMessage) GetFileSize() uint64 {
-	if m != nil {
-		return m.FileSize
-	}
-	return 0
-}
+func (m *SnapshotChunkMessage) GetFileSize() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotChunkMessage) GetCheckSum() uint64 {
-	if m != nil {
-		return m.CheckSum
-	}
-	return 0
-}
+func (m *SnapshotChunkMessage) GetCheckSum() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type SnapshotAckMessage struct {
 	Ack                  SnapshotState `protobuf:"varint,1,opt,name=ack,enum=mraft.SnapshotState" json:"ack"`
@@ -573,44 +357,29 @@ type SnapshotAckMessage struct {
 	XXX_sizecache        int32         `json:"-"`
 }
 
-func (m *SnapshotAckMessage) Reset()         { *m = SnapshotAckMessage{} }
-func (m *SnapshotAckMessage) String() string { return proto.CompactTextString(m) }
-func (*SnapshotAckMessage) ProtoMessage()    {}
-func (*SnapshotAckMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{6}
-}
-func (m *SnapshotAckMessage) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *SnapshotAckMessage) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *SnapshotAckMessage) String() string            { _ = "STUB: not implemented"; return "" }
+func (*SnapshotAckMessage) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*SnapshotAckMessage) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *SnapshotAckMessage) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *SnapshotAckMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SnapshotAckMessage.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *SnapshotAckMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SnapshotAckMessage.Merge(m, src)
-}
-func (m *SnapshotAckMessage) XXX_Size() int {
-	return m.Size()
-}
-func (m *SnapshotAckMessage) XXX_DiscardUnknown() {
-	xxx_messageInfo_SnapshotAckMessage.DiscardUnknown(m)
-}
+
+func (m *SnapshotAckMessage) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *SnapshotAckMessage) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *SnapshotAckMessage) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_SnapshotAckMessage proto.InternalMessageInfo
 
 func (m *SnapshotAckMessage) GetAck() SnapshotState {
-	if m != nil {
-		return m.Ack
-	}
-	return Accept
+	_ = "STUB: not implemented"
+	return *new(SnapshotState)
 }
 
 type SnapshotAskMessage struct {
@@ -619,36 +388,23 @@ type SnapshotAskMessage struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SnapshotAskMessage) Reset()         { *m = SnapshotAskMessage{} }
-func (m *SnapshotAskMessage) String() string { return proto.CompactTextString(m) }
-func (*SnapshotAskMessage) ProtoMessage()    {}
-func (*SnapshotAskMessage) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{7}
-}
-func (m *SnapshotAskMessage) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *SnapshotAskMessage) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *SnapshotAskMessage) String() string            { _ = "STUB: not implemented"; return "" }
+func (*SnapshotAskMessage) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*SnapshotAskMessage) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *SnapshotAskMessage) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *SnapshotAskMessage) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_SnapshotAskMessage.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *SnapshotAskMessage) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SnapshotAskMessage.Merge(m, src)
-}
-func (m *SnapshotAskMessage) XXX_Size() int {
-	return m.Size()
-}
-func (m *SnapshotAskMessage) XXX_DiscardUnknown() {
-	xxx_messageInfo_SnapshotAskMessage.DiscardUnknown(m)
-}
+
+func (m *SnapshotAskMessage) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *SnapshotAskMessage) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *SnapshotAskMessage) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_SnapshotAskMessage proto.InternalMessageInfo
 
@@ -660,52 +416,29 @@ type CellLocalState struct {
 	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *CellLocalState) Reset()         { *m = CellLocalState{} }
-func (m *CellLocalState) String() string { return proto.CompactTextString(m) }
-func (*CellLocalState) ProtoMessage()    {}
-func (*CellLocalState) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{8}
-}
-func (m *CellLocalState) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *CellLocalState) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *CellLocalState) String() string            { _ = "STUB: not implemented"; return "" }
+func (*CellLocalState) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*CellLocalState) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *CellLocalState) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *CellLocalState) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_CellLocalState.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *CellLocalState) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CellLocalState.Merge(m, src)
-}
-func (m *CellLocalState) XXX_Size() int {
-	return m.Size()
-}
-func (m *CellLocalState) XXX_DiscardUnknown() {
-	xxx_messageInfo_CellLocalState.DiscardUnknown(m)
-}
+
+func (m *CellLocalState) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *CellLocalState) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *CellLocalState) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_CellLocalState proto.InternalMessageInfo
 
-func (m *CellLocalState) GetState() PeerState {
-	if m != nil {
-		return m.State
-	}
-	return Normal
-}
+func (m *CellLocalState) GetState() PeerState { _ = "STUB: not implemented"; return *new(PeerState) }
 
-func (m *CellLocalState) GetCell() metapb.Cell {
-	if m != nil {
-		return m.Cell
-	}
-	return metapb.Cell{}
-}
+func (m *CellLocalState) GetCell() metapb.Cell { _ = "STUB: not implemented"; return *new(metapb.Cell) }
 
 type RaftLocalState struct {
 	HardState            raftpb.HardState `protobuf:"bytes,1,opt,name=hardState" json:"hardState"`
@@ -715,52 +448,32 @@ type RaftLocalState struct {
 	XXX_sizecache        int32            `json:"-"`
 }
 
-func (m *RaftLocalState) Reset()         { *m = RaftLocalState{} }
-func (m *RaftLocalState) String() string { return proto.CompactTextString(m) }
-func (*RaftLocalState) ProtoMessage()    {}
-func (*RaftLocalState) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{9}
-}
-func (m *RaftLocalState) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *RaftLocalState) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *RaftLocalState) String() string            { _ = "STUB: not implemented"; return "" }
+func (*RaftLocalState) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*RaftLocalState) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *RaftLocalState) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *RaftLocalState) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_RaftLocalState.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *RaftLocalState) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RaftLocalState.Merge(m, src)
-}
-func (m *RaftLocalState) XXX_Size() int {
-	return m.Size()
-}
-func (m *RaftLocalState) XXX_DiscardUnknown() {
-	xxx_messageInfo_RaftLocalState.DiscardUnknown(m)
-}
+
+func (m *RaftLocalState) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *RaftLocalState) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *RaftLocalState) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_RaftLocalState proto.InternalMessageInfo
 
 func (m *RaftLocalState) GetHardState() raftpb.HardState {
-	if m != nil {
-		return m.HardState
-	}
-	return raftpb.HardState{}
+	_ = "STUB: not implemented"
+	return *new(raftpb.HardState)
 }
 
-func (m *RaftLocalState) GetLastIndex() uint64 {
-	if m != nil {
-		return m.LastIndex
-	}
-	return 0
-}
+func (m *RaftLocalState) GetLastIndex() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type RaftTruncatedState struct {
 	Index                uint64   `protobuf:"varint,1,opt,name=index" json:"index"`
@@ -770,52 +483,29 @@ type RaftTruncatedState struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *RaftTruncatedState) Reset()         { *m = RaftTruncatedState{} }
-func (m *RaftTruncatedState) String() string { return proto.CompactTextString(m) }
-func (*RaftTruncatedState) ProtoMessage()    {}
-func (*RaftTruncatedState) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{10}
-}
-func (m *RaftTruncatedState) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *RaftTruncatedState) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *RaftTruncatedState) String() string            { _ = "STUB: not implemented"; return "" }
+func (*RaftTruncatedState) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*RaftTruncatedState) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *RaftTruncatedState) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *RaftTruncatedState) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_RaftTruncatedState.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *RaftTruncatedState) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RaftTruncatedState.Merge(m, src)
-}
-func (m *RaftTruncatedState) XXX_Size() int {
-	return m.Size()
-}
-func (m *RaftTruncatedState) XXX_DiscardUnknown() {
-	xxx_messageInfo_RaftTruncatedState.DiscardUnknown(m)
-}
+
+func (m *RaftTruncatedState) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *RaftTruncatedState) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *RaftTruncatedState) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_RaftTruncatedState proto.InternalMessageInfo
 
-func (m *RaftTruncatedState) GetIndex() uint64 {
-	if m != nil {
-		return m.Index
-	}
-	return 0
-}
+func (m *RaftTruncatedState) GetIndex() uint64 { _ = "STUB: not implemented"; return 0 }
 
-func (m *RaftTruncatedState) GetTerm() uint64 {
-	if m != nil {
-		return m.Term
-	}
-	return 0
-}
+func (m *RaftTruncatedState) GetTerm() uint64 { _ = "STUB: not implemented"; return 0 }
 
 type RaftApplyState struct {
 	AppliedIndex         uint64             `protobuf:"varint,1,opt,name=applied_index,json=appliedIndex" json:"applied_index"`
@@ -825,51 +515,31 @@ type RaftApplyState struct {
 	XXX_sizecache        int32              `json:"-"`
 }
 
-func (m *RaftApplyState) Reset()         { *m = RaftApplyState{} }
-func (m *RaftApplyState) String() string { return proto.CompactTextString(m) }
-func (*RaftApplyState) ProtoMessage()    {}
-func (*RaftApplyState) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5a9bc23a653d4ba8, []int{11}
-}
-func (m *RaftApplyState) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
+func (m *RaftApplyState) Reset()                    { _ = "STUB: not implemented"; return }
+func (m *RaftApplyState) String() string            { _ = "STUB: not implemented"; return "" }
+func (*RaftApplyState) ProtoMessage()               { _ = "STUB: not implemented"; return }
+func (*RaftApplyState) Descriptor() ([]byte, []int) { _ = "STUB: not implemented"; return nil, nil }
+
+func (m *RaftApplyState) XXX_Unmarshal(b []byte) error { _ = "STUB: not implemented"; return nil }
+
 func (m *RaftApplyState) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_RaftApplyState.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
+	_ = "STUB: not implemented"
+	return nil, nil
 }
-func (m *RaftApplyState) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RaftApplyState.Merge(m, src)
-}
-func (m *RaftApplyState) XXX_Size() int {
-	return m.Size()
-}
-func (m *RaftApplyState) XXX_DiscardUnknown() {
-	xxx_messageInfo_RaftApplyState.DiscardUnknown(m)
-}
+
+func (m *RaftApplyState) XXX_Merge(src proto.Message) { _ = "STUB: not implemented"; return }
+
+func (m *RaftApplyState) XXX_Size() int { _ = "STUB: not implemented"; return 0 }
+
+func (m *RaftApplyState) XXX_DiscardUnknown() { _ = "STUB: not implemented"; return }
 
 var xxx_messageInfo_RaftApplyState proto.InternalMessageInfo
 
-func (m *RaftApplyState) GetAppliedIndex() uint64 {
-	if m != nil {
-		return m.AppliedIndex
-	}
-	return 0
-}
+func (m *RaftApplyState) GetAppliedIndex() uint64 { _ = "STUB: not implemented"; return 0 }
 
 func (m *RaftApplyState) GetTruncatedState() RaftTruncatedState {
-	if m != nil {
-		return m.TruncatedState
-	}
-	return RaftTruncatedState{}
+	_ = "STUB: not implemented"
+	return *new(RaftTruncatedState)
 }
 
 func init() {
@@ -947,2484 +617,225 @@ var fileDescriptor_5a9bc23a653d4ba8 = []byte{
 }
 
 func (m *RaftMessage) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func (m *RaftMessage) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *RaftMessage) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *RaftMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	if m.End != nil {
-		i -= len(m.End)
-		copy(dAtA[i:], m.End)
-		i = encodeVarintMraft(dAtA, i, uint64(len(m.End)))
-		i--
-		dAtA[i] = 0x42
-	}
-	if m.Start != nil {
-		i -= len(m.Start)
-		copy(dAtA[i:], m.Start)
-		i = encodeVarintMraft(dAtA, i, uint64(len(m.Start)))
-		i--
-		dAtA[i] = 0x3a
-	}
-	i--
-	if m.IsTombstone {
-		dAtA[i] = 1
-	} else {
-		dAtA[i] = 0
-	}
-	i--
-	dAtA[i] = 0x30
-	{
-		size, err := m.CellEpoch.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x2a
-	{
-		size, err := m.Message.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x22
-	{
-		size, err := m.ToPeer.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x1a
-	{
-		size, err := m.FromPeer.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x12
-	i = encodeVarintMraft(dAtA, i, uint64(m.CellID))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (m *StoreIdent) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *StoreIdent) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *StoreIdent) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *StoreIdent) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *StoreIdent) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMraft(dAtA, i, uint64(m.StoreID))
-	i--
-	dAtA[i] = 0x10
-	i = encodeVarintMraft(dAtA, i, uint64(m.ClusterID))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (m *ACKMessage) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
+func (m *ACKMessage) Marshal() (dAtA []byte, err error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (m *ACKMessage) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
+func (m *ACKMessage) MarshalTo(dAtA []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 func (m *ACKMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMraft(dAtA, i, uint64(m.To))
-	i--
-	dAtA[i] = 0x10
-	i = encodeVarintMraft(dAtA, i, uint64(m.Seq))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotMessageHeader) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *SnapshotMessageHeader) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotMessageHeader) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMraft(dAtA, i, uint64(m.Seq))
-	i--
-	dAtA[i] = 0x30
-	i = encodeVarintMraft(dAtA, i, uint64(m.Index))
-	i--
-	dAtA[i] = 0x28
-	i = encodeVarintMraft(dAtA, i, uint64(m.Term))
-	i--
-	dAtA[i] = 0x20
-	{
-		size, err := m.ToPeer.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x1a
-	{
-		size, err := m.FromPeer.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x12
-	{
-		size, err := m.Cell.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotMessage) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *SnapshotMessage) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	if m.Ask != nil {
-		{
-			size, err := m.Ask.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintMraft(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x22
-	}
-	if m.Ack != nil {
-		{
-			size, err := m.Ack.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintMraft(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x1a
-	}
-	if m.Chunk != nil {
-		{
-			size, err := m.Chunk.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintMraft(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
-	{
-		size, err := m.Header.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotChunkMessage) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *SnapshotChunkMessage) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotChunkMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMraft(dAtA, i, uint64(m.CheckSum))
-	i--
-	dAtA[i] = 0x28
-	i = encodeVarintMraft(dAtA, i, uint64(m.FileSize))
-	i--
-	dAtA[i] = 0x20
-	i--
-	if m.Last {
-		dAtA[i] = 1
-	} else {
-		dAtA[i] = 0
-	}
-	i--
-	dAtA[i] = 0x18
-	i--
-	if m.First {
-		dAtA[i] = 1
-	} else {
-		dAtA[i] = 0
-	}
-	i--
-	dAtA[i] = 0x10
-	if m.Data != nil {
-		i -= len(m.Data)
-		copy(dAtA[i:], m.Data)
-		i = encodeVarintMraft(dAtA, i, uint64(len(m.Data)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotAckMessage) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *SnapshotAckMessage) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotAckMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMraft(dAtA, i, uint64(m.Ack))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotAskMessage) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *SnapshotAskMessage) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *SnapshotAskMessage) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *CellLocalState) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *CellLocalState) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *CellLocalState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	{
-		size, err := m.Cell.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x12
-	i = encodeVarintMraft(dAtA, i, uint64(m.State))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *RaftLocalState) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *RaftLocalState) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *RaftLocalState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMraft(dAtA, i, uint64(m.LastIndex))
-	i--
-	dAtA[i] = 0x10
-	{
-		size, err := m.HardState.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *RaftTruncatedState) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *RaftTruncatedState) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *RaftTruncatedState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	i = encodeVarintMraft(dAtA, i, uint64(m.Term))
-	i--
-	dAtA[i] = 0x10
-	i = encodeVarintMraft(dAtA, i, uint64(m.Index))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *RaftApplyState) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (m *RaftApplyState) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 func (m *RaftApplyState) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		i -= len(m.XXX_unrecognized)
-		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	{
-		size, err := m.TruncatedState.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintMraft(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0x12
-	i = encodeVarintMraft(dAtA, i, uint64(m.AppliedIndex))
-	i--
-	dAtA[i] = 0x8
-	return len(dAtA) - i, nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func encodeVarintMraft(dAtA []byte, offset int, v uint64) int {
-	offset -= sovMraft(v)
-	base := offset
-	for v >= 1<<7 {
-		dAtA[offset] = uint8(v&0x7f | 0x80)
-		v >>= 7
-		offset++
-	}
-	dAtA[offset] = uint8(v)
-	return base
-}
-func (m *RaftMessage) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMraft(uint64(m.CellID))
-	l = m.FromPeer.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	l = m.ToPeer.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	l = m.Message.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	l = m.CellEpoch.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	n += 2
-	if m.Start != nil {
-		l = len(m.Start)
-		n += 1 + l + sovMraft(uint64(l))
-	}
-	if m.End != nil {
-		l = len(m.End)
-		n += 1 + l + sovMraft(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func encodeVarintMraft(dAtA []byte, offset int, v uint64) int { _ = "STUB: not implemented"; return 0 }
 
-func (m *StoreIdent) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMraft(uint64(m.ClusterID))
-	n += 1 + sovMraft(uint64(m.StoreID))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *RaftMessage) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *ACKMessage) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMraft(uint64(m.Seq))
-	n += 1 + sovMraft(uint64(m.To))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *StoreIdent) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotMessageHeader) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.Cell.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	l = m.FromPeer.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	l = m.ToPeer.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	n += 1 + sovMraft(uint64(m.Term))
-	n += 1 + sovMraft(uint64(m.Index))
-	n += 1 + sovMraft(uint64(m.Seq))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *ACKMessage) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotMessage) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.Header.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	if m.Chunk != nil {
-		l = m.Chunk.Size()
-		n += 1 + l + sovMraft(uint64(l))
-	}
-	if m.Ack != nil {
-		l = m.Ack.Size()
-		n += 1 + l + sovMraft(uint64(l))
-	}
-	if m.Ask != nil {
-		l = m.Ask.Size()
-		n += 1 + l + sovMraft(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *SnapshotMessageHeader) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotChunkMessage) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Data != nil {
-		l = len(m.Data)
-		n += 1 + l + sovMraft(uint64(l))
-	}
-	n += 2
-	n += 2
-	n += 1 + sovMraft(uint64(m.FileSize))
-	n += 1 + sovMraft(uint64(m.CheckSum))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *SnapshotMessage) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotAckMessage) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMraft(uint64(m.Ack))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *SnapshotChunkMessage) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *SnapshotAskMessage) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *SnapshotAckMessage) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *CellLocalState) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMraft(uint64(m.State))
-	l = m.Cell.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *SnapshotAskMessage) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *RaftLocalState) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.HardState.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	n += 1 + sovMraft(uint64(m.LastIndex))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *CellLocalState) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *RaftTruncatedState) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMraft(uint64(m.Index))
-	n += 1 + sovMraft(uint64(m.Term))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *RaftLocalState) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func (m *RaftApplyState) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	n += 1 + sovMraft(uint64(m.AppliedIndex))
-	l = m.TruncatedState.Size()
-	n += 1 + l + sovMraft(uint64(l))
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
-	}
-	return n
-}
+func (m *RaftTruncatedState) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-func sovMraft(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
-}
-func sozMraft(x uint64) (n int) {
-	return sovMraft(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
-func (m *RaftMessage) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: RaftMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RaftMessage: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CellID", wireType)
-			}
-			m.CellID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.CellID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FromPeer", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.FromPeer.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ToPeer", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.ToPeer.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.Message.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CellEpoch", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.CellEpoch.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field IsTombstone", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.IsTombstone = bool(v != 0)
-		case 7:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Start", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Start = append(m.Start[:0], dAtA[iNdEx:postIndex]...)
-			if m.Start == nil {
-				m.Start = []byte{}
-			}
-			iNdEx = postIndex
-		case 8:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field End", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.End = append(m.End[:0], dAtA[iNdEx:postIndex]...)
-			if m.End == nil {
-				m.End = []byte{}
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *RaftApplyState) Size() (n int) { _ = "STUB: not implemented"; return 0 }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *StoreIdent) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: StoreIdent: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: StoreIdent: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClusterID", wireType)
-			}
-			m.ClusterID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ClusterID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StoreID", wireType)
-			}
-			m.StoreID = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.StoreID |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func sovMraft(x uint64) (n int) { _ = "STUB: not implemented"; return 0 }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *ACKMessage) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: ACKMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ACKMessage: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Seq", wireType)
-			}
-			m.Seq = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Seq |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field To", wireType)
-			}
-			m.To = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.To |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func sozMraft(x uint64) (n int) { _ = "STUB: not implemented"; return 0 }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SnapshotMessageHeader) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SnapshotMessageHeader: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SnapshotMessageHeader: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Cell", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.Cell.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FromPeer", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.FromPeer.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ToPeer", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.ToPeer.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Term", wireType)
-			}
-			m.Term = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Term |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 5:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
-			}
-			m.Index = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Index |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Seq", wireType)
-			}
-			m.Seq = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Seq |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *RaftMessage) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SnapshotMessage) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SnapshotMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SnapshotMessage: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Header", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.Header.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Chunk", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Chunk == nil {
-				m.Chunk = &SnapshotChunkMessage{}
-			}
-			if err := m.Chunk.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Ack", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Ack == nil {
-				m.Ack = &SnapshotAckMessage{}
-			}
-			if err := m.Ack.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Ask", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Ask == nil {
-				m.Ask = &SnapshotAskMessage{}
-			}
-			if err := m.Ask.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *StoreIdent) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SnapshotChunkMessage) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SnapshotChunkMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SnapshotChunkMessage: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Data", wireType)
-			}
-			var byteLen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				byteLen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if byteLen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Data = append(m.Data[:0], dAtA[iNdEx:postIndex]...)
-			if m.Data == nil {
-				m.Data = []byte{}
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field First", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.First = bool(v != 0)
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Last", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Last = bool(v != 0)
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FileSize", wireType)
-			}
-			m.FileSize = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.FileSize |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 5:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CheckSum", wireType)
-			}
-			m.CheckSum = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.CheckSum |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *ACKMessage) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SnapshotAckMessage) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SnapshotAckMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SnapshotAckMessage: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Ack", wireType)
-			}
-			m.Ack = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Ack |= SnapshotState(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *SnapshotMessageHeader) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *SnapshotAskMessage) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: SnapshotAskMessage: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: SnapshotAskMessage: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *SnapshotMessage) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *CellLocalState) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: CellLocalState: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: CellLocalState: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field State", wireType)
-			}
-			m.State = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.State |= PeerState(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Cell", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.Cell.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *SnapshotChunkMessage) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *RaftLocalState) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: RaftLocalState: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RaftLocalState: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HardState", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.HardState.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastIndex", wireType)
-			}
-			m.LastIndex = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.LastIndex |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *SnapshotAckMessage) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *RaftTruncatedState) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: RaftTruncatedState: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RaftTruncatedState: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
-			}
-			m.Index = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Index |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Term", wireType)
-			}
-			m.Term = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Term |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *SnapshotAskMessage) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *RaftApplyState) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: RaftApplyState: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: RaftApplyState: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AppliedIndex", wireType)
-			}
-			m.AppliedIndex = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.AppliedIndex |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field TruncatedState", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthMraft
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.TruncatedState.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipMraft(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if skippy < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthMraft
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
+func (m *CellLocalState) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
 
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func skipMraft(dAtA []byte) (n int, err error) {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return 0, ErrIntOverflowMraft
-			}
-			if iNdEx >= l {
-				return 0, io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		wireType := int(wire & 0x7)
-		switch wireType {
-		case 0:
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return 0, ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return 0, io.ErrUnexpectedEOF
-				}
-				iNdEx++
-				if dAtA[iNdEx-1] < 0x80 {
-					break
-				}
-			}
-			return iNdEx, nil
-		case 1:
-			iNdEx += 8
-			return iNdEx, nil
-		case 2:
-			var length int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return 0, ErrIntOverflowMraft
-				}
-				if iNdEx >= l {
-					return 0, io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				length |= (int(b) & 0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if length < 0 {
-				return 0, ErrInvalidLengthMraft
-			}
-			iNdEx += length
-			if iNdEx < 0 {
-				return 0, ErrInvalidLengthMraft
-			}
-			return iNdEx, nil
-		case 3:
-			for {
-				var innerWire uint64
-				var start int = iNdEx
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return 0, ErrIntOverflowMraft
-					}
-					if iNdEx >= l {
-						return 0, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					innerWire |= (uint64(b) & 0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				innerWireType := int(innerWire & 0x7)
-				if innerWireType == 4 {
-					break
-				}
-				next, err := skipMraft(dAtA[start:])
-				if err != nil {
-					return 0, err
-				}
-				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthMraft
-				}
-			}
-			return iNdEx, nil
-		case 4:
-			return iNdEx, nil
-		case 5:
-			iNdEx += 4
-			return iNdEx, nil
-		default:
-			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
-		}
-	}
-	panic("unreachable")
-}
+func (m *RaftLocalState) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
+
+func (m *RaftTruncatedState) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
+
+func (m *RaftApplyState) Unmarshal(dAtA []byte) error { _ = "STUB: not implemented"; return nil }
+
+func skipMraft(dAtA []byte) (n int, err error) { _ = "STUB: not implemented"; return 0, nil }
 
 var (
 	ErrInvalidLengthMraft = fmt.Errorf("proto: negative length found during unmarshaling")

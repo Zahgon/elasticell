@@ -15,8 +15,6 @@ package pdserver
 
 import (
 	"sync"
-
-	"github.com/pkg/errors"
 )
 
 const (
@@ -32,53 +30,12 @@ type idAllocator struct {
 }
 
 func newIDAllocator(store Store, leaderSignatureFn func() string) *idAllocator {
-	return &idAllocator{
-		store:             store,
-		leaderSignatureFn: leaderSignatureFn,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (alloc *idAllocator) newID() (uint64, error) {
-	alloc.Lock()
-	defer alloc.Unlock()
+func (alloc *idAllocator) newID() (uint64, error) { _ = "STUB: not implemented"; return 0, nil }
 
-	if alloc.base == alloc.end {
-		end, err := alloc.generate()
-		if err != nil {
-			return 0, errors.Wrap(err, "")
-		}
+func (alloc *idAllocator) generate() (uint64, error) { _ = "STUB: not implemented"; return 0, nil }
 
-		alloc.end = end
-		alloc.base = alloc.end - batch
-	}
-
-	alloc.base++
-	return alloc.base, nil
-}
-
-func (alloc *idAllocator) generate() (uint64, error) {
-	value, err := alloc.store.GetID()
-	if err != nil {
-		return 0, errors.Wrap(err, "")
-	}
-
-	max := value + batch
-
-	// create id
-	if value == 0 {
-		max := value + batch
-		err := alloc.store.CreateID(alloc.leaderSignatureFn(), max)
-		if err != nil {
-			return 0, err
-		}
-
-		return max, nil
-	}
-
-	err = alloc.store.UpdateID(alloc.leaderSignatureFn(), value, max)
-	if err != nil {
-		return 0, err
-	}
-
-	return max, nil
-}
+// create id

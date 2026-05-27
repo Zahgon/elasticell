@@ -13,55 +13,17 @@
 
 package pdserver
 
-import (
-	"github.com/coreos/etcd/clientv3"
-	"github.com/fagongzi/util/format"
-)
-
 // GetID returns current id
-func (s *pdStore) GetID() (uint64, error) {
-	resp, err := s.getValue(pdIDPath)
-	if err != nil {
-		return 0, err
-	}
-
-	if resp == nil {
-		return 0, nil
-	}
-
-	return format.BytesToUint64(resp)
-}
+func (s *pdStore) GetID() (uint64, error) { _ = "STUB: not implemented"; return 0, nil }
 
 // CreateID create id alloc info.
 func (s *pdStore) CreateID(leaderSignature string, value uint64) error {
-	cmp := clientv3.Compare(clientv3.CreateRevision(pdIDPath), "=", 0)
-	op := clientv3.OpPut(pdIDPath, string(format.Uint64ToBytes(value)))
-	resp, err := s.leaderTxn(leaderSignature, cmp).Then(op).Commit()
-
-	if err != nil {
-		return err
-	}
-
-	if !resp.Succeeded {
-		return errMaybeNotLeader
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // UpdateID update id for alloc.
 func (s *pdStore) UpdateID(leaderSignature string, old, value uint64) error {
-	cmp := clientv3.Compare(clientv3.Value(pdIDPath), "=", string(format.Uint64ToBytes(old)))
-	op := clientv3.OpPut(pdIDPath, string(format.Uint64ToBytes(value)))
-	resp, err := s.leaderTxn(leaderSignature, cmp).Then(op).Commit()
-
-	if err != nil {
-		return err
-	}
-
-	if !resp.Succeeded {
-		return errMaybeNotLeader
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }

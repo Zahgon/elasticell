@@ -19,23 +19,9 @@ type Filter interface {
 	FilterTarget(store *StoreInfo) bool
 }
 
-func filterSource(store *StoreInfo, filters []Filter) bool {
-	for _, filter := range filters {
-		if filter.FilterSource(store) {
-			return true
-		}
-	}
-	return false
-}
+func filterSource(store *StoreInfo, filters []Filter) bool { _ = "STUB: not implemented"; return false }
 
-func filterTarget(store *StoreInfo, filters []Filter) bool {
-	for _, filter := range filters {
-		if filter.FilterTarget(store) {
-			return true
-		}
-	}
-	return false
-}
+func filterTarget(store *StoreInfo, filters []Filter) bool { _ = "STUB: not implemented"; return false }
 
 type stateFilter struct {
 	cfg *Cfg
@@ -52,129 +38,96 @@ type excludedFilter struct {
 }
 
 func newStorageThresholdFilter(cfg *Cfg) *storageThresholdFilter {
-	return &storageThresholdFilter{
-		cfg: cfg,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func newStateFilter(cfg *Cfg) Filter {
-	return &stateFilter{cfg: cfg}
-}
+func newStateFilter(cfg *Cfg) Filter { _ = "STUB: not implemented"; return *new(Filter) }
 
 func newExcludedFilter(sources, targets map[uint64]struct{}) *excludedFilter {
-	return &excludedFilter{
-		sources: sources,
-		targets: targets,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (f *stateFilter) filter(store *StoreInfo) bool {
-	return !(store.isUp() && store.downTime() < f.cfg.LimitStoreDownDuration)
-}
+func (f *stateFilter) filter(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
-func (f *stateFilter) FilterSource(store *StoreInfo) bool {
-	return f.filter(store)
-}
+func (f *stateFilter) FilterSource(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
-func (f *stateFilter) FilterTarget(store *StoreInfo) bool {
-	return f.filter(store)
-}
+func (f *stateFilter) FilterTarget(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
 func (f *storageThresholdFilter) FilterSource(store *StoreInfo) bool {
+	_ = "STUB: not implemented"
 	return false
 }
 
 func (f *storageThresholdFilter) FilterTarget(store *StoreInfo) bool {
-	return store.storageRatio() > f.cfg.ThresholdStorageRate
+	_ = "STUB: not implemented"
+	return false
 }
 
 func (f *excludedFilter) FilterSource(store *StoreInfo) bool {
-	_, ok := f.sources[store.getID()]
-	return ok
+	_ = "STUB: not implemented"
+	return false
 }
 
 func (f *excludedFilter) FilterTarget(store *StoreInfo) bool {
-	_, ok := f.targets[store.getID()]
-	return ok
+	_ = "STUB: not implemented"
+	return false
 }
 
 type blockFilter struct{}
 
-func newBlockFilter() *blockFilter {
-	return &blockFilter{}
-}
+func newBlockFilter() *blockFilter { _ = "STUB: not implemented"; return nil }
 
-func (f *blockFilter) FilterSource(store *StoreInfo) bool {
-	return store.isBlocked()
-}
+func (f *blockFilter) FilterSource(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
-func (f *blockFilter) FilterTarget(store *StoreInfo) bool {
-	return store.isBlocked()
-}
+func (f *blockFilter) FilterTarget(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
 type healthFilter struct {
 	cfg *Cfg
 }
 
-func newHealthFilter(cfg *Cfg) *healthFilter {
-	return &healthFilter{cfg: cfg}
-}
+func newHealthFilter(cfg *Cfg) *healthFilter { _ = "STUB: not implemented"; return nil }
 
-func (f *healthFilter) filter(store *StoreInfo) bool {
-	if store.Status == nil || store.Status.Stats.IsBusy {
-		return true
-	}
+func (f *healthFilter) filter(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
-	return store.downTime() > f.cfg.LimitStoreDownDuration
-}
+func (f *healthFilter) FilterSource(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
-func (f *healthFilter) FilterSource(store *StoreInfo) bool {
-	return f.filter(store)
-}
-
-func (f *healthFilter) FilterTarget(store *StoreInfo) bool {
-	return f.filter(store)
-}
+func (f *healthFilter) FilterTarget(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
 type cacheFilter struct {
 	cache *idCache
 }
 
-func newCacheFilter(cache *idCache) *cacheFilter {
-	return &cacheFilter{cache: cache}
-}
+func newCacheFilter(cache *idCache) *cacheFilter { _ = "STUB: not implemented"; return nil }
 
-func (f *cacheFilter) FilterSource(store *StoreInfo) bool {
-	return f.cache.get(store.getID())
-}
+func (f *cacheFilter) FilterSource(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
-func (f *cacheFilter) FilterTarget(store *StoreInfo) bool {
-	return false
-}
+func (f *cacheFilter) FilterTarget(store *StoreInfo) bool { _ = "STUB: not implemented"; return false }
 
 type snapshotCountFilter struct {
 	cfg *Cfg
 }
 
-func newSnapshotCountFilter(cfg *Cfg) *snapshotCountFilter {
-	return &snapshotCountFilter{cfg: cfg}
-}
+func newSnapshotCountFilter(cfg *Cfg) *snapshotCountFilter { _ = "STUB: not implemented"; return nil }
 
 func (f *snapshotCountFilter) filter(store *StoreInfo) bool {
-	return uint64(store.Status.Stats.SendingSnapCount) > f.cfg.LimitSnapshots ||
-		uint64(store.Status.Stats.ReceivingSnapCount) > f.cfg.LimitSnapshots ||
-		uint64(store.Status.Stats.ApplyingSnapCount) > f.cfg.LimitSnapshots
+	_ = "STUB: not implemented"
+	return false
 }
 
 func (f *snapshotCountFilter) FilterSource(store *StoreInfo) bool {
-	return f.filter(store)
+	_ = "STUB: not implemented"
+	return false
 }
 
 func (f *snapshotCountFilter) FilterTarget(store *StoreInfo) bool {
-	return f.filter(store)
+	_ = "STUB: not implemented"
+	return false
+
+	// distinctScoreFilter ensures that distinct score will not decrease.
 }
 
-// distinctScoreFilter ensures that distinct score will not decrease.
 type distinctScoreFilter struct {
 	cfg       *Cfg
 	stores    []*StoreInfo
@@ -182,25 +135,16 @@ type distinctScoreFilter struct {
 }
 
 func newDistinctScoreFilter(cfg *Cfg, stores []*StoreInfo, source *StoreInfo) *distinctScoreFilter {
-	newStores := make([]*StoreInfo, 0, len(stores)-1)
-	for _, s := range stores {
-		if s.getID() == source.getID() {
-			continue
-		}
-		newStores = append(newStores, s)
-	}
-
-	return &distinctScoreFilter{
-		cfg:       cfg,
-		stores:    newStores,
-		safeScore: cfg.getDistinctScore(newStores, source),
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (f *distinctScoreFilter) FilterSource(store *StoreInfo) bool {
+	_ = "STUB: not implemented"
 	return false
 }
 
 func (f *distinctScoreFilter) FilterTarget(store *StoreInfo) bool {
-	return f.cfg.getDistinctScore(f.stores, store) < f.safeScore
+	_ = "STUB: not implemented"
+	return false
 }

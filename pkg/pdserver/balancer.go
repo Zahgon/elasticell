@@ -14,10 +14,7 @@
 package pdserver
 
 import (
-	"math"
 	"time"
-
-	"github.com/montanaflynn/stats"
 )
 
 const (
@@ -30,32 +27,15 @@ const (
 // The min balance diff provides a buffer to make the cluster stable, so that we
 // don't need to schedule very frequently.
 func shouldBalance(source, target *StoreInfo, kind ResourceKind) bool {
-	sourceCount := source.resourceCount(kind)
-	sourceScore := source.resourceScore(kind)
-	targetScore := target.resourceScore(kind)
-	if targetScore >= sourceScore {
-		return false
-	}
-	diffRatio := 1 - targetScore/sourceScore
-	diffCount := diffRatio * float64(sourceCount)
-	return diffCount >= minBalanceDiff(sourceCount)
+	_ = "STUB: not implemented"
+	return false
 }
 
 func adjustBalanceLimit(cache *cache, kind ResourceKind) uint64 {
-	stores := cache.getStoreCache().getStores()
-	counts := make([]float64, 0, len(stores))
-	for _, s := range stores {
-		counts = append(counts, float64(s.resourceCount(kind)))
-	}
-	limit, _ := stats.StandardDeviation(stats.Float64Data(counts))
-	return maxUint64(1, uint64(limit))
+	_ = "STUB: not implemented"
+	return 0
 }
 
 // minBalanceDiff returns the minimal diff to do balance. The formula is based
 // on experience to let the diff increase alone with the count slowly.
-func minBalanceDiff(count uint64) float64 {
-	if count < bootstrapBalanceCount {
-		return bootstrapBalanceDiff
-	}
-	return math.Sqrt(float64(count))
-}
+func minBalanceDiff(count uint64) float64 { _ = "STUB: not implemented"; return 0 }

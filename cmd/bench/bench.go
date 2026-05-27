@@ -3,16 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"math"
-	"math/rand"
 	_ "net/http/pprof"
 	"os"
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/fagongzi/goetty"
-	"github.com/fagongzi/goetty/protocol/redis"
 )
 
 var (
@@ -89,81 +84,8 @@ func main() {
 }
 
 func startG(total int64, wg, complate *sync.WaitGroup, ready chan struct{}, ans *analysis, proxy string) {
-	if total <= 0 {
-		total = math.MaxInt64
-	}
-
-	conn := goetty.NewConnector(proxy,
-		goetty.WithClientConnectTimeout(time.Second*time.Duration(*connectTimeout)),
-		goetty.WithClientDecoder(redis.NewRedisReplyDecoder()),
-		goetty.WithClientEncoder(goetty.NewEmptyEncoder()))
-	_, err := conn.Connect()
-	if err != nil {
-		fmt.Printf("%+v\n", err)
-		os.Exit(1)
-	}
-
-	redis.InitRedisConn(conn)
-
-	wg.Done()
-	<-ready
-
-	value := make([]byte, *size)
-	doRead := true
-	c := *readWeight * 100
-	start := time.Now()
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-
-	for index := int64(0); index < total; index += *cn {
-		for k := int64(0); k < *cn; k++ {
-			rnd := r.Uint64()
-			key := fmt.Sprintf("%d", rnd)
-
-			for {
-				if c > 0 {
-					break
-				} else {
-					doRead = !doRead
-					if doRead {
-						c = *readWeight * 100
-					} else {
-						c = *writeWeight * 100
-					}
-				}
-			}
-
-			if doRead {
-				redis.WriteCommand(conn, "get", key)
-			} else {
-				for i := 0; i < *size; i++ {
-					value[i] = byte((index + k) % 0xff)
-				}
-				redis.WriteCommand(conn, "set", key, value)
-			}
-			c--
-		}
-
-		err := conn.Flush()
-		if err != nil {
-			fmt.Printf("%+v\n", err)
-			os.Exit(1)
-		}
-		s := time.Now()
-		ans.incrSent(*cn)
-
-		for k := int64(0); k < *cn; k++ {
-			_, err = conn.ReadTimeout(time.Second * time.Duration(*readTimeout))
-			if err != nil {
-				fmt.Printf("%+v\n", err)
-				os.Exit(1)
-			}
-
-			ans.incrRecv(time.Now().Sub(s).Nanoseconds())
-		}
-	}
-
-	end := time.Now()
-	fmt.Printf("%s sent %d reqs\n", end.Sub(start), total)
+	_ = "STUB: not implemented"
+	return
 }
 
 type analysis struct {
@@ -174,59 +96,16 @@ type analysis struct {
 	totalCost, prevCost                int64
 }
 
-func newAnalysis() *analysis {
-	return &analysis{}
-}
+func newAnalysis() *analysis { _ = "STUB: not implemented"; return nil }
 
-func (a *analysis) setLatency(latency int64) {
-	if a.minLatency == 0 || a.minLatency > latency {
-		a.minLatency = latency
-	}
+func (a *analysis) setLatency(latency int64) { _ = "STUB: not implemented"; return }
 
-	if a.maxLatency == 0 || a.maxLatency < latency {
-		a.maxLatency = latency
-	}
+func (a *analysis) reset() { _ = "STUB: not implemented"; return }
 
-	a.totalCost += latency
-	a.avgLatency = a.totalCost / a.recv
-}
+func (a *analysis) start() { _ = "STUB: not implemented"; return }
 
-func (a *analysis) reset() {
-	a.Lock()
-	a.maxLatency = 0
-	a.minLatency = 0
-	a.Unlock()
-}
+func (a *analysis) incrRecv(latency int64) { _ = "STUB: not implemented"; return }
 
-func (a *analysis) start() {
-	a.startAt = time.Now()
-}
+func (a *analysis) incrSent(n int64) { _ = "STUB: not implemented"; return }
 
-func (a *analysis) incrRecv(latency int64) {
-	a.Lock()
-	a.recv++
-	a.setLatency(latency)
-	a.Unlock()
-}
-
-func (a *analysis) incrSent(n int64) {
-	a.Lock()
-	a.sent += n
-	a.Unlock()
-}
-
-func (a *analysis) print() {
-	a.Lock()
-	fmt.Printf("[%d, %d, %d](%d s), tps: <%d>/s, avg: %s, min: %s, max: %s \n",
-		a.sent,
-		a.recv,
-		(a.sent - a.recv),
-		int(time.Now().Sub(a.startAt).Seconds()),
-		(a.recv - a.prevRecv),
-		time.Duration(a.avgLatency),
-		time.Duration(a.minLatency),
-		time.Duration(a.maxLatency))
-	a.prevRecv = a.recv
-	a.prevCost = a.totalCost
-	a.Unlock()
-}
+func (a *analysis) print() { _ = "STUB: not implemented"; return }

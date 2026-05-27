@@ -26,196 +26,78 @@ type cellPeersMap struct {
 	m map[uint64]*PeerReplicate
 }
 
-func newCellPeersMap() *cellPeersMap {
-	return &cellPeersMap{
-		m: make(map[uint64]*PeerReplicate),
-	}
-}
+func newCellPeersMap() *cellPeersMap { _ = "STUB: not implemented"; return nil }
 
-func (m *cellPeersMap) size() uint32 {
-	m.RLock()
-	v := uint32(len(m.m))
-	m.RUnlock()
+func (m *cellPeersMap) size() uint32 { _ = "STUB: not implemented"; return 0 }
 
-	return v
-}
+func (m *cellPeersMap) put(key uint64, peers *PeerReplicate) { _ = "STUB: not implemented"; return }
 
-func (m *cellPeersMap) put(key uint64, peers *PeerReplicate) {
-	m.Lock()
-	m.m[key] = peers
-	m.Unlock()
-}
+func (m *cellPeersMap) get(key uint64) *PeerReplicate { _ = "STUB: not implemented"; return nil }
 
-func (m *cellPeersMap) get(key uint64) *PeerReplicate {
-	m.RLock()
-	v := m.m[key]
-	m.RUnlock()
-
-	return v
-}
-
-func (m *cellPeersMap) delete(key uint64) *PeerReplicate {
-	m.Lock()
-	v := m.m[key]
-	delete(m.m, key)
-	m.Unlock()
-
-	return v
-}
+func (m *cellPeersMap) delete(key uint64) *PeerReplicate { _ = "STUB: not implemented"; return nil }
 
 func (m *cellPeersMap) foreach(fn func(*PeerReplicate) (bool, error)) error {
-	m.RLock()
-	var err error
-	var c bool
-	for _, v := range m.m {
-		c, err = fn(v)
-		if err != nil || !c {
-			break
-		}
-	}
-	m.RUnlock()
-
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
-func (m *cellPeersMap) values() []*PeerReplicate {
-	m.RLock()
-	var values []*PeerReplicate
-	for _, v := range m.m {
-		values = append(values, v)
-	}
-	m.RUnlock()
 
-	return values
-}
+func (m *cellPeersMap) values() []*PeerReplicate { _ = "STUB: not implemented"; return nil }
 
 type peerCacheMap struct {
 	sync.RWMutex
 	m map[uint64]metapb.Peer
 }
 
-func newPeerCacheMap() *peerCacheMap {
-	return &peerCacheMap{
-		m: make(map[uint64]metapb.Peer),
-	}
-}
+func newPeerCacheMap() *peerCacheMap { _ = "STUB: not implemented"; return nil }
 
-func (m *peerCacheMap) put(key uint64, peer metapb.Peer) {
-	m.Lock()
-	m.m[key] = peer
-	m.Unlock()
-}
+func (m *peerCacheMap) put(key uint64, peer metapb.Peer) { _ = "STUB: not implemented"; return }
 
 func (m *peerCacheMap) get(key uint64) (metapb.Peer, bool) {
-	m.RLock()
-	v, ok := m.m[key]
-	m.RUnlock()
-
-	return v, ok
+	_ = "STUB: not implemented"
+	return *new(metapb.Peer), false
 }
 
-func (m *peerCacheMap) delete(key uint64) {
-	m.Lock()
-	delete(m.m, key)
-	m.Unlock()
-}
+func (m *peerCacheMap) delete(key uint64) { _ = "STUB: not implemented"; return }
 
 type applyDelegateMap struct {
 	sync.RWMutex
 	m map[uint64]*applyDelegate
 }
 
-func newApplyDelegateMap() *applyDelegateMap {
-	return &applyDelegateMap{
-		m: make(map[uint64]*applyDelegate),
-	}
-}
+func newApplyDelegateMap() *applyDelegateMap { _ = "STUB: not implemented"; return nil }
 
 func (m *applyDelegateMap) put(key uint64, value *applyDelegate) *applyDelegate {
-	m.Lock()
-	old := m.m[key]
-	m.m[key] = value
-	m.Unlock()
-
-	return old
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (m *applyDelegateMap) get(key uint64) *applyDelegate {
-	m.RLock()
-	v := m.m[key]
-	m.RUnlock()
+func (m *applyDelegateMap) get(key uint64) *applyDelegate { _ = "STUB: not implemented"; return nil }
 
-	return v
-}
-
-func (m *applyDelegateMap) delete(key uint64) *applyDelegate {
-	m.Lock()
-	v := m.m[key]
-	delete(m.m, key)
-	m.Unlock()
-
-	return v
-}
+func (m *applyDelegateMap) delete(key uint64) *applyDelegate { _ = "STUB: not implemented"; return nil }
 
 type peerHeartbeatsMap struct {
 	sync.RWMutex
 	m map[uint64]time.Time
 }
 
-func newPeerHeartbeatsMap() *peerHeartbeatsMap {
-	return &peerHeartbeatsMap{
-		m: make(map[uint64]time.Time, 3),
-	}
-}
+func newPeerHeartbeatsMap() *peerHeartbeatsMap { _ = "STUB: not implemented"; return nil }
 
-func (m *peerHeartbeatsMap) clear() {
-	m.Lock()
-	for key := range m.m {
-		delete(m.m, key)
-	}
-	m.Unlock()
-}
+func (m *peerHeartbeatsMap) clear() { _ = "STUB: not implemented"; return }
 
-func (m *peerHeartbeatsMap) has(key uint64) bool {
-	m.Lock()
-	_, ok := m.m[key]
-	m.Unlock()
+func (m *peerHeartbeatsMap) has(key uint64) bool { _ = "STUB: not implemented"; return false }
 
-	return ok
-}
-
-func (m *peerHeartbeatsMap) put(key uint64, value time.Time) {
-	m.Lock()
-	m.m[key] = value
-	m.Unlock()
-}
+func (m *peerHeartbeatsMap) put(key uint64, value time.Time) { _ = "STUB: not implemented"; return }
 
 func (m *peerHeartbeatsMap) putOnlyNotExist(key uint64, value time.Time) {
-	m.Lock()
-	_, ok := m.m[key]
-	if !ok {
-		m.m[key] = value
-	}
-	m.Unlock()
+	_ = "STUB: not implemented"
+	return
 }
 
-func (m *peerHeartbeatsMap) size() int {
-	m.Lock()
-	v := len(m.m)
-	m.Unlock()
-
-	return v
-}
+func (m *peerHeartbeatsMap) size() int { _ = "STUB: not implemented"; return 0 }
 
 func (m *peerHeartbeatsMap) get(key uint64) time.Time {
-	m.RLock()
-	v := m.m[key]
-	m.RUnlock()
-
-	return v
+	_ = "STUB: not implemented"
+	return *new(time.Time)
 }
 
-func (m *peerHeartbeatsMap) delete(key uint64) {
-	m.Lock()
-	delete(m.m, key)
-	m.Unlock()
-}
+func (m *peerHeartbeatsMap) delete(key uint64) { _ = "STUB: not implemented"; return }

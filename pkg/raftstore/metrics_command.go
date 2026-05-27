@@ -48,7 +48,4 @@ var (
 		}, []string{"type", "status"})
 )
 
-func initMetricsForCommand() {
-	prometheus.MustRegister(commandCounterVec)
-	prometheus.MustRegister(commandAdminCounterVec)
-}
+func initMetricsForCommand() { _ = "STUB: not implemented"; return }

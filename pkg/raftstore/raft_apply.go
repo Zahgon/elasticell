@@ -14,17 +14,12 @@
 package raftstore
 
 import (
-	"bytes"
 	"sync"
-	"time"
 
 	"github.com/coreos/etcd/raft/raftpb"
 	"github.com/deepfabric/elasticell/pkg/pb/metapb"
 	"github.com/deepfabric/elasticell/pkg/pb/mraft"
 	"github.com/deepfabric/elasticell/pkg/pb/raftcmdpb"
-	"github.com/deepfabric/elasticell/pkg/pool"
-	"github.com/fagongzi/log"
-	"github.com/fagongzi/util/protoc"
 )
 
 type applyMetrics struct {
@@ -46,17 +41,9 @@ type asyncApplyResult struct {
 	metrics          applyMetrics
 }
 
-func (res *asyncApplyResult) reset() {
-	res.cellID = 0
-	res.appliedIndexTerm = 0
-	res.applyState = emptyApplyState
-	res.result = nil
-	res.metrics = emptyApplyMetrics
-}
+func (res *asyncApplyResult) reset() { _ = "STUB: not implemented"; return }
 
-func (res *asyncApplyResult) hasSplitExecResult() bool {
-	return nil != res.result && res.result.splitResult != nil
-}
+func (res *asyncApplyResult) hasSplitExecResult() bool { _ = "STUB: not implemented"; return false }
 
 type changePeer struct {
 	confChange raftpb.ConfChange
@@ -102,259 +89,55 @@ type applyDelegate struct {
 	pendingChangePeerCMD *cmd
 }
 
-func (d *applyDelegate) clearAllCommandsAsStale() {
-	d.Lock()
-	for _, c := range d.pendingCMDs {
-		d.notifyStaleCMD(c)
-	}
+func (d *applyDelegate) clearAllCommandsAsStale() { _ = "STUB: not implemented"; return }
 
-	if nil != d.pendingChangePeerCMD {
-		d.notifyStaleCMD(d.pendingChangePeerCMD)
-	}
+func (d *applyDelegate) findCB(ctx *applyContext) *cmd { _ = "STUB: not implemented"; return nil }
 
-	d.pendingCMDs = make([]*cmd, 0)
-	d.pendingChangePeerCMD = nil
-	d.Unlock()
-}
+// Because of the lack of original RaftCmdRequest, we skip calling
+// coprocessor here.
 
-func (d *applyDelegate) findCB(ctx *applyContext) *cmd {
-	if isChangePeerCMD(ctx.req) {
-		c := d.getPendingChangePeerCMD()
-		if c == nil || c.req == nil {
-			return nil
-		} else if bytes.Compare(ctx.req.Header.UUID, c.getUUID()) == 0 {
-			return c
-		}
+func (d *applyDelegate) appendPendingCmd(c *cmd) { _ = "STUB: not implemented"; return }
 
-		d.notifyStaleCMD(c)
-		return nil
-	}
+func (d *applyDelegate) setPendingChangePeerCMD(c *cmd) { _ = "STUB: not implemented"; return }
 
-	for {
-		head := d.popPendingCMD(ctx.term)
-		if head == nil {
-			return nil
-		}
-
-		if bytes.Compare(head.getUUID(), ctx.req.Header.UUID) == 0 {
-			return head
-		}
-
-		if log.DebugEnabled() {
-			log.Debugf("raftstore-apply[cell-%d]: notify stale cmd, cmd=<%+v>",
-				d.cell.ID,
-				head)
-		}
-
-		// Because of the lack of original RaftCmdRequest, we skip calling
-		// coprocessor here.
-		d.notifyStaleCMD(head)
-	}
-}
-
-func (d *applyDelegate) appendPendingCmd(c *cmd) {
-	d.pendingCMDs = append(d.pendingCMDs, c)
-}
-
-func (d *applyDelegate) setPendingChangePeerCMD(c *cmd) {
-	d.Lock()
-	d.pendingChangePeerCMD = c
-	d.Unlock()
-}
-
-func (d *applyDelegate) getPendingChangePeerCMD() *cmd {
-	d.RLock()
-	c := d.pendingChangePeerCMD
-	d.RUnlock()
-
-	return c
-}
+func (d *applyDelegate) getPendingChangePeerCMD() *cmd { _ = "STUB: not implemented"; return nil }
 
 func (d *applyDelegate) popPendingCMD(raftLogEntryTerm uint64) *cmd {
-	d.Lock()
-	if len(d.pendingCMDs) == 0 {
-		d.Unlock()
-		return nil
-	}
-
-	if d.pendingCMDs[0].term > raftLogEntryTerm {
-		d.Unlock()
-		return nil
-	}
-
-	c := d.pendingCMDs[0]
-	d.pendingCMDs[0] = nil
-	d.pendingCMDs = d.pendingCMDs[1:]
-	d.Unlock()
-	return c
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func isChangePeerCMD(req *raftcmdpb.RaftCMDRequest) bool {
-	return nil != req.AdminRequest &&
-		req.AdminRequest.Type == raftcmdpb.ChangePeer
-}
+func isChangePeerCMD(req *raftcmdpb.RaftCMDRequest) bool { _ = "STUB: not implemented"; return false }
 
-func (d *applyDelegate) notifyStaleCMD(c *cmd) {
-	log.Debugf("raftstore-apply[cell-%d]: resp stale, cmd=<%+v>, current=<%d>",
-		d.cell.ID,
-		c,
-		d.term)
-	resp := errorStaleCMDResp(c.getUUID(), d.term)
-	c.resp(resp)
-}
+func (d *applyDelegate) notifyStaleCMD(c *cmd) { _ = "STUB: not implemented"; return }
 
-func (d *applyDelegate) notifyCellRemoved(c *cmd) {
-	log.Infof("raftstore-destroy[cell-%d]: cmd is removed, skip. cmd=<%+v>",
-		d.cell.ID,
-		c)
-	c.respCellNotFound(d.cell.ID)
-}
+func (d *applyDelegate) notifyCellRemoved(c *cmd) { _ = "STUB: not implemented"; return }
 
 func (d *applyDelegate) applyCommittedEntries(commitedEntries []raftpb.Entry) {
-	if len(commitedEntries) <= 0 {
-		return
-	}
-
-	start := time.Now()
-	ctx := acquireApplyContext()
-	req := pool.AcquireRaftCMDRequest()
-
-	for idx, entry := range commitedEntries {
-		if d.isPendingRemove() {
-			// This peer is about to be destroyed, skip everything.
-			break
-		}
-		expectIndex := d.applyState.AppliedIndex + 1
-		if expectIndex != entry.Index {
-			log.Fatalf("raftstore-apply[cell-%d]: index not match, expect=<%d> get=<%d> state=<%+v> entry=<%+v>",
-				d.cell.ID,
-				expectIndex,
-				entry.Index,
-				d.applyState,
-				entry)
-		}
-
-		if idx > 0 {
-			ctx.reset()
-			req.Reset()
-		}
-
-		ctx.req = req
-		ctx.applyState = d.applyState
-		ctx.index = entry.Index
-		ctx.term = entry.Term
-
-		var result *execResult
-
-		switch entry.Type {
-		case raftpb.EntryNormal:
-			result = d.applyEntry(ctx, &entry)
-		case raftpb.EntryConfChange:
-			result = d.applyConfChange(ctx, &entry)
-		}
-
-		asyncResult := acquireAsyncApplyResult()
-
-		asyncResult.cellID = d.cell.ID
-		asyncResult.appliedIndexTerm = d.appliedIndexTerm
-		asyncResult.applyState = d.applyState
-		asyncResult.result = result
-
-		if ctx != nil {
-			asyncResult.metrics = ctx.metrics
-		}
-
-		pr := d.store.replicatesMap.get(d.cell.ID)
-		if pr != nil {
-			pr.addApplyResult(asyncResult)
-		}
-	}
-
-	// only release RaftCMDRequest. Header and Requests fields is pb created in Unmarshal
-	pool.ReleaseRaftCMDRequest(req)
-	releaseApplyContext(ctx)
-
-	observeRaftLogApply(start)
+	_ = "STUB: not implemented"
+	return
 }
+
+// This peer is about to be destroyed, skip everything.
+
+// only release RaftCMDRequest. Header and Requests fields is pb created in Unmarshal
 
 func (d *applyDelegate) applyEntry(ctx *applyContext, entry *raftpb.Entry) *execResult {
-	if len(entry.Data) > 0 {
-		protoc.MustUnmarshal(ctx.req, entry.Data)
-		return d.doApplyRaftCMD(ctx)
-	}
-
-	// when a peer become leader, it will send an empty entry.
-	state := d.applyState
-	state.AppliedIndex = entry.Index
-
-	err := d.store.getEngine(d.cell.ID).Set(getApplyStateKey(d.cell.ID), protoc.MustMarshal(&state))
-	if err != nil {
-		log.Fatalf("raftstore-apply[cell-%d]: apply empty entry failed, entry=<%s> errors:\n %+v",
-			d.cell.ID,
-			entry.String(),
-			err)
-	}
-
-	d.applyState.AppliedIndex = entry.Index
-	d.appliedIndexTerm = entry.Term
-	if entry.Term <= 0 {
-		panic("error empty entry term.")
-	}
-
-	for {
-		c := d.popPendingCMD(entry.Term - 1)
-		if c == nil {
-			return nil
-		}
-
-		// apprently, all the callbacks whose term is less than entry's term are stale.
-		d.notifyStaleCMD(c)
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// when a peer become leader, it will send an empty entry.
+
+// apprently, all the callbacks whose term is less than entry's term are stale.
 
 func (d *applyDelegate) applyConfChange(ctx *applyContext, entry *raftpb.Entry) *execResult {
-	cc := new(raftpb.ConfChange)
-
-	protoc.MustUnmarshal(cc, entry.Data)
-	protoc.MustUnmarshal(ctx.req, cc.Context)
-
-	result := d.doApplyRaftCMD(ctx)
-	if nil == result {
-		return &execResult{
-			adminType:  raftcmdpb.ChangePeer,
-			changePeer: &changePeer{},
-		}
-	}
-
-	result.changePeer.confChange = *cc
-	return result
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (d *applyDelegate) destroy() {
-	d.Lock()
-	for _, c := range d.pendingCMDs {
-		d.notifyCellRemoved(c)
-	}
+func (d *applyDelegate) destroy() { _ = "STUB: not implemented"; return }
 
-	if d.pendingChangePeerCMD != nil && d.pendingChangePeerCMD.req != nil {
-		d.notifyCellRemoved(d.pendingChangePeerCMD)
-	}
+func (d *applyDelegate) setPendingRemove() { _ = "STUB: not implemented"; return }
 
-	d.pendingCMDs = nil
-	d.pendingChangePeerCMD = nil
-	d.Unlock()
-}
-
-func (d *applyDelegate) setPendingRemove() {
-	d.Lock()
-	d.pendingRemove = true
-	d.Unlock()
-}
-
-func (d *applyDelegate) isPendingRemove() bool {
-	d.RLock()
-	value := d.pendingRemove
-	d.RUnlock()
-
-	return value
-}
+func (d *applyDelegate) isPendingRemove() bool { _ = "STUB: not implemented"; return false }
